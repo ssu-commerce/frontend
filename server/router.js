@@ -4,13 +4,13 @@ let assetMap = {
   "reset.css": "/public/reset.css",
 };
 
-module.exports = function render(url, res) {
+export function render(url, res) {
   const { pipe } = renderToPipableStream(<App assetMap={assetMap} />, {
     bootstrapScripts: [],
     onShellReady() {
       res.setHeader("content-type", "text/html");
+      res.statusCode = 200;
       pipe(res);
     },
   });
-  res.send("router");
-};
+}
