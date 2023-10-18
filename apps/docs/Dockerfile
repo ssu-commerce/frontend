@@ -1,5 +1,7 @@
 FROM node:18-alpine AS base
  
+RUN npm install -g pnpm
+
 # builder base 생성
 FROM base AS builder
 # 패키지 목록 업데이트 및 설치
@@ -24,11 +26,12 @@ COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN npm install -g pnpm
-RUN pnpm install
+RUN npm install -g turbo
+RUN pnpm install ---frozen-lockfile
  
 # build project
 COPY --from=builder /app/out/full/ .
-RUN pnpm turbo run build --filter=docs...
+RUN turbo run build --filter=docs...
  
 FROM base as runner
 WORKDIR /app
