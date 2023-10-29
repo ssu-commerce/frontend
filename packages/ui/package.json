@@ -9,19 +9,20 @@
         "**/*.css"
     ],
     "exports": {
-        ".": "./src",
+        ".": "./dist",
         "./styles.css": "./dist/index.css"
     },
-    "files": [
-        "src/**"
-    ],
     "scripts": {
-        "generate:component": "turbo gen react-component",
+        "build": "vite",
+        "dev": "vite dev",
         "lint": "eslint src/",
-        "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+        "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+        "check-types": "tsc --noEmit"
+    },
+    "peerDependencies": {
+        "react": "^18.2.0"
     },
     "devDependencies": {
-        "@turbo/gen": "^1.10.12",
         "@types/node": "^20.5.2",
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.2.0",

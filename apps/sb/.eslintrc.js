@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ["custom/storybook"],
+    extends: ['custom/react-internal', 'plugin:storybook/recommended'],
 };

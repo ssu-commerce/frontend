@@ -6,7 +6,7 @@ export default defineConfig({
     ...sharedViteConfig,
     build: {
         lib: {
-            entry: resolve(__dirname, 'src/index.js'),
+            entry: resolve(__dirname, 'src/**/*.tsx'),
             name: 'ui',
             fileName: 'index',
             formats: ['es', 'cjs'],
