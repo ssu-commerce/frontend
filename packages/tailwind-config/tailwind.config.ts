@@ -1,33 +1,44 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 const config: Config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: ['./**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     colors: {
-      blue: "#1fb6ff",
-      purple: "#7e5bef",
-      pink: "#ff49db",
-      orange: "#ff7849",
-      green: "#13ce66",
-      yellow: "#ffc82c",
-      "gray-dark": "#273444",
-      gray: "#8492a6",
-      "gray-light": "#d3dce6",
+      default: '#1fb6ff',
+      primary: '#7e5bef',
+      secondary: '#ff49db',
+      error: '#ff7849',
+      info: '#13ce66',
+      success: '#ffc82c',
+      warning: '#273444',
     },
     fontFamily: {
-      sans: ["Graphik", "sans-serif"],
-      serif: ["Merriweather", "serif"],
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
     },
     extend: {
+      textColor: {
+        default: '#1fb6ff',
+        primary: '#7e5bef',
+        secondary: '#ff49db',
+        error: '#ff7849',
+        info: '#13ce66',
+        success: '#ffc82c',
+        warning: '#273444',
+      },
       spacing: {
-        "8xl": "96rem",
-        "9xl": "128rem",
+        '8xl': '96rem',
+        '9xl': '128rem',
       },
       borderRadius: {
-        "4xl": "2rem",
+        '4xl': '2rem',
       },
     },
+  },
+  fontFamily: {
+    pretendard: ['Pretendard', ...fontFamily.sans],
   },
   plugins: [],
 };
