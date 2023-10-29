@@ -36,4 +36,7 @@ yarn-error.log*
 .turbo
 out
 
-# storybook build
+# storybook
+server/dist
+public/dist
+storybook-static/

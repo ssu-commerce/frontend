@@ -1,0 +1,5 @@
+{
+  "extends": "tsconfig/nextjs.json",
+  "include": [".", "../../packages/ui/src/Button.tsx"],
+  "exclude": ["dist", "build", "node_modules"]
+}
