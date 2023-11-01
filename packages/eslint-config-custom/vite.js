@@ -1,6 +1,6 @@
-const { resolve } = require('node:path');
+const { resolve } = require("node:path");
 
-const project = resolve(process.cwd(), 'tsconfig.json');
+const project = resolve(process.cwd(), "tsconfig.json");
 
 /*
  * This is a custom ESLint configuration for use with
@@ -16,26 +16,27 @@ module.exports = {
     JSX: true,
   },
   env: { browser: true, es2020: true, node: true },
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     project,
   },
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       typescript: {
         project,
       },
     },
   },
-  plugins: ['@typescript-eslint', 'react-refresh', 'react-hooks', 'prettier'],
+  plugins: ["@typescript-eslint", "react-refresh", "react-hooks", "prettier"],
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
-    'prettier',
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier",
   ],
-  ignorePatterns: ['node_modules/', 'dist/', '.eslintrc.js'],
+  ignorePatterns: ["node_modules/", "dist/", ".eslintrc.js"],
   rules: {
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/explicit-function-return-type": "error",
   },
 };
