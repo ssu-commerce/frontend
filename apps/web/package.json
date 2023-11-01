@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@ssu-commerce/web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,10 +10,10 @@
     "clean": "rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {
+    "@ssu-commerce/components": "workspace:*",
     "next": "^13.4.19",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "ui": "workspace:*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.4.19",
@@ -23,7 +23,7 @@
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "^5.2.2",
-    "tailwind-config": "workspace:*",
+    "@ssu-commerce/tailwind-config": "workspace:*",
     "tailwindcss": "^3.3.5",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20"

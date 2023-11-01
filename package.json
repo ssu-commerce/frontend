@@ -1,6 +1,10 @@
 {
-  "name": "ssu-commerce-fe",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tests/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -9,7 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=sb^... && changeset publish"
+    "release": "turbo run build --filter=@ssu-commerce/docs^... && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.2",
