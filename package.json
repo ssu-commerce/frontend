@@ -1,6 +1,10 @@
 {
-  "name": "ssu-commerce-fe",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tests/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -9,13 +13,17 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=sb^... && changeset publish"
+    "release": "turbo run build --filter=@sc/docs^... && changeset publish",
+    "backoffice": "pnpm -F @sc/backoffice dev",
+    "commerce": "pnpm -F @sc/commerce dev",
+    "sb": "pnpm -F @sc/docs dev"
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.2",
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.3",
+    "@svgr/plugin-prettier": "^8.1.0",
     "tsconfig": "workspace:*",
     "turbo": "latest"
   },

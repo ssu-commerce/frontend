@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Storybook: debug sb",
+      "name": "Storybook: debug docs",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:6006"
