@@ -12,20 +12,13 @@ const project = resolve(process.cwd(), 'tsconfig.json');
  */
 
 module.exports = {
-  extends: [
-    '@vercel/style-guide/eslint/node',
-    '@vercel/style-guide/eslint/browser',
-    '@vercel/style-guide/eslint/typescript',
-    '@vercel/style-guide/eslint/react',
-    '@vercel/style-guide/eslint/next',
-    'eslint-config-turbo',
-  ].map(require.resolve),
+  globals: {
+    JSX: true,
+  },
+  env: { browser: true, es2020: true, node: true },
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     project,
-  },
-  globals: {
-    React: true,
-    JSX: true,
   },
   settings: {
     'import/resolver': {
@@ -34,8 +27,12 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ['node_modules/', 'dist/'],
-  rules: {
-    'import/no-default-export': 'off',
-  },
+  plugins: ['@typescript-eslint', 'react-hooks', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    'prettier',
+  ],
+  ignorePatterns: ['node_modules/', 'dist/', '.eslintrc.js'],
 };

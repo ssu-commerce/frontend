@@ -1,10 +1,10 @@
 {
-  "name": "sb",
+  "name": "@ssu-commerce/docs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "storybook build --sb",
+    "build": "storybook build --docs",
     "preview-storybook": "serve storybook-static",
     "clean": "rm -rf .turbo && rm -rf node_modules",
     "lint": "eslint ./stories/*.stories.tsx"
@@ -13,8 +13,7 @@
     "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ts-node": "^10.9.1",
-    "ui": "workspace:*"
+    "@ssu-commerce/components": "workspace:*"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^7.4.0",
