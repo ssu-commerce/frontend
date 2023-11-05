@@ -30,10 +30,12 @@
     "autoprefixer": "^10.4.13",
     "clsx": "^2.0.0",
     "eslint-config-custom": "workspace:*",
+    "jest-styled-components": "^7.2.0",
     "postcss": "^8.4.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.2.2",
+    "typescript-plugin-styled-components": "^3.0.0",
     "tsup": "^6.7.0"
   },
   "publishConfig": {
