@@ -47,5 +47,6 @@ module.exports = {
   rules: {
     "import/no-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "error",
+    "unicorn/filename-case": "off",
   },
 };

@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
+import plugin from "tailwindcss/plugin";
 
 /** @type {import('tailwindcss').Config} */
 const config: Config = {
@@ -9,47 +10,11 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      default: "#1fb6ff",
-      primary: "#7e5bef",
-      secondary: "#ff49db",
-      error: "#ff7849",
-      info: "#13ce66",
-      success: "#ffc82c",
-      warning: "#273444",
-    },
-    textColor: {
-      default: "#1fb6ff",
-      primary: "#7e5bef",
-      secondary: "#ff49db",
-      error: "#ff7849",
-      info: "#13ce66",
-      success: "#ffc82c",
-      warning: "#273444",
-    },
     fontFamily: {
       sans: ["Graphik", "sans-serif"],
       serif: ["Merriweather", "serif"],
     },
     extend: {
-      colors: {
-        default: "#1fb6ff",
-        primary: "#7e5bef",
-        secondary: "#ff49db",
-        error: "#ff7849",
-        info: "#13ce66",
-        success: "#ffc82c",
-        warning: "#273444",
-      },
-      textColor: {
-        default: "#1fb6ff",
-        primary: "#7e5bef",
-        secondary: "#ff49db",
-        error: "#ff7849",
-        info: "#13ce66",
-        success: "#ffc82c",
-        warning: "#273444",
-      },
       fontSize: {
         sm: ["14px", "20px"],
         md: ["16px", "24px"],
@@ -68,7 +33,12 @@ const config: Config = {
   fontFamily: {
     pretendard: ["Pretendard", ...fontFamily.sans],
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant("descendant", "& *");
+      addVariant("child", "& > *");
+    }),
+  ],
 };
 
 export default config;
