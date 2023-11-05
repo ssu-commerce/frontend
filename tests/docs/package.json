@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@sc/components": "workspace:*",
-    "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ts-node": "^10.9.1"
@@ -23,8 +22,6 @@
     "@storybook/addon-essentials": "^7.5.2",
     "@storybook/addon-interactions": "^7.5.2",
     "@storybook/addon-links": "^7.5.2",
-    "@storybook/addon-mdx-gfm": "^7.5.2",
-    "@storybook/addon-onboarding": "^1.0.8",
     "@storybook/addon-styling-webpack": "^0.0.5",
     "@storybook/react": "^7.5.2",
     "@storybook/react-vite": "^7.5.2",
@@ -43,9 +40,6 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react-swc": "^3.4.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^5.2.2",
     "vite": "^4.5.0"
   }
 }

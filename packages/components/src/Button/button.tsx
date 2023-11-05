@@ -1,7 +1,13 @@
 import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
+import type { ClassNameValue } from "tailwind-merge";
 import { twMerge } from "tailwind-merge";
-import type { ButtonProps } from "./button.types";
+import type {
+  ButtonColor,
+  ButtonProps,
+  ButtonSize,
+  ButtonVariant,
+} from "./button.types";
 
 const Button = forwardRef(function Button(
   {
@@ -15,7 +21,7 @@ const Button = forwardRef(function Button(
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>,
 ): ReactElement<ButtonProps> {
-  const textColor = {
+  const textColor: Record<ButtonColor, ClassNameValue> = {
     default: "ui-text-default",
     primary: "ui-text-primary",
     secondary: "ui-text-secondary",
@@ -25,12 +31,12 @@ const Button = forwardRef(function Button(
     warning: "ui-text-warning",
   };
 
-  const buttonVariant = {
+  const buttonVariant: Record<ButtonVariant, ClassNameValue> = {
     contained: "ui-border-0",
     outlined: "ui-border-2",
     text: "ui-border-0",
   };
-  const buttonSize = {
+  const buttonSize: Record<ButtonSize, ClassNameValue> = {
     sm: "ui-sm",
     md: "ui-md",
     lg: "ui-lg",
