@@ -1,11 +1,11 @@
-import fs from 'fs/promises';
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
+import fs from "node:fs/promises";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
   plugins: [react()],
   esbuild: {
-    loader: 'tsx',
+    loader: "tsx",
     include: /\/.*\.[tj]sx?$/,
     exclude: [],
   },
@@ -13,11 +13,11 @@ export default defineConfig({
     esbuildOptions: {
       plugins: [
         {
-          name: 'load-js-files-as-jsx',
+          name: "load-js-files-as-jsx",
           setup(build) {
             build.onLoad({ filter: /\/.*\.js$/ }, async (args) => ({
-              loader: 'jsx',
-              contents: await fs.readFile(args.path, 'utf8'),
+              loader: "jsx",
+              contents: await fs.readFile(args.path, "utf8"),
             }));
           },
         },

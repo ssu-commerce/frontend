@@ -9,7 +9,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "lint:styled": "stylelint './src/**/*.styles.ts' --fix",
+    "lint:styled": "stylelint './**/*.styles.ts' --fix",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
@@ -17,7 +17,8 @@
     "release": "turbo run build --filter=@sc/docs^... && changeset publish",
     "backoffice": "pnpm -F @sc/backoffice dev",
     "commerce": "pnpm -F @sc/commerce dev",
-    "sb": "pnpm -F @sc/docs dev"
+    "sb": "pnpm -F @sc/docs dev",
+    "cp": "pnpm -F @sc/components dev"
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.2",

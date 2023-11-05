@@ -4,7 +4,12 @@
       "at-rule-no-unknown": [
         true,
         {
-          "ignoreAtRules": ["extends"]
+          "ignoreAtRules": ["extends",
+          "tailwind",
+          "apply",
+          "variants",
+          "responsive",
+          "screen"]
         }
       ],
       "block-no-empty": null,
