@@ -17,7 +17,8 @@
     "release": "turbo run build --filter=@sc/docs^... && changeset publish",
     "backoffice": "pnpm -F @sc/backoffice dev",
     "commerce": "pnpm -F @sc/commerce dev",
-    "sb": "pnpm -F @sc/docs dev"
+    "sb": "pnpm -F @sc/docs dev",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.2",
@@ -31,7 +32,8 @@
     "stylelint-order": "^6.0.3",
     "@svgr/plugin-prettier": "^8.1.0",
     "tsconfig": "workspace:*",
-    "turbo": "latest"
+    "turbo": "latest",
+    "husky": "^8.0.0"
   },
   "packageManager": "pnpm@8.7.4"
 }
