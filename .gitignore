@@ -40,3 +40,5 @@ out
 server/dist
 public/dist
 storybook-static/
+
+.history
