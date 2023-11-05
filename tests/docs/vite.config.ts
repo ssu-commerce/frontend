@@ -1,4 +1,4 @@
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 

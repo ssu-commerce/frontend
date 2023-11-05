@@ -11,7 +11,6 @@ const meta = {
   argTypes: {
     color: {
       control: "radio",
-      defaultValue: "default",
       options: [
         "default",
         "primary",
@@ -20,14 +19,15 @@ const meta = {
         "info",
         "success",
         "warning",
-        "black",
-        "slate-100",
       ],
+    },
+    variant: {
+      control: "radio",
+      options: ["contained", "outlined", "text"],
     },
     size: {
       control: "radio",
-      defaultValue: "lg",
-      options: ["lg", "md", "sm"],
+      options: ["sm", "md", "lg"],
     },
   },
 } satisfies Meta<typeof Button>;
@@ -36,10 +36,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-function ButtonHooks(args): ReactElement<ButtonProps> {
-  return <Button {...args}>Button</Button>;
-}
-
-export const Primary: Story = {
-  render: (args) => <ButtonHooks color={args.color} {...args} />,
+export const Default: Story = {
+  args: {
+    color: "default",
+    variant: "contained",
+    size: "sm",
+    children: "default",
+  },
 };
