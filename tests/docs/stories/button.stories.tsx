@@ -1,5 +1,6 @@
 import { Button } from "@sc/components";
 import type { Meta, StoryObj } from "@storybook/react";
+import SearchIcon from "@sc/shared/icons/search_filled_20.svg?react";
 
 const meta = {
   title: "Example/Button",
@@ -21,6 +22,19 @@ const meta = {
         "warning",
       ],
     },
+    disabled: {
+      control: "boolean",
+    },
+    endIcon: {
+      options: Object.keys({ SearchIcon }),
+      mapping: { SearchIcon },
+      control: {
+        type: "select",
+        labels: {
+          SearchIcon: "Search",
+        },
+      },
+    },
     variant: {
       control: "radio",
       options: ["contained", "outlined", "text"],
@@ -36,11 +50,12 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const DefaultButton: Story = {
   args: {
     color: "default",
     variant: "contained",
     size: "sm",
+    disabled: false,
     children: "default",
   },
 };

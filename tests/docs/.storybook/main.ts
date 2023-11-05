@@ -1,5 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-
+import { mergeConfig } from "vite";
 import { join, dirname } from "path";
 
 /**
@@ -26,6 +26,16 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: "tag",
+  },
+  core: {
+    builder: "@storybook/builder-vite",
+  },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      optimizeDeps: {
+        include: ["storybook-dark-mode"],
+      },
+    });
   },
 };
 export default config;

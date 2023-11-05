@@ -1,5 +1,8 @@
+/// <reference types="vite-plugin-svgr/client" />
+
 import type { Preview } from "@storybook/react";
 import "../styles/style.css";
+import "@sc/components/style.css";
 
 const preview: Preview = {
   parameters: {
