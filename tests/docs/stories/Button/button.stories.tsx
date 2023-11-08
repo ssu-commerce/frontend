@@ -4,7 +4,7 @@ import SearchIcon from "@sc/shared/icons/search_filled_20.svg?react";
 import { userEvent, within } from "@storybook/testing-library";
 
 const meta = {
-  title: "Example/Button",
+  title: "UI/Button",
   component: Button,
   parameters: {
     layout: "centered",
@@ -83,14 +83,3 @@ export const PrimaryButton: Story = {
     await userEvent.click(canvas.getByText("primary"));
   },
 };
-
-// export const CombinedStories: Story = {
-//   play: async ({ canvasElement }) => {
-//     const canvas = within(canvasElement);
-
-//     // Runs the FirstStory and Second story play function before running this story's play function
-//     await DefaultButton.play({ canvasElement });
-//     await PrimaryButton.play({ canvasElement });
-//     // await userEvent.click(canvas.getByText("primary"));
-//   },
-// };
