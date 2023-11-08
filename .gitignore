@@ -40,3 +40,9 @@ out
 server/dist
 public/dist
 storybook-static/
+build-storybook.log
+chromatic.log
+chromatic-build-*.xml
+chromatic-diagnostics.json
+
+.DS_Store

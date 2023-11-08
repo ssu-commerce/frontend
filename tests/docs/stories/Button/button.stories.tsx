@@ -1,12 +1,16 @@
 import { Button } from "@sc/components";
 import type { Meta, StoryObj } from "@storybook/react";
 import SearchIcon from "@sc/shared/icons/search_filled_20.svg?react";
+import { userEvent, within } from "@storybook/testing-library";
 
 const meta = {
-  title: "Example/Button",
+  title: "UI/Button",
   component: Button,
   parameters: {
     layout: "centered",
+    vitest: {
+      testFile: "Button.test.tsx",
+    },
   },
   tags: ["autodocs"],
   argTypes: {
@@ -48,7 +52,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Button>;
 
 export const DefaultButton: Story = {
   args: {
@@ -57,5 +61,25 @@ export const DefaultButton: Story = {
     size: "sm",
     disabled: false,
     children: "default",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText("default"));
+  },
+};
+
+export const PrimaryButton: Story = {
+  args: {
+    color: "primary",
+    variant: "outlined",
+    size: "md",
+    disabled: false,
+    children: "primary",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText("primary"));
   },
 };

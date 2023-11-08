@@ -10,6 +10,10 @@ function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, "package.json")));
 }
 const config: StorybookConfig = {
+  framework: {
+    name: getAbsolutePath("@storybook/react-vite"),
+    options: {},
+  },
   stories: [
     "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
@@ -20,10 +24,6 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-styling-webpack"),
   ],
-  framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
-    options: {},
-  },
   docs: {
     autodocs: "tag",
   },

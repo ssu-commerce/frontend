@@ -27,4 +27,5 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     size?: ButtonSize;
     startIcon?: FunctionComponent<ComponentProps<"svg">>;
     variant?: ButtonVariant;
+    testId?: string;
   };
