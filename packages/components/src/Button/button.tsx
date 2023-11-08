@@ -23,6 +23,7 @@ const Button = forwardRef(function Button(
     variant = "text",
     type = "button",
     target = "_self",
+    testId,
     ...props
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>,
@@ -116,6 +117,7 @@ const Button = forwardRef(function Button(
     return (
       <a
         className={classNames}
+        data-testid={testId}
         target={target}
         {...props}
         ref={ref as ForwardedRef<HTMLAnchorElement>}
@@ -128,6 +130,7 @@ const Button = forwardRef(function Button(
   return (
     <button
       className={classNames}
+      data-testid={testId}
       type={type === "button" ? "button" : "submit"}
       {...props}
       ref={ref}
