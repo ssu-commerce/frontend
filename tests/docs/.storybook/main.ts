@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-import { mergeConfig } from "vite";
 import { join, dirname } from "path";
 
 /**
@@ -19,23 +18,16 @@ const config: StorybookConfig = {
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
-    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-docs"),
     getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-styling-webpack"),
+    getAbsolutePath("@storybook/addon-jest"),
+    getAbsolutePath("@storybook/addon-postcss"),
   ],
   docs: {
     autodocs: "tag",
-  },
-  core: {
-    builder: "@storybook/builder-vite",
-  },
-  async viteFinal(config) {
-    return mergeConfig(config, {
-      optimizeDeps: {
-        include: ["storybook-dark-mode"],
-      },
-    });
   },
 };
 export default config;

@@ -4,19 +4,13 @@ import type {
   ComponentProps,
   FunctionComponent,
 } from "react";
+import type { ColorType, SizeType } from "../types";
 
-export type ButtonColor =
-  | "default"
-  | "primary"
-  | "secondary"
-  | "error"
-  | "info"
-  | "success"
-  | "warning";
+export type ButtonColor = ColorType;
 
 export type ButtonVariant = "contained" | "outlined" | "text";
 
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonSize = SizeType;
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -29,3 +23,23 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     variant?: ButtonVariant;
     testId?: string;
   };
+
+export type ButtonStyledProps = Partial<keyof ButtonProps> | "hover";
+
+export const styledList: ButtonStyledProps[] = [
+  "disabled",
+  "fullWidth",
+  "hover",
+];
+
+export const variantList: ButtonVariant[] = ["contained", "outlined", "text"];
+
+export const colorList: ColorType[] = [
+  "default",
+  "primary",
+  "secondary",
+  "error",
+  "info",
+  "success",
+  "warning",
+];

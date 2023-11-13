@@ -1,5 +1,5 @@
 {
-  "name": "@sc/components",
+  "name": "@sc/ui",
   "version": "0.1.0",
   "license": "MIT",
   "sideEffects": [
@@ -19,30 +19,22 @@
     "lint": "eslint src/",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
-  "jest": {
-    "preset": "jest-presets/jest/browser"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0"
+  "dependencies": {
+    "@sc/utils": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@sc/tailwind-config": "workspace:*",
-    "@testing-library/react": "^14.0.0",
-    "@types/jest": "^29.5.7",
+    "eslint-config-sc": "workspace:*",
+    "@sc-config/tailwind": "workspace:*",
+    "tsconfig-sc": "workspace:*",
     "@types/node": "^20.5.2",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "autoprefixer": "^10.4.13",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "eslint-config-custom": "workspace:*",
-    "postcss": "^8.4.20",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "tailwind-merge": "^2.0.0",
-    "tailwindcss": "^3.3.5",
-    "tsconfig": "workspace:*",
-    "tsup": "^6.7.0",
-    "typescript": "^5.2.2"
+    "tsup": "^6.7.0"
   },
   "publishConfig": {
     "access": "public"

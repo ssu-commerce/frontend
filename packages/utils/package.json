@@ -1,0 +1,20 @@
+{
+  "name": "@sc/utils",
+  "version": "0.1.0",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "tsconfig-sc": "workspace:*",
+    "eslint-config-sc": "workspace:*",
+    "@types/react": "^18.2.0",
+    "react": "^18.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
-import sharedConfig from "@sc/tailwind-config/tailwind.config";
+import sharedConfig from "@sc-config/tailwind/tailwind.config";
 
 const config: Pick<Config, "prefix" | "presets"> = {
-  prefix: "sc-",
+  prefix: "ui-",
   presets: [sharedConfig],
 };
 

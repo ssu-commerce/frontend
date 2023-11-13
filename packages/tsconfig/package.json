@@ -1,6 +1,6 @@
 {
-  "name": "tsconfig",
-  "version": "0.0.0",
+  "name": "tsconfig-sc",
+  "version": "0.1.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
