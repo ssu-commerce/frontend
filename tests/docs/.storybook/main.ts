@@ -23,14 +23,20 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-styling-webpack"),
+    getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-jest"),
+    getAbsolutePath("@storybook/addon-postcss"),
   ],
   docs: {
     autodocs: "tag",
   },
-  core: {
-    builder: "@storybook/builder-vite",
-  },
-  async viteFinal(config) {
+  async viteFinal(config, { configType }) {
+    if (configType === "DEVELOPMENT") {
+      // Your development configuration goes here
+    }
+    if (configType === "PRODUCTION") {
+      // Your production configuration goes here.
+    }
     return mergeConfig(config, {
       optimizeDeps: {
         include: ["storybook-dark-mode"],
