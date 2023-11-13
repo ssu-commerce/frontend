@@ -2,24 +2,25 @@
   "name": "@sc/shared",
   "version": "0.0.0",
   "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "types": "./dist/index.d.ts",
   "files": [
     "fonts",
-    "icons",
-    "src"
+    "icons"
   ],
   "sideEffects": false,
   "scripts": {
     "clean": "rm -rf .turbo && rm -rf node_modules"
   },
   "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
     "@types/node": "^18.17.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "typescript": "^5.2.2"
   }
 }
