@@ -16,7 +16,6 @@ module.exports = {
   extends: [
     "@vercel/style-guide/eslint/browser",
     "@vercel/style-guide/eslint/typescript",
-    "@vercel/style-guide/eslint/browser",
     "@vercel/style-guide/eslint/react",
   ].map(require.resolve),
   overrides: [
@@ -32,6 +31,7 @@ module.exports = {
   },
   globals: {
     JSX: true,
+    React: true,
   },
   settings: {
     "import/resolver": {

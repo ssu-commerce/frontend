@@ -4,7 +4,7 @@ import type {
   ComponentProps,
   FunctionComponent,
 } from "react";
-import type { ColorType, SizeType } from "../Types";
+import type { ColorType, SizeType } from "../types";
 
 export type ButtonColor = ColorType;
 

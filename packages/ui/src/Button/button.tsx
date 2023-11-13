@@ -2,13 +2,13 @@ import type { ForwardedRef, ReactElement, ReactNode } from "react";
 import { forwardRef } from "react";
 import type { ClassNameValue } from "tailwind-merge";
 // import { cva } from "class-variance-authority";
+import { cn } from "../utils/class-name-merge";
 import type {
   ButtonColor,
   ButtonProps,
   ButtonSize,
   ButtonVariant,
 } from "./button.types";
-import { cn } from "../Util/classNameMerge";
 
 // export const buttonVariant = cva("", {
 //   variants: {

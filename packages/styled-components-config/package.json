@@ -1,11 +1,11 @@
 {
-    "name": "styled-components-config",
-    "version": "0.0.0",
-    "private": true,
-    "main": "index.ts",
-    "types": "index.ts",
-    "devDependencies": {
-        "styled-components": "^6.1.0",
-        "styled-reset": "^4.5.1"
-    }
+  "name": "@sc-config/styled-components",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "devDependencies": {
+    "styled-components": "^6.1.0",
+    "styled-reset": "^4.5.1"
+  }
 }

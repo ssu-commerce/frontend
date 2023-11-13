@@ -21,8 +21,7 @@
     "backoffice": "pnpm -F @sc/backoffice dev",
     "commerce": "pnpm -F @sc/commerce dev",
     "sb": "pnpm -F @sc/docs dev",
-    "cp": "pnpm -F @sc/ui dev",
-    "utils": "pnpm -F @sc/utils dev"
+    "ui": "pnpm -F @sc/ui dev"
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.2",
@@ -35,7 +34,7 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-order": "^6.0.3",
     "@svgr/plugin-prettier": "^8.1.0",
-    "tsconfig": "workspace:*",
+    "tsconfig-sc": "workspace:*",
     "turbo": "latest",
     "husky": "^8.0.0",
     "@types/jest": "^29.5.4",

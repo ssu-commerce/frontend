@@ -1,6 +1,6 @@
 import "./styles.css";
 
-export * from "./Types";
+export * from "./types";
 
 export * from "./Card";
 export * from "./Button";

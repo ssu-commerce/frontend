@@ -9,12 +9,10 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "tsconfig": "workspace:*",
+    "tsconfig-sc": "workspace:*",
+    "eslint-config-sc": "workspace:*",
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "eslint-config-custom": "workspace:*",
-    "react": "^18.2.0",
-    "typescript": "^5.2.2"
+    "react": "^18.2.0"
   },
   "publishConfig": {
     "access": "public"

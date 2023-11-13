@@ -8,7 +8,6 @@ import {
   buttonCommonColor,
   buttonStyledProps,
 } from "./button.constant";
-import "../../styles/style.css";
 import { Fragment } from "react";
 
 const meta = {

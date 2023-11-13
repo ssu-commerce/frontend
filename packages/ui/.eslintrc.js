@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ["custom/react"],
+  extends: ["sc/react", "sc/library"],
 };
