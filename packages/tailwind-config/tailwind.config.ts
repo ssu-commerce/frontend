@@ -1,6 +1,17 @@
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
+import colors from "tailwindcss/colors";
+
+const Color = {
+  default: colors.gray["600"],
+  primary: colors.amber["600"],
+  secondary: colors.violet["600"],
+  error: colors.red["600"],
+  info: colors.gray["300"],
+  success: colors.green["600"],
+  warning: colors.yellow["300"],
+};
 
 /** @type {import('tailwindcss').Config} */
 const config: Config = {
@@ -15,6 +26,8 @@ const config: Config = {
       serif: ["Merriweather", "serif"],
     },
     extend: {
+      colors: Color,
+
       fontSize: {
         sm: ["14px", "20px"],
         md: ["16px", "24px"],

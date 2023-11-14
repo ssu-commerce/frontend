@@ -7,43 +7,40 @@ import type {
 
 export const buttonColor: Record<ButtonColor, Record<ButtonVariant, string>> = {
   default: {
-    contained: "ui-bg-gray-800",
-    outlined: "ui-text-gray-800 ui-border-gray-800 descendant:ui-fill-gray-800",
-    text: "ui-text-gray-800 descendant:ui-fill-gray-800",
+    contained: "ui-bg-default",
+    outlined: "ui-text-default ui-border-default descendant:ui-fill-default",
+    text: "ui-text-default descendant:ui-fill-default",
   },
   primary: {
-    contained: "ui-bg-amber-600",
-    outlined:
-      "ui-text-amber-600 ui-border-amber-600 descendant:ui-fill-amber-600",
-    text: "ui-text-amber-600 descendant:ui-fill-amber-600",
+    contained: "ui-bg-primary",
+    outlined: "ui-text-primary ui-border-primary descendant:ui-fill-primary",
+    text: "ui-text-primary descendant:ui-fill-primary",
   },
   secondary: {
-    contained: "ui-bg-amber-300",
+    contained: "ui-bg-secondary",
     outlined:
-      "ui-text-amber-300 ui-border-amber-300 descendant:ui-fill-amber-300",
-    text: "ui-text-amber-300 descendant:ui-fill-amber-300",
+      "ui-text-secondary ui-border-secondary descendant:ui-fill-secondary",
+    text: "ui-text-secondary descendant:ui-fill-secondary",
   },
   error: {
-    contained: "ui-bg-red-600",
-    outlined: "ui-text-red-600 ui-border-red-600 descendant:ui-fill-red-600",
-    text: "ui-text-red-600 descendant:ui-fill-red-600",
+    contained: "ui-bg-error",
+    outlined: "ui-text-error ui-border-error descendant:ui-fill-error",
+    text: "ui-text-error descendant:ui-fill-error",
   },
   info: {
-    contained: "ui-bg-gray-300",
-    outlined: "ui-text-gray-300 ui-border-gray-300 descendant:ui-fill-gray-300",
-    text: "ui-text-gray-300 descendant:ui-fill-gray-300",
+    contained: "ui-bg-info",
+    outlined: "ui-text-info ui-border-info descendant:ui-fill-info",
+    text: "ui-text-info descendant:ui-fill-info",
   },
   success: {
-    contained: "ui-bg-green-600",
-    outlined:
-      "ui-text-green-600 ui-border-green-600 descendant:ui-fill-green-600",
-    text: "ui-text-green-600 descendant:ui-fill-green-600",
+    contained: "ui-bg-success",
+    outlined: "ui-text-success ui-border-success descendant:ui-fill-success",
+    text: "ui-text-success descendant:ui-fill-success",
   },
   warning: {
-    contained: "ui-bg-yellow-300",
-    outlined:
-      "ui-text-yellow-300 ui-border-yellow-300 descendant:ui-fill-yellow-300",
-    text: "ui-text-yellow-300 descendant:ui-fill-yellow-300",
+    contained: "ui-bg-warning",
+    outlined: "ui-text-warning ui-border-warning descendant:ui-fill-warning",
+    text: "ui-text-warning descendant:ui-fill-warning",
   },
 };
 export const buttonCommonColor = {
@@ -67,6 +64,6 @@ export const iconSize: Record<ButtonSize, string> = {
 export const buttonStyledProps: Record<ButtonStyledProps, string> = {
   hover: "hover:ui-opacity-70 ui-cursor-pointer",
   disabled:
-    "ui-opacity-30 hover:ui-opacity-30 foucs:ui-outline-blue-800 ui-cursor-not-allowed",
+    "ui-opacity-30 hover:ui-opacity-30 foucs:ui-outline-blue-600 ui-cursor-not-allowed",
   fullWidth: "ui-w-full",
 };

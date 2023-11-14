@@ -1,27 +1,68 @@
 import type { ForwardedRef, ReactElement, ReactNode } from "react";
 import { forwardRef } from "react";
-import type { ClassNameValue } from "tailwind-merge";
-// import { cva } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "../utils/class-name-merge";
-import type {
-  ButtonColor,
-  ButtonProps,
-  ButtonSize,
-  ButtonVariant,
-} from "./button.types";
+import type { ButtonProps } from "./button.types";
 
-// export const buttonVariant = cva("", {
-//   variants: {
-//     color: {
-//       default: ["ui-bg-gray-800"],
-//       primary: { 0: "p-0", 2: "p-2", 4: "p-4", 8: "p-8" },
-//       secondary: { 0: "p-0", 2: "p-2", 4: "p-4", 8: "p-8" },
-//     },
-//   },
-//   defaultVariants: {
-//     color: "default",
-//   },
-// });
+export const buttonVariant = cva(
+  "ui-rounded ui-inline-flex ui-gap-1 hover:ui-opacity-70 ui-cursor-pointer ui-border-2 ",
+  {
+    variants: {
+      color: {
+        default:
+          "ui-bg-default ui-border-default descendant:ui-fill-default ui-text-default",
+        primary:
+          "ui-bg-primary ui-border-primary descendant:ui-fill-primary ui-text-primary",
+        secondary:
+          "ui-bg-secondary ui-border-secondary descendant:ui-fill-secondary ui-text-secondary",
+        error:
+          "ui-bg-error ui-border-error descendant:ui-fill-error ui-text-error",
+        info: "ui-bg-info ui-border-info  descendant:ui-fill-info ui-text-info",
+        success:
+          "ui-bg-success ui-border-success descendant:ui-fill-success ui-text-success",
+        warning:
+          "ui-bg-warning ui-border-warning descendant:ui-fill-warning ui-text-warning",
+      },
+      variant: {
+        contained: "descendant:ui-fill-white ui-text-white",
+        outlined: "ui-bg-white ",
+        text: "ui-bg-transparent ui-border-transparent",
+      },
+      size: {
+        sm: "ui-text-sm ui-py-1 ui-px-1",
+        md: "ui-text-md ui-py-1 ui-px-2",
+        lg: "ui-text-lg ui-py-1 ui-px-3",
+      },
+    },
+    defaultVariants: {
+      color: "default",
+    },
+  },
+);
+
+export const iconVariant = cva("", {
+  variants: {
+    size: {
+      sm: "ui-w-5 ui-h-5",
+      md: "ui-w-6 ui-h-6",
+      lg: "ui-w-7 ui-h-7",
+    },
+    color: {
+      default: "descendant:ui-fill-default",
+      primary: "descendant:ui-fill-primary",
+      secondary: "descendant:ui-fill-secondary",
+      error: "descendant:ui-fill-error",
+      info: "descendant:ui-fill-info",
+      success: "descendant:ui-fill-success",
+      warning: "descendant:ui-fill-warning",
+    },
+    variant: {
+      contained: "descendant:ui-fill-white",
+      outlined: "",
+      text: "",
+    },
+  },
+});
 
 const Button = forwardRef(function Button(
   {
@@ -42,95 +83,32 @@ const Button = forwardRef(function Button(
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>,
 ): ReactElement<ButtonProps> {
-  const buttonColor: Record<ButtonColor, Record<ButtonVariant, string>> = {
-    default: {
-      contained: "ui-bg-gray-800",
-      outlined:
-        "ui-text-gray-800 ui-border-gray-800 descendant:ui-fill-gray-800",
-      text: "ui-text-gray-800 descendant:ui-fill-gray-800",
-    },
-    primary: {
-      contained: "ui-bg-amber-600",
-      outlined:
-        "ui-text-amber-600 ui-border-amber-600 descendant:ui-fill-amber-600",
-      text: "ui-text-amber-600 descendant:ui-fill-amber-600",
-    },
-    secondary: {
-      contained: "ui-bg-amber-300",
-      outlined:
-        "ui-text-amber-300 ui-border-amber-300 descendant:ui-fill-amber-300",
-      text: "ui-text-amber-300 descendant:ui-fill-amber-300",
-    },
-    error: {
-      contained: "ui-bg-red-600",
-      outlined: "ui-text-red-600 ui-border-red-600 descendant:ui-fill-red-600",
-      text: "ui-text-red-600 descendant:ui-fill-red-600",
-    },
-    info: {
-      contained: "ui-bg-gray-300",
-      outlined:
-        "ui-text-gray-300 ui-border-gray-300 descendant:ui-fill-gray-300",
-      text: "ui-text-gray-300 descendant:ui-fill-gray-300",
-    },
-    success: {
-      contained: "ui-bg-green-600",
-      outlined:
-        "ui-text-green-600 ui-border-green-600 descendant:ui-fill-green-600",
-      text: "ui-text-green-600 descendant:ui-fill-green-600",
-    },
-    warning: {
-      contained: "ui-bg-yellow-300",
-      outlined:
-        "ui-text-yellow-300 ui-border-yellow-300 descendant:ui-fill-yellow-300",
-      text: "ui-text-yellow-300 descendant:ui-fill-yellow-300",
-    },
-  };
-  const buttonCommonColor = {
-    contained: "ui-text-white descendant:ui-fill-white",
-    outlined: "ui-bg-white ui-border-2",
-    text: "ui-bg-transparent",
-  };
-
-  const buttonSize: Record<ButtonSize, ClassNameValue> = {
-    sm: "ui-text-sm ui-py-1 ui-px-1",
-    md: "ui-text-md ui-py-1 ui-px-2",
-    lg: "ui-text-lg ui-py-1 ui-px-3",
-  };
-
-  const iconSize: Record<ButtonSize, ClassNameValue> = {
-    sm: "ui-w-5 ui-h-5",
-    md: "ui-w-6 ui-h-6",
-    lg: "ui-w-7 ui-h-7",
-  };
-
-  const classNames = cn(
-    buttonColor[color][variant],
-    buttonCommonColor[variant],
-    buttonSize[size],
-    disabled
-      ? "ui-opacity-30 hover:ui-opacity-30 foucs:ui-outline-blue-800 ui-cursor-not-allowed"
-      : "hover:ui-opacity-70 ui-cursor-pointer",
-    fullWidth && "ui-w-full",
-    "ui-rounded ui-inline-flex ui-gap-1",
-    className,
-  );
-
-  const iconClassName = cn(iconSize[size]);
-
   const childrenNode = (): ReactNode => (
     <>
       {startIcon ? (
-        <span className={iconClassName}>{startIcon({})}</span>
+        <span className={cn(iconVariant({ color, size, variant }))}>
+          {startIcon({})}
+        </span>
       ) : null}
       {children}
-      {endIcon ? <span className={iconClassName}>{endIcon({})}</span> : null}
+      {endIcon ? (
+        <span className={cn(iconVariant({ color, size, variant }))}>
+          {endIcon({})}
+        </span>
+      ) : null}
     </>
   );
 
   if (href) {
     return (
       <a
-        className={classNames}
+        className={cn(
+          buttonVariant({ color, variant, size }),
+          disabled &&
+            "ui-opacity-30 hover:ui-opacity-30 foucs:ui-outline-blue-600 ui-cursor-not-allowed",
+          fullWidth && "ui-w-full",
+          className,
+        )}
         data-testid={testId}
         href={href}
         target={target}
@@ -144,7 +122,13 @@ const Button = forwardRef(function Button(
 
   return (
     <button
-      className={classNames}
+      className={cn(
+        buttonVariant({ color, variant, size }),
+        disabled &&
+          "ui-opacity-30 hover:ui-opacity-30 foucs:ui-outline-blue-600 ui-cursor-not-allowed",
+        fullWidth && "ui-w-full",
+        className,
+      )}
       data-testid={testId}
       type={type === "button" ? "button" : "submit"}
       {...props}

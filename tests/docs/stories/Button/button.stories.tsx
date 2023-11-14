@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import SearchIcon from "@sc/shared/icons/search_filled_20.svg?react";
 import { userEvent, within } from "@storybook/testing-library";
 import { Button, styledList, colorList, variantList } from "@sc/ui";
+import { Fragment } from "react";
 import {
   buttonColor,
   buttonCommonColor,
   buttonStyledProps,
 } from "./button.constant";
-import { Fragment } from "react";
 
 const meta = {
   title: "UI/Button",

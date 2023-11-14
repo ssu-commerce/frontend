@@ -19,9 +19,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "eslint-config-sc": "workspace:*",
     "@sc-config/tailwind": "workspace:*",
     "@sc-config/jest": "workspace:*",
+    "eslint-config-sc": "workspace:*",
     "tsconfig-sc": "workspace:*",
     "@storybook/addon-docs": "^7.5.3",
     "@storybook/addon-essentials": "^7.5.3",
