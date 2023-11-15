@@ -112,7 +112,9 @@ export const StyleButton: Story = {
       buttonCompoundArgs.color.map((color) =>
         buttonCompoundArgs.variant.map((variant) =>
           buttonCompoundArgs.size.map(async (size) => {
-            const button = canvas.getByText(`${color}-${variant}-${size}`);
+            const button = canvas.getByLabelText(
+              `[${color} / ${variant} / ${size}]`,
+            );
             await expect(button).toBeInTheDocument();
             await expect(button).toHaveClass(
               buttonColor[color][variant],
@@ -123,7 +125,7 @@ export const StyleButton: Story = {
       ),
     );
   },
-  render: ({ endIcon, disabled }) => {
+  render: ({ disabled }) => {
     return (
       <>
         {buttonCompoundArgs.color.map((color) => (
@@ -132,14 +134,22 @@ export const StyleButton: Story = {
               <Fragment key={variant}>
                 {buttonCompoundArgs.size.map((size) => (
                   <li key={color + variant + size}>
+                    <label
+                      className="text-xs block bg-white p-1 rounded-md"
+                      htmlFor={`${color}-${variant}-${size}`}
+                    >
+                      [{color} / {variant} / {size}]
+                    </label>
                     <Button
+                      className="my-2"
                       color={color}
                       disabled={disabled}
-                      endIcon={endIcon ? sizeIcon[size] : undefined}
+                      endIcon={sizeIcon[size]}
+                      id={`${color}-${variant}-${size}`}
                       size={size}
                       variant={variant}
                     >
-                      {color}-{variant}-{size}
+                      button
                     </Button>
                   </li>
                 ))}
@@ -152,13 +162,12 @@ export const StyleButton: Story = {
   },
   decorators: [
     (Story) => (
-      <ul className="grid grid-cols-5 gap-4 text-center align-middle items-center bg-stripes-gray rounded-lg p-5">
+      <ul className="grid grid-cols-5 gap-4 text-center align-middle items-center rounded-lg p-5">
         <Story />
       </ul>
     ),
   ],
   argTypes: {
-    // foo is the property we want to remove from the UI
     color: {
       control: false,
     },
