@@ -6,6 +6,7 @@ import ArrowDownMD from "@sc/shared/icons/arrow_down_24.svg?react";
 import ArrowDownLG from "@sc/shared/icons/arrow_down_28.svg?react";
 import ArrowDownXL from "@sc/shared/icons/arrow_down_32.svg?react";
 import { userEvent, within } from "@storybook/testing-library";
+import type { ButtonSize } from "@sc/ui";
 import { Button } from "@sc/ui";
 import { Fragment } from "react";
 import {
@@ -16,7 +17,7 @@ import {
   buttonStyle,
 } from "./button.type";
 
-const SizeIcon = {
+const sizeIcon: Record<ButtonSize, React.VFC<React.SVGProps<SVGSVGElement>>> = {
   xs: ArrowDownXS,
   sm: ArrowDownSM,
   md: ArrowDownMD,
@@ -43,20 +44,7 @@ const meta = {
       control: "boolean",
     },
     endIcon: {
-      options: Object.keys(SizeIcon),
-      mapping: {
-        ArrowDownXS,
-        ArrowDownSM,
-        ArrowDownMD,
-        ArrowDownLG,
-        ArrowDownXL,
-      },
-      control: {
-        type: "select",
-        labels: {
-          ArrowDownXL: "ArrowDownXL",
-        },
-      },
+      control: "boolean",
     },
     variant: {
       control: "radio",
@@ -79,6 +67,7 @@ export const DefaultButton: Story = {
     variant: "contained",
     size: "sm",
     disabled: false,
+    endIcon: false,
     children: "Button",
   },
   play: async ({ canvasElement }) => {
@@ -87,6 +76,12 @@ export const DefaultButton: Story = {
     await expect(button.tagName).toBe("BUTTON");
     await expect(button).toHaveClass(buttonStyle);
   },
+  render: ({ size, endIcon, ...args }) => (
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- 임시 코드임...
+    <Button endIcon={endIcon ? sizeIcon[size!] : undefined} {...args}>
+      {args.children}
+    </Button>
+  ),
 };
 
 export const LinkButton: Story = {
@@ -128,7 +123,7 @@ export const StyleButton: Story = {
       ),
     );
   },
-  render: (args) => {
+  render: ({ endIcon, disabled }) => {
     return (
       <>
         {buttonCompoundArgs.color.map((color) => (
@@ -139,8 +134,8 @@ export const StyleButton: Story = {
                   <li key={color + variant + size}>
                     <Button
                       color={color}
-                      disabled={args.disabled}
-                      endIcon={SizeIcon[size]}
+                      disabled={disabled}
+                      endIcon={endIcon ? sizeIcon[size] : undefined}
                       size={size}
                       variant={variant}
                     >
