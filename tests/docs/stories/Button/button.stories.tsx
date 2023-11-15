@@ -2,13 +2,13 @@ import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import SearchIcon from "@sc/shared/icons/search_filled_20.svg?react";
 import { userEvent, within } from "@storybook/testing-library";
-import { Button, styledList, colorList, variantList } from "@sc/ui";
+import { Button } from "@sc/ui";
 import { Fragment } from "react";
 import {
+  buttonCompoundArgs,
   buttonColor,
-  buttonCommonColor,
-  buttonStyledProps,
-} from "./button.constant";
+  buttonStyleProps,
+} from "./button.type";
 
 const meta = {
   title: "UI/Button",
@@ -23,15 +23,7 @@ const meta = {
   argTypes: {
     color: {
       control: "radio",
-      options: [
-        "default",
-        "primary",
-        "secondary",
-        "error",
-        "info",
-        "success",
-        "warning",
-      ],
+      options: buttonCompoundArgs.color,
     },
     disabled: {
       control: "boolean",
@@ -48,11 +40,11 @@ const meta = {
     },
     variant: {
       control: "radio",
-      options: ["contained", "outlined", "text"],
+      options: buttonCompoundArgs.variant,
     },
     size: {
       control: "radio",
-      options: ["sm", "md", "lg"],
+      options: buttonCompoundArgs.size,
     },
   },
 } satisfies Meta<typeof Button>;
@@ -66,14 +58,11 @@ export const DefaultButton: Story = {
     const canvas = within(canvasElement);
 
     await Promise.allSettled(
-      colorList.map((color) =>
-        variantList.map(async (variant) => {
+      buttonCompoundArgs.color.map((color) =>
+        buttonCompoundArgs.variant.map(async (variant) => {
           const button = canvas.getByText(`${color}-${variant}`);
           await expect(button).toBeInTheDocument();
-          await expect(button).toHaveClass(
-            buttonColor[color][variant],
-            buttonCommonColor[variant],
-          );
+          await expect(button).toHaveClass(buttonColor[color][variant]);
         }),
       ),
     );
@@ -81,9 +70,9 @@ export const DefaultButton: Story = {
   render: (_args) => {
     return (
       <ul className="grid grid-cols-3 gap-4 text-center bg-stripes-gray rounded-lg p-5">
-        {colorList.map((color) => (
+        {buttonCompoundArgs.color.map((color) => (
           <Fragment key={color}>
-            {variantList.map((variant) => (
+            {buttonCompoundArgs.variant.map((variant) => (
               <li key={variant + color}>
                 <Button color={color} size="sm" variant={variant}>
                   {color}-{variant}
@@ -108,17 +97,17 @@ export const ActionButton: Story = {
     const canvas = within(canvasElement);
 
     await Promise.allSettled(
-      styledList.map(async (name) => {
+      Object.entries(buttonStyleProps).map(async ([name, value]) => {
         const button = canvas.getByText(name);
         await expect(button).toBeInTheDocument();
-        await expect(button).toHaveClass(buttonStyledProps[name]);
+        await expect(button).toHaveClass(value);
       }),
     );
   },
   render: (args) => {
     return (
       <ul className="grid grid-cols-3 gap-4 text-center bg-stripes-gray rounded-lg p-5">
-        {styledList.map((name) => (
+        {Object.keys(buttonStyleProps).map((name) => (
           <li key={name}>
             <Button
               color={args.color}

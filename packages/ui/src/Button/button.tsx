@@ -9,23 +9,17 @@ export const buttonVariant = cva(
   {
     variants: {
       color: {
-        default:
-          "ui-bg-default ui-border-default descendant:ui-fill-default ui-text-default",
-        primary:
-          "ui-bg-primary ui-border-primary descendant:ui-fill-primary ui-text-primary",
-        secondary:
-          "ui-bg-secondary ui-border-secondary descendant:ui-fill-secondary ui-text-secondary",
-        error:
-          "ui-bg-error ui-border-error descendant:ui-fill-error ui-text-error",
-        info: "ui-bg-info ui-border-info  descendant:ui-fill-info ui-text-info",
-        success:
-          "ui-bg-success ui-border-success descendant:ui-fill-success ui-text-success",
-        warning:
-          "ui-bg-warning ui-border-warning descendant:ui-fill-warning ui-text-warning",
+        default: "ui-bg-default ui-border-default ui-text-default",
+        primary: "ui-bg-primary ui-border-primary ui-text-primary",
+        secondary: "ui-bg-secondary ui-border-secondary ui-text-secondary",
+        error: "ui-bg-error ui-border-error ui-text-error",
+        info: "ui-bg-info ui-border-info ui-text-info",
+        success: "ui-bg-success ui-border-success ui-text-success",
+        warning: "ui-bg-warning ui-border-warning ui-text-warning",
       },
       variant: {
-        contained: "descendant:ui-fill-white ui-text-white",
-        outlined: "ui-bg-white ",
+        contained: "ui-text-white",
+        outlined: "ui-bg-white",
         text: "ui-bg-transparent ui-border-transparent",
       },
       size: {
@@ -36,6 +30,8 @@ export const buttonVariant = cva(
     },
     defaultVariants: {
       color: "default",
+      variant: "contained",
+      size: "sm",
     },
   },
 );
@@ -64,7 +60,7 @@ export const iconVariant = cva("", {
   },
 });
 
-const Button = forwardRef(function Button(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     children,
     className,
@@ -103,7 +99,7 @@ const Button = forwardRef(function Button(
     return (
       <a
         className={cn(
-          buttonVariant({ color, variant, size }),
+          buttonVariant({ color, size, variant }),
           disabled &&
             "ui-opacity-30 hover:ui-opacity-30 foucs:ui-outline-blue-600 ui-cursor-not-allowed",
           fullWidth && "ui-w-full",
