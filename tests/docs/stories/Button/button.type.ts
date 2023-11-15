@@ -20,8 +20,11 @@ export const buttonCompoundArgs: {
     "warning",
   ],
   variant: ["contained", "outlined", "text"],
-  size: ["sm", "md", "lg"],
+  size: ["xs", "sm", "md", "lg", "xl"],
 };
+
+export const buttonStyle =
+  "ui-rounded ui-inline-flex ui-gap-1 hover:ui-opacity-70 ui-cursor-pointer ui-text-center ui-justify-center ui-items-center ui-border-0";
 
 export const buttonColor: Record<ButtonColor, Record<ButtonVariant, string>> = {
   default: {
@@ -67,18 +70,22 @@ export const buttonCommonColor = {
 };
 
 export const buttonSize: Record<ButtonSize, string> = {
-  sm: "ui-text-sm ui-py-1 ui-px-1",
-  md: "ui-text-md ui-py-1 ui-px-2",
-  lg: "ui-text-lg ui-py-1 ui-px-3",
+  xs: "ui-text-xs ui-h-6 ui-min-w-6 ui-px-2",
+  sm: "ui-text-sm ui-h-8 ui-min-w-8 ui-px-3",
+  md: "ui-text-md ui-h-10 ui-min-w-10 ui-px-4",
+  lg: "ui-text-lg ui-h-12 ui-min-w-12 ui-px-6",
+  xl: "ui-text-xl ui-h-14 ui-min-w-14 ui-px-8",
 };
 
 export const iconSize: Record<ButtonSize, string> = {
+  xs: "ui-w-4 ui-h-4",
   sm: "ui-w-5 ui-h-5",
   md: "ui-w-6 ui-h-6",
   lg: "ui-w-7 ui-h-7",
+  xl: "ui-w-8 ui-h-8",
 };
 
-export const buttonStyleProps: Record<ButtonStyleProps, string> = {
+export const buttonStyleProps: Partial<Record<ButtonStyleProps, string>> = {
   hover: "hover:ui-opacity-70 ui-cursor-pointer",
   disabled:
     "ui-opacity-30 hover:ui-opacity-30 foucs:ui-outline-blue-600 ui-cursor-not-allowed",

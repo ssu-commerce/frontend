@@ -5,7 +5,7 @@ import { cn } from "../utils/class-name-merge";
 import type { ButtonProps } from "./button.types";
 
 export const buttonVariant = cva(
-  "ui-rounded ui-inline-flex ui-gap-1 hover:ui-opacity-70 ui-cursor-pointer ui-border-2 ",
+  "ui-rounded ui-inline-flex ui-gap-1 hover:ui-opacity-70 ui-cursor-pointer ui-text-center ui-justify-center ui-items-center ui-border-0",
   {
     variants: {
       color: {
@@ -19,13 +19,15 @@ export const buttonVariant = cva(
       },
       variant: {
         contained: "ui-text-white",
-        outlined: "ui-bg-white",
-        text: "ui-bg-transparent ui-border-transparent",
+        outlined: "ui-bg-white  ui-border-2",
+        text: "ui-bg-transparent",
       },
       size: {
-        sm: "ui-text-sm ui-py-1 ui-px-1",
-        md: "ui-text-md ui-py-1 ui-px-2",
-        lg: "ui-text-lg ui-py-1 ui-px-3",
+        xs: "ui-text-xs ui-h-6 ui-min-w-6 ui-px-2",
+        sm: "ui-text-sm ui-h-8 ui-min-w-8 ui-px-3",
+        md: "ui-text-md ui-h-10 ui-min-w-10 ui-px-4",
+        lg: "ui-text-lg ui-h-12 ui-min-w-12 ui-px-6",
+        xl: "ui-text-xl ui-h-14 ui-min-w-14 ui-px-8",
       },
     },
     defaultVariants: {
@@ -39,9 +41,11 @@ export const buttonVariant = cva(
 export const iconVariant = cva("", {
   variants: {
     size: {
+      xs: "ui-w-4 ui-h-4",
       sm: "ui-w-5 ui-h-5",
       md: "ui-w-6 ui-h-6",
       lg: "ui-w-7 ui-h-7",
+      xl: "ui-w-8 ui-h-8",
     },
     color: {
       default: "descendant:ui-fill-default",
@@ -82,13 +86,23 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   const childrenNode = (): ReactNode => (
     <>
       {startIcon ? (
-        <span className={cn(iconVariant({ color, size, variant }))}>
+        <span
+          className={cn(
+            iconVariant({ color, size, variant }),
+            "ui-flex ui-justify-center ui-items-center",
+          )}
+        >
           {startIcon({})}
         </span>
       ) : null}
       {children}
       {endIcon ? (
-        <span className={cn(iconVariant({ color, size, variant }))}>
+        <span
+          className={cn(
+            iconVariant({ color, size, variant }),
+            "ui-flex ui-justify-center ui-items-center",
+          )}
+        >
           {endIcon({})}
         </span>
       ) : null}
