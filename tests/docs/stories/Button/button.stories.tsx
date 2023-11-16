@@ -1,58 +1,58 @@
 import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
-import SearchIcon from "@sc/shared/icons/search_filled_20.svg?react";
+import ArrowDownXS from "@sc/shared/icons/arrow_down_16.svg?react";
+import ArrowDownSM from "@sc/shared/icons/arrow_down_20.svg?react";
+import ArrowDownMD from "@sc/shared/icons/arrow_down_24.svg?react";
+import ArrowDownLG from "@sc/shared/icons/arrow_down_28.svg?react";
+import ArrowDownXL from "@sc/shared/icons/arrow_down_32.svg?react";
 import { userEvent, within } from "@storybook/testing-library";
-import { Button, styledList, colorList, variantList } from "@sc/ui";
-import {
-  buttonColor,
-  buttonCommonColor,
-  buttonStyledProps,
-} from "./button.constant";
+import type { ButtonSize } from "@sc/ui";
+import { Button } from "@sc/ui";
 import { Fragment } from "react";
+import {
+  buttonCompoundArgs,
+  buttonColor,
+  buttonStyleProps,
+  buttonSize,
+  buttonStyle,
+} from "./button.type";
+
+const sizeIcon: Record<ButtonSize, React.VFC<React.SVGProps<SVGSVGElement>>> = {
+  xs: ArrowDownXS,
+  sm: ArrowDownSM,
+  md: ArrowDownMD,
+  lg: ArrowDownLG,
+  xl: ArrowDownXL,
+};
 
 const meta = {
   title: "UI/Button",
   component: Button,
   parameters: {
     layout: "centered",
-    vitest: {
-      testFile: "Button.test.tsx",
+    variants: {
+      enable: true,
     },
   },
   tags: ["autodocs"],
   argTypes: {
     color: {
       control: "radio",
-      options: [
-        "default",
-        "primary",
-        "secondary",
-        "error",
-        "info",
-        "success",
-        "warning",
-      ],
+      options: buttonCompoundArgs.color,
     },
     disabled: {
       control: "boolean",
     },
     endIcon: {
-      options: Object.keys({ SearchIcon }),
-      mapping: { SearchIcon },
-      control: {
-        type: "select",
-        labels: {
-          SearchIcon: "Search",
-        },
-      },
+      control: "boolean",
     },
     variant: {
       control: "radio",
-      options: ["contained", "outlined", "text"],
+      options: buttonCompoundArgs.variant,
     },
     size: {
       control: "radio",
-      options: ["sm", "md", "lg"],
+      options: buttonCompoundArgs.size,
     },
   },
 } satisfies Meta<typeof Button>;
@@ -62,78 +62,26 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const DefaultButton: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await Promise.allSettled(
-      colorList.map((color) =>
-        variantList.map(async (variant) => {
-          const button = canvas.getByText(`${color}-${variant}`);
-          await expect(button).toBeInTheDocument();
-          await expect(button).toHaveClass(
-            buttonColor[color][variant],
-            buttonCommonColor[variant],
-          );
-        }),
-      ),
-    );
-  },
-  render: (_args) => {
-    return (
-      <ul className="grid grid-cols-3 gap-4 text-center bg-stripes-gray rounded-lg p-5">
-        {colorList.map((color) => (
-          <Fragment key={color}>
-            {variantList.map((variant) => (
-              <li key={variant + color}>
-                <Button color={color} size="sm" variant={variant}>
-                  {color}-{variant}
-                </Button>
-              </li>
-            ))}
-          </Fragment>
-        ))}
-      </ul>
-    );
-  },
-};
-
-export const ActionButton: Story = {
   args: {
     color: "default",
     variant: "contained",
     size: "sm",
+    disabled: false,
+    endIcon: false,
     children: "Button",
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-
-    await Promise.allSettled(
-      styledList.map(async (name) => {
-        const button = canvas.getByText(name);
-        await expect(button).toBeInTheDocument();
-        await expect(button).toHaveClass(buttonStyledProps[name]);
-      }),
-    );
+    const button = canvas.getByText("Button");
+    await expect(button.tagName).toBe("BUTTON");
+    await expect(button).toHaveClass(buttonStyle);
   },
-  render: (args) => {
-    return (
-      <ul className="grid grid-cols-3 gap-4 text-center bg-stripes-gray rounded-lg p-5">
-        {styledList.map((name) => (
-          <li key={name}>
-            <Button
-              color={args.color}
-              disabled={name === "disabled"}
-              fullWidth={name === "fullWidth"}
-              size={args.size}
-              variant={args.variant}
-            >
-              {name}
-            </Button>
-          </li>
-        ))}
-      </ul>
-    );
-  },
+  render: ({ size, endIcon, ...args }) => (
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- 임시 코드임...
+    <Button endIcon={endIcon ? sizeIcon[size!] : undefined} {...args}>
+      {args.children}
+    </Button>
+  ),
 };
 
 export const LinkButton: Story = {
@@ -154,4 +102,130 @@ export const LinkButton: Story = {
     const moveURL = window.location.href;
     await expect(moveURL).toBe(`${currentURL}#`);
   },
+};
+
+export const StyleButton: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await Promise.allSettled(
+      buttonCompoundArgs.color.map((color) =>
+        buttonCompoundArgs.variant.map((variant) =>
+          buttonCompoundArgs.size.map(async (size) => {
+            const button = canvas.getByLabelText(
+              `[${color} / ${variant} / ${size}]`,
+            );
+            await expect(button).toBeInTheDocument();
+            await expect(button).toHaveClass(
+              buttonColor[color][variant],
+              buttonSize[size],
+            );
+          }),
+        ),
+      ),
+    );
+  },
+  render: ({ disabled }) => {
+    return (
+      <>
+        {buttonCompoundArgs.color.map((color) => (
+          <Fragment key={color}>
+            {buttonCompoundArgs.variant.map((variant) => (
+              <Fragment key={variant}>
+                {buttonCompoundArgs.size.map((size) => (
+                  <li key={color + variant + size}>
+                    <label
+                      className="text-xs block bg-white p-1 rounded-md"
+                      htmlFor={`${color}-${variant}-${size}`}
+                    >
+                      [{color} / {variant} / {size}]
+                    </label>
+                    <Button
+                      className="my-2"
+                      color={color}
+                      disabled={disabled}
+                      endIcon={sizeIcon[size]}
+                      id={`${color}-${variant}-${size}`}
+                      size={size}
+                      variant={variant}
+                    >
+                      button
+                    </Button>
+                  </li>
+                ))}
+              </Fragment>
+            ))}
+          </Fragment>
+        ))}
+      </>
+    );
+  },
+  decorators: [
+    (Story) => (
+      <ul className="grid grid-cols-5 gap-4 text-center align-middle items-center rounded-lg p-5">
+        <Story />
+      </ul>
+    ),
+  ],
+  argTypes: {
+    color: {
+      control: false,
+    },
+    variant: {
+      control: false,
+    },
+    size: {
+      control: false,
+    },
+    endIcon: {
+      control: false,
+    },
+  },
+};
+
+export const ActionButton: Story = {
+  args: {
+    color: "default",
+    variant: "contained",
+    size: "sm",
+    children: "Button",
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await Promise.allSettled(
+      Object.entries(buttonStyleProps).map(async ([name, value]) => {
+        const button = canvas.getByText(name);
+        await expect(button).toBeInTheDocument();
+        value && (await expect(button).toHaveClass(value));
+      }),
+    );
+  },
+  render: (args) => {
+    return (
+      <>
+        {Object.keys(buttonStyleProps).map((name) => (
+          <li key={name}>
+            <Button
+              color={args.color}
+              disabled={name === "disabled"}
+              fullWidth={name === "fullWidth"}
+              size={args.size}
+              variant={args.variant}
+            >
+              {name}
+            </Button>
+          </li>
+        ))}
+      </>
+    );
+  },
+  decorators: [
+    (Story) => (
+      <ul className="flex gap-4 text-center align-middle items-center bg-stripes-gray rounded-lg p-5 w-50">
+        <Story />
+      </ul>
+    ),
+  ],
 };

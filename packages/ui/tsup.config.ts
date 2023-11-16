@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export -- config file is ignore */
 import type { Options } from "tsup";
 import { defineConfig } from "tsup";
 
