@@ -22,7 +22,9 @@ const config: Config = {
         warning: colors.yellow["300"],
       },
       spacing: {
+        "0.5": "2px",
         "1": "4px",
+        "1.5": "6px",
         "2": "8px",
         "3": "12px",
         "4": "16px",

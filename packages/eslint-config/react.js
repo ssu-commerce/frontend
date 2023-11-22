@@ -48,5 +48,11 @@ module.exports = {
     "import/no-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "error",
     "unicorn/filename-case": "off",
+    "jsx-a11y/no-autofocus": [
+      2,
+      {
+        ignoreNonDOM: true,
+      },
+    ],
   },
 };
