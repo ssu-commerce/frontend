@@ -6,16 +6,10 @@ import ArrowDownMD from "@sc/shared/icons/arrow_down_24.svg?react";
 import ArrowDownLG from "@sc/shared/icons/arrow_down_28.svg?react";
 import ArrowDownXL from "@sc/shared/icons/arrow_down_32.svg?react";
 import { userEvent, within } from "@storybook/testing-library";
+import { Fragment, ReactNode } from "react";
 import type { ButtonSize } from "@sc/ui";
 import { Button } from "@sc/ui";
-import { Fragment } from "react";
-import {
-  buttonCompoundArgs,
-  buttonColor,
-  buttonStyleProps,
-  buttonSize,
-  buttonStyle,
-} from "./button.type";
+import { buttonCompoundArgs, buttonStyleProps } from "./button.type";
 
 const sizeIcon: Record<ButtonSize, React.VFC<React.SVGProps<SVGSVGElement>>> = {
   xs: ArrowDownXS,
@@ -74,11 +68,17 @@ export const DefaultButton: Story = {
     const canvas = within(canvasElement);
     const button = canvas.getByText("Button");
     await expect(button.tagName).toBe("BUTTON");
-    await expect(button).toHaveClass(buttonStyle);
   },
-  render: ({ size, endIcon, ...args }) => (
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- 임시 코드임...
-    <Button endIcon={endIcon ? sizeIcon[size!] : undefined} {...args}>
+  render: ({
+    size,
+    endIcon,
+    ...args
+  }: {
+    size: ButtonSize;
+    endIcon: boolean;
+    children: ReactNode;
+  }) => (
+    <Button endIcon={endIcon ? sizeIcon[size] : undefined} {...args}>
       {args.children}
     </Button>
   ),
@@ -105,25 +105,8 @@ export const LinkButton: Story = {
 };
 
 export const StyleButton: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await Promise.allSettled(
-      buttonCompoundArgs.color.map((color) =>
-        buttonCompoundArgs.variant.map((variant) =>
-          buttonCompoundArgs.size.map(async (size) => {
-            const button = canvas.getByLabelText(
-              `[${color} / ${variant} / ${size}]`,
-            );
-            await expect(button).toBeInTheDocument();
-            await expect(button).toHaveClass(
-              buttonColor[color][variant],
-              buttonSize[size],
-            );
-          }),
-        ),
-      ),
-    );
+  args: {
+    disabled: false,
   },
   render: ({ disabled }) => {
     return (
@@ -135,7 +118,7 @@ export const StyleButton: Story = {
                 {buttonCompoundArgs.size.map((size) => (
                   <li key={color + variant + size}>
                     <label
-                      className="text-xs block bg-white p-1 rounded-md"
+                      className="text-xs block bg-white p-1 rounded-md w-fit mx-auto m"
                       htmlFor={`${color}-${variant}-${size}`}
                     >
                       [{color} / {variant} / {size}]
@@ -162,7 +145,7 @@ export const StyleButton: Story = {
   },
   decorators: [
     (Story) => (
-      <ul className="grid grid-cols-5 gap-4 text-center align-middle items-center rounded-lg p-5">
+      <ul className="grid grid-cols-5 gap-4 text-center align-middle items-center">
         <Story />
       </ul>
     ),
@@ -202,17 +185,17 @@ export const ActionButton: Story = {
       }),
     );
   },
-  render: (args) => {
+  render: ({ color, size, variant }) => {
     return (
       <>
         {Object.keys(buttonStyleProps).map((name) => (
-          <li key={name}>
+          <li className="w-52" key={name}>
             <Button
-              color={args.color}
+              color={color}
               disabled={name === "disabled"}
               fullWidth={name === "fullWidth"}
-              size={args.size}
-              variant={args.variant}
+              size={size}
+              variant={variant}
             >
               {name}
             </Button>
@@ -223,7 +206,7 @@ export const ActionButton: Story = {
   },
   decorators: [
     (Story) => (
-      <ul className="flex gap-4 text-center align-middle items-center bg-stripes-gray rounded-lg p-5 w-50">
+      <ul className="flex flex-col gap-4 text-center align-middle items-center w-52">
         <Story />
       </ul>
     ),

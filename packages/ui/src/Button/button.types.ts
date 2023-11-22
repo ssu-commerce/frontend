@@ -4,30 +4,25 @@ import type {
   ComponentProps,
   FunctionComponent,
 } from "react";
+import type { Action, Color, Size, Variant } from "../types";
 
-export type ButtonColor =
-  | "default"
-  | "primary"
-  | "secondary"
-  | "error"
-  | "info"
-  | "success"
-  | "warning";
+export type ButtonColor = Color;
 
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonSize = Size;
 
-export type ButtonVariant = "contained" | "outlined" | "text";
+export type ButtonVariant = Variant;
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  AnchorHTMLAttributes<HTMLAnchorElement> & {
-    color?: ButtonColor;
-    endIcon?: FunctionComponent<ComponentProps<"svg">>;
-    fullWidth?: boolean;
-    href?: string;
-    size?: ButtonSize;
-    startIcon?: FunctionComponent<ComponentProps<"svg">>;
-    variant?: ButtonVariant;
-    testId?: string;
-  };
+  AnchorHTMLAttributes<HTMLAnchorElement> &
+  Partial<{
+    color: ButtonColor;
+    endIcon: FunctionComponent<ComponentProps<"svg">>;
+    fullWidth: boolean;
+    href: string;
+    size: ButtonSize;
+    startIcon: FunctionComponent<ComponentProps<"svg">>;
+    variant: ButtonVariant;
+    testId: string;
+  }>;
 
-export type ButtonStyleProps = Partial<keyof ButtonProps> | "hover";
+export type ButtonStyleProps = Partial<keyof ButtonProps> | Action;

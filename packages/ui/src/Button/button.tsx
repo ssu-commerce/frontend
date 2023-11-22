@@ -75,7 +75,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     href,
     size = "sm",
     startIcon,
-    variant = "text",
+    variant = "contained",
     type = "button",
     target = "_self",
     testId,
