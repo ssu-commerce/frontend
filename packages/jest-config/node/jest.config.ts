@@ -10,7 +10,7 @@ const config: Config = {
     "<rootDir>/test/__fixtures__",
     "<rootDir>/node_modules",
     "<rootDir>/dist",
-    'jest-test-results.json'
+    "jest-test-results.json",
   ],
   testMatch: [
     "<rootDir>/__tests__/**/*.ts?(x)",
