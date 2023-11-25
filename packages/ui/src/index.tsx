@@ -1,6 +1,6 @@
 import "./styles.css";
 
-export { Button, buttonVariant, iconVariant } from "./Button/button";
+export { Button } from "./Button/button";
 
 export { TextField } from "./TextField/textfield";
 

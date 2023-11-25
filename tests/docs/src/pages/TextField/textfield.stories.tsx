@@ -132,7 +132,7 @@ export const ActionTextField: Story = {
   render: () => {
     return (
       <>
-        {Object.keys(textFieldStyleProps).map((name) => (
+        {textFieldStyleProps.map((name) => (
           <li className="w-52" key={name}>
             <TextField
               // eslint-disable-next-line jsx-a11y/no-autofocus -- for test

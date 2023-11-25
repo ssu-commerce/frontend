@@ -17,27 +17,4 @@ module.export = {
     "prettier-plugin-organize-imports",
     "prettier-plugin-tailwindcss",
   ],
-  overrides: [
-    {
-      files: ["*.mjs", "*.cjs", "*.js"],
-      options: {
-        parser: "babel",
-      },
-    },
-
-    {
-      files: ["*.mts", "*.cts", "*.ts"],
-      options: {
-        parser: "typescript",
-      },
-    },
-
-    {
-      files: ["*.json", "*.jsonc", "*.json5"],
-      options: {
-        singleQuote: false,
-        parser: "json",
-      },
-    },
-  ],
 };

@@ -4,7 +4,12 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "storybook-static/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "storybook-static/**",
+        "dist/**"
+      ]
     },
     "lint": {},
     "dev": {
@@ -18,7 +23,15 @@
     "clean": {
       "cache": false
     },
-    "test": {},
+    "test": {
+      "dependsOn": ["lint", "build"],
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "pages/**/*.ts",
+        "pages/**/*.ts"
+      ]
+    },
     "test:watch": {
       "cache": false
     }

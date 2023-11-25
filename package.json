@@ -11,7 +11,7 @@
     "lint": "turbo run lint",
     "lint:styled": "stylelint './**/*.styles.ts' --fix",
     "clean": "turbo run clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "prepare": "husky install",
@@ -42,11 +42,13 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint --fix",
       "turbo run test",
       "turbo run lint",
       "turbo run format"
     ]
   },
-  "packageManager": "pnpm@8.7.4"
+  "packageManager": "pnpm@8.7.4",
+  "engines": {
+    "node": ">=18"
+  }
 }
