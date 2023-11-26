@@ -121,6 +121,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
     value,
     testId,
     className,
+    id,
     ...props
   }: TextFieldProps,
   ref: ForwardedRef<HTMLDivElement>,
@@ -179,6 +180,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
           data-testid={testId}
           defaultValue={defaultValue}
           disabled={disabled}
+          id={id}
           name={name}
           onChange={handleChangeTextArea}
           placeholder={placeholder}
@@ -223,6 +225,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
         data-testid={testId}
         defaultValue={defaultValue}
         disabled={disabled}
+        id={id}
         name={name}
         onChange={onChange}
         placeholder={placeholder}

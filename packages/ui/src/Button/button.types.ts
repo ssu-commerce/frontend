@@ -25,4 +25,4 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     testId: string;
   }>;
 
-export type ButtonStyleProps = Partial<keyof ButtonProps> | Action;
+export type ButtonStyleProps = keyof ButtonProps & Action;
