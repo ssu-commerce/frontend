@@ -36,6 +36,7 @@ export type TextFieldProps = HTMLAttributes<HTMLDivElement> &
     type: HTMLInputTypeAttribute;
     value: string | readonly string[] | number;
     testId: string;
+    id: string;
   }>;
 
 export type TextFieldStyleProps = keyof TextFieldProps & Action;

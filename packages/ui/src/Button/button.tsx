@@ -4,7 +4,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "../utils/class-name-merge";
 import type { ButtonProps } from "./button.types";
 
-export const buttonVariant = cva(
+const buttonVariant = cva(
   "ui-rounded ui-inline-flex ui-gap-1 hover:ui-opacity-70 ui-cursor-pointer ui-text-center ui-justify-center ui-items-center ui-border-0",
   {
     variants: {
@@ -38,7 +38,7 @@ export const buttonVariant = cva(
   },
 );
 
-export const iconVariant = cva("", {
+const iconVariant = cva("", {
   variants: {
     size: {
       xs: "ui-w-4 ui-h-4",
