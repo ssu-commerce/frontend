@@ -3,6 +3,7 @@ import type {
   InputHTMLAttributes,
   RefObject,
   MouseEventHandler,
+  ReactNode,
 } from "react";
 import type { Action, Color, Size, Variant } from "../types";
 
@@ -26,6 +27,7 @@ export type CheckboxProps = HTMLAttributes<HTMLLabelElement> &
     onClick: MouseEventHandler<HTMLInputElement>;
     required: boolean;
     name: string;
+    children: ReactNode;
   }>;
 
 export type CheckboxStyleProps = keyof CheckboxProps & Action;

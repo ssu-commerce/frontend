@@ -54,6 +54,7 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
     id,
     className,
     testId,
+    children,
     ...props
   },
   ref: ForwardedRef<HTMLLabelElement>,
@@ -82,6 +83,7 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
         type="checkbox"
         {...inputProps}
       />
+      {children}
     </label>
   );
 });
