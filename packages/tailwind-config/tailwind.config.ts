@@ -1,7 +1,6 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
 import { Config } from "tailwindcss/types";
-import colors from "tailwindcss/colors";
 
 /** @type {import('tailwindcss').Config} */
 const config: Config = {
@@ -9,13 +8,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        default: colors.gray["600"],
-        primary: colors.amber["600"],
-        secondary: colors.violet["600"],
-        error: colors.red["600"],
-        info: colors.gray["300"],
-        success: colors.green["600"],
-        warning: colors.yellow["300"],
+        default: "#ff6b01",
+        primary: "#959a9d",
+        secondary: "#24282b",
+        error: "#dc2626",
+        info: "#d1d5db",
+        success: "#16a34a",
+        warning: "#fde047",
       },
       spacing: {
         "0.5": "2px",

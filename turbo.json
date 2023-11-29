@@ -24,7 +24,7 @@
       "cache": false
     },
     "test": {
-      "dependsOn": ["lint", "build"],
+      "dependsOn": [],
       "inputs": [
         "src/**/*.tsx",
         "src/**/*.ts",

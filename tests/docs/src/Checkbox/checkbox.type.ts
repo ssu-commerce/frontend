@@ -1,8 +1,8 @@
-import type { TextFieldColor, TextFieldSize } from "@sc/ui";
+import type { CheckboxColor, CheckboxSize } from "@sc/ui";
 
-export const textFieldCompoundArgs: {
-  color: TextFieldColor[];
-  size: TextFieldSize[];
+export const checkboxCompoundArgs: {
+  color: CheckboxColor[];
+  size: CheckboxSize[];
 } = {
   color: [
     "default",
@@ -16,7 +16,7 @@ export const textFieldCompoundArgs: {
   size: ["sm", "md", "lg"],
 };
 
-export const textFieldStyleProps = [
+export const checkboxStyleProps = [
   "hover",
   "disabled",
   "fullWidth",

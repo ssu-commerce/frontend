@@ -4,6 +4,8 @@ export { Button } from "./Button/button";
 
 export { TextField } from "./TextField/textfield";
 
+export { Checkbox } from "./Checkbox/checkbox";
+
 export type {
   TextFieldColor,
   TextFieldProps,
@@ -18,3 +20,11 @@ export type {
   ButtonSize,
   ButtonStyleProps,
 } from "./Button/button.types";
+
+export type {
+  CheckboxVariant,
+  CheckboxSize,
+  CheckboxColor,
+  CheckboxProps,
+  CheckboxStyleProps,
+} from "./Checkbox/checkbox.types";
