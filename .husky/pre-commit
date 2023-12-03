@@ -6,5 +6,5 @@
 # npx lint-staged
 
 pnpm lint
-# pnpm test
-# pnpm format
+pnpm test
+pnpm format

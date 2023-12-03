@@ -2,7 +2,7 @@ import { Checkbox } from "@sc/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
-import type { ReactElement} from "react";
+import type { ReactElement } from "react";
 import { useState } from "react";
 import { checkboxCompoundArgs } from "./checkbox.type";
 

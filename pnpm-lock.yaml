@@ -161,6 +161,9 @@ importers:
       '@sc/utils':
         specifier: workspace:*
         version: link:../utils
+      eslint-config-sc:
+        specifier: workspace:*
+        version: link:../eslint-config
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -189,9 +192,6 @@ importers:
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
-      eslint-config-sc:
-        specifier: workspace:*
-        version: link:../eslint-config
       postcss:
         specifier: ^8.4.20
         version: 8.4.31
@@ -234,6 +234,9 @@ importers:
       '@sc/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      eslint-config-sc:
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -307,9 +310,6 @@ importers:
       chromatic:
         specifier: ^9.0.0
         version: 9.0.0
-      eslint-config-sc:
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
       postcss:
         specifier: ^8.4.20
         version: 8.4.31

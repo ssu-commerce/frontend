@@ -19,14 +19,14 @@
     "lint": "eslint src/ --fix --max-warnings 0",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@sc/utils": "workspace:*",
     "@sc/shared": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "eslint-config-sc": "workspace:*"
   },
   "devDependencies": {
-    "eslint-config-sc": "workspace:*",
     "@sc-config/tailwind": "workspace:*",
     "tsconfig-sc": "workspace:*",
     "@types/node": "^20.5.2",
