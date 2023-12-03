@@ -11,7 +11,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "clean": "rm -rf .turbo && rm -rf node_modules"
   },
   "peerDependencies": {
     "react": "^18.2.0",

@@ -54,5 +54,32 @@ module.exports = {
         ignoreNonDOM: true,
       },
     ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: "enum",
+        format: ["UPPER_CASE"],
+        leadingUnderscore: "allow",
+        trailingUnderscore: "allow",
+      },
+      {
+        selector: ["variable"],
+        modifiers: ["const"],
+        format: ["camelCase", "PascalCase", "UPPER_CASE"],
+      },
+      {
+        selector: ["typeParameter"],
+        format: ["PascalCase"],
+      },
+      {
+        selector: ["interface"],
+        format: ["PascalCase"],
+      },
+      {
+        selector: ["function"],
+        format: ["camelCase"],
+        leadingUnderscore: "allow",
+      },
+    ],
   },
 };

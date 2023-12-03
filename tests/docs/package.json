@@ -18,7 +18,8 @@
     "@sc/ui": "workspace:*",
     "@sc/utils": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "eslint-config-sc": "workspace:*"
   },
   "devDependencies": {
     "@sc-config/jest": "workspace:*",
@@ -43,7 +44,6 @@
     "@vitejs/plugin-react-swc": "^3.4.0",
     "autoprefixer": "^10.4.13",
     "chromatic": "^9.0.0",
-    "eslint-config-sc": "workspace:*",
     "postcss": "^8.4.20",
     "serve": "^13.0.4",
     "storybook": "^7.5.3",
