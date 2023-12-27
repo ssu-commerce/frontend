@@ -2,9 +2,9 @@ import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../utils/class-name-merge";
-import type { CheckboxProps } from "./checkbox.types";
+import type { RadioProps } from "./radio.types";
 import { COLOR, SIZE } from "../types";
-import { CheckedIcon, UnCheckedIcon } from "../SVG";
+import { RadioCheckedIcon, RadioUnCheckedIcon } from "../SVG";
 
 const wrapperVariant = cva(
   "ui-rounded ui-inline-flex ui-gap-2 hover:ui-opacity-70 ui-cursor-pointer ui-text-center ui-justify-center ui-items-center ui-border-0 ui-relative",
@@ -48,7 +48,7 @@ const inputVariant = cva(
   },
 );
 
-const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
+const Radio = forwardRef<HTMLLabelElement, RadioProps>(function Radio(
   {
     checked,
     defaultChecked,
@@ -63,12 +63,14 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
     id,
     className,
     testId,
-    value,
     children,
+    selectedValue,
+    value,
     ...props
   },
   ref: ForwardedRef<HTMLLabelElement>,
-): ReactElement<CheckboxProps> {
+): ReactElement<RadioProps> {
+  const isChecked = checked || selectedValue === value;
   return (
     <label
       ref={ref}
@@ -80,13 +82,13 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
         className,
       )}
     >
-      {checked ? (
-        <CheckedIcon color={COLOR[color]} size={SIZE[size]} />
+      {isChecked ? (
+        <RadioCheckedIcon color={COLOR[color]} size={SIZE[size]} />
       ) : (
-        <UnCheckedIcon color={COLOR[color]} size={SIZE[size]} />
+        <RadioUnCheckedIcon color={COLOR[color]} size={SIZE[size]} />
       )}
       <input
-        checked={checked}
+        checked={isChecked}
         className={cn(
           inputVariant({ size }),
           disabled &&
@@ -101,7 +103,7 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
         onChange={onChange}
         ref={inputRef}
         required={required}
-        type="checkbox"
+        type="radio"
         value={value}
         {...inputProps}
       />
@@ -110,4 +112,4 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
   );
 });
 
-export { Checkbox };
+export { Radio };

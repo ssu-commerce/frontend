@@ -5,11 +5,12 @@ import { defineConfig } from "tsup";
 export default defineConfig((options: Options) => ({
   treeshake: true,
   splitting: true,
-  entry: ["src/**/*.tsx"],
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: true,
   minify: true,
   clean: true,
   external: ["react"],
+  entry: ["src/index.tsx"],
+
   ...options,
 }));

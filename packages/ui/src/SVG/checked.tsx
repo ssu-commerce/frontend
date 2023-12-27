@@ -1,15 +1,9 @@
-import { ReactElement } from "react";
-import { Color, Size } from ".";
+import { IconProps } from ".";
 
-function CheckIcon({
-  color = "#000000",
-  size = 20,
-}: {
-  color?: Color;
-  size?: Size;
-}): ReactElement {
+function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
   switch (size) {
     case 16:
+    case "xs":
       return (
         <svg
           width="16"
@@ -25,6 +19,7 @@ function CheckIcon({
         </svg>
       );
     case 20:
+    case "sm":
       return (
         <svg
           width="20"
@@ -40,6 +35,7 @@ function CheckIcon({
         </svg>
       );
     case 24:
+    case "md":
       return (
         <svg
           width="24"
@@ -55,6 +51,7 @@ function CheckIcon({
         </svg>
       );
     case 28:
+    case "lg":
       return (
         <svg
           width="28"
@@ -70,6 +67,7 @@ function CheckIcon({
         </svg>
       );
     case 32:
+    case "xl":
       return (
         <svg
           width="32"
@@ -101,4 +99,4 @@ function CheckIcon({
   );
 }
 
-export { CheckIcon };
+export { CheckedIcon };

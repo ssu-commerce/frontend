@@ -1,24 +1,11 @@
 import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
-import ArrowDownXS from "@sc/shared/icons/arrow_down_16.svg?react";
-import ArrowDownSM from "@sc/shared/icons/arrow_down_20.svg?react";
-import ArrowDownMD from "@sc/shared/icons/arrow_down_24.svg?react";
-import ArrowDownLG from "@sc/shared/icons/arrow_down_28.svg?react";
-import ArrowDownXL from "@sc/shared/icons/arrow_down_32.svg?react";
 import { userEvent, within } from "@storybook/testing-library";
 import type { ReactNode } from "react";
 import { Fragment } from "react";
 import type { ButtonSize } from "@sc/ui";
-import { Button } from "@sc/ui";
+import { ArrowIcon, Button } from "@sc/ui";
 import { buttonCompoundArgs, buttonStyleProps } from "./button.type";
-
-const sizeIcon: Record<ButtonSize, React.VFC<React.SVGProps<SVGSVGElement>>> = {
-  xs: ArrowDownXS,
-  sm: ArrowDownSM,
-  md: ArrowDownMD,
-  lg: ArrowDownLG,
-  xl: ArrowDownXL,
-};
 
 const meta = {
   title: "UI/Button",
@@ -62,7 +49,6 @@ export const DefaultButton: Story = {
     variant: "contained",
     size: "sm",
     disabled: false,
-    endIcon: false,
     children: "Button",
   },
   play: async ({ canvasElement }) => {
@@ -71,7 +57,7 @@ export const DefaultButton: Story = {
     await expect(button.tagName).toBe("BUTTON");
   },
   render: ({
-    size,
+    size = "sm",
     endIcon,
     ...args
   }: {
@@ -79,7 +65,7 @@ export const DefaultButton: Story = {
     endIcon: boolean;
     children: ReactNode;
   }) => (
-    <Button endIcon={endIcon ? sizeIcon[size] : undefined} {...args}>
+    <Button endIcon={endIcon ? <ArrowIcon size={size} /> : null} {...args}>
       {args.children}
     </Button>
   ),
@@ -128,7 +114,7 @@ export const StyleButton: Story = {
                       className="my-2"
                       color={color}
                       disabled={disabled}
-                      endIcon={sizeIcon[size]}
+                      endIcon={<ArrowIcon size={size} />}
                       id={`${color}-${variant}-${size}`}
                       size={size}
                       variant={variant}

@@ -92,7 +92,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
             "ui-flex ui-justify-center ui-items-center",
           )}
         >
-          {startIcon({})}
+          {startIcon}
         </span>
       ) : null}
       {children}
@@ -103,7 +103,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
             "ui-flex ui-justify-center ui-items-center",
           )}
         >
-          {endIcon({})}
+          {endIcon}
         </span>
       ) : null}
     </>
