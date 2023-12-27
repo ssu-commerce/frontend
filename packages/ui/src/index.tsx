@@ -1,30 +1,14 @@
-import "./styles.css";
+import "./style.css";
 
-export { Button } from "./Button/button";
+export * from "./Button/button";
+export * from "./TextField/textfield";
+export * from "./Checkbox/checkbox";
+export * from "./Radio/radio";
+export * from "./Radio/radioGroup";
+export * from "./SVG";
 
-export { TextField } from "./TextField/textfield";
-
-export { Checkbox } from "./Checkbox/checkbox";
-
-export type {
-  TextFieldColor,
-  TextFieldProps,
-  TextFieldSize,
-  TextFieldStyleProps,
-} from "./TextField/textfield.types";
-
-export type {
-  ButtonVariant,
-  ButtonColor,
-  ButtonProps,
-  ButtonSize,
-  ButtonStyleProps,
-} from "./Button/button.types";
-
-export type {
-  CheckboxVariant,
-  CheckboxSize,
-  CheckboxColor,
-  CheckboxProps,
-  CheckboxStyleProps,
-} from "./Checkbox/checkbox.types";
+export type * from "./TextField/textfield.types";
+export type * from "./Button/button.types";
+export type * from "./Checkbox/checkbox.types";
+export type * from "./Radio/radio.types";
+export type * from "./SVG";

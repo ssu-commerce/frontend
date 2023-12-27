@@ -1,13 +1,9 @@
-import { ReactElement } from "react";
-import { Color, Size } from ".";
+import { IconProps } from ".";
 
-function UnCheckIcon({
+function UnCheckedIcon({
   color = "#ffffff",
   size = 20,
-}: {
-  color?: Color;
-  size?: Size;
-}): ReactElement {
+}: IconProps): JSX.Element {
   switch (size) {
     case 16:
       return (
@@ -101,4 +97,4 @@ function UnCheckIcon({
   );
 }
 
-export { UnCheckIcon };
+export { UnCheckedIcon };

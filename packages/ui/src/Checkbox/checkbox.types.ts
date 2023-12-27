@@ -13,7 +13,7 @@ export type CheckboxSize = Size;
 
 export type CheckboxVariant = Variant;
 
-export type CheckboxProps = HTMLAttributes<HTMLLabelElement> &
+export type CheckboxProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
   Partial<{
     checked: boolean;
     defaultChecked: boolean;
@@ -27,6 +27,7 @@ export type CheckboxProps = HTMLAttributes<HTMLLabelElement> &
     required: boolean;
     name: string;
     children: ReactNode;
+    value: string | ReadonlyArray<string> | number;
   }>;
 
 export type CheckboxStyleProps = keyof CheckboxProps & Action;

@@ -8,6 +8,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
   "exports": {
     ".": "./dist",
     "./style.css": "./dist/index.css"
@@ -19,14 +22,13 @@
     "lint": "eslint src/ --fix --max-warnings 0",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
-  "peerDependencies": {
+  "peerDependencies": {},
+  "devDependencies": {
     "@sc/utils": "workspace:*",
     "@sc/shared": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "eslint-config-sc": "workspace:*"
-  },
-  "devDependencies": {
+    "eslint-config-sc": "workspace:*",
     "@sc-config/tailwind": "workspace:*",
     "tsconfig-sc": "workspace:*",
     "@types/node": "^20.5.2",
@@ -38,7 +40,7 @@
     "tailwindcss": "^3.3.5",
     "postcss": "^8.4.20",
     "autoprefixer": "^10.4.13",
-    "tsup": "^6.7.0"
+    "tsup": "^8.0.1"
   },
   "publishConfig": {
     "access": "public"
