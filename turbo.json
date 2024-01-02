@@ -12,6 +12,8 @@
       ]
     },
     "lint": {},
+    "lint:fix": {},
+    "format": {},
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,
@@ -25,12 +27,7 @@
     },
     "test": {
       "dependsOn": [],
-      "inputs": [
-        "src/**/*.tsx",
-        "src/**/*.ts",
-        "pages/**/*.ts",
-        "pages/**/*.ts"
-      ]
+      "inputs": ["tests/**/src/**/*.tsx", "tests/**/src/**/*.ts"]
     },
     "test:watch": {
       "cache": false
