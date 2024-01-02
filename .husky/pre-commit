@@ -3,8 +3,8 @@
 
 # TODO: https://github.com/vercel/turbo/issues/6358
 # cannot use lint-staged
-# npx lint-staged
+npx lint-staged
 
-pnpm lint
-pnpm test
-pnpm format
+# pnpm lint
+# pnpm test
+# pnpm format
