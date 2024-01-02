@@ -9,6 +9,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix",
     "lint:styled": "stylelint './**/*.styles.ts' --fix",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
@@ -42,10 +43,10 @@
     "turbo": "latest"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "turbo run lint --",
-      "turbo run test",
-      "turbo run format"
+    "*": "turbo run format --",
+    "*.{js,jsx,ts,tsx}": [
+      "turbo run lint:fix --",
+      "turbo run test --"
     ]
   },
   "packageManager": "pnpm@8.7.4",

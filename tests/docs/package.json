@@ -9,7 +9,7 @@
     "preview-storybook": "serve storybook-static",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf storybook-static",
     "lint": "eslint src/**/*.{ts,tsx} --fix --max-warnings 0",
-    "test": "test-storybook",
+    "test": "test-storybook -- --coverage --passWithNoTests",
     "test:watch": "test-storybook --watch",
     "chromatic": "npx chromatic --project-token=chpt_bcfcb25b665220e"
   },
@@ -17,13 +17,14 @@
     "@sc/shared": "workspace:*",
     "@sc/ui": "workspace:*",
     "@sc/utils": "workspace:*",
+    "eslint-config-sc": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "eslint-config-sc": "workspace:*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@sc-config/jest": "workspace:*",
     "@sc-config/tailwind": "workspace:*",
+    "@storybook/addon-coverage": "^1.0.0",
     "@storybook/addon-docs": "^7.5.3",
     "@storybook/addon-essentials": "^7.5.3",
     "@storybook/addon-interactions": "^7.5.3",
