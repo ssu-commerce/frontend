@@ -1,11 +1,25 @@
+import {
+  Button,
+  Size,
+  ArrowIcon,
+  EColor,
+  ESize,
+  EVariant,
+  Color,
+  Variant,
+} from "@sc/ui";
 import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import type { ReactNode } from "react";
 import { Fragment } from "react";
-import type { ButtonSize } from "@sc/ui";
-import { ArrowIcon, Button } from "@sc/ui";
-import { buttonCompoundArgs, buttonStyleProps } from "./button.type";
+import { css } from "@emotion/react";
+
+const buttonCompoundArgs = {
+  color: Object.keys(EColor) as Color[],
+  variant: Object.keys(EVariant) as Variant[],
+  size: Object.keys(ESize) as Size[],
+};
 
 const meta = {
   title: "UI/Button",
@@ -61,7 +75,7 @@ export const DefaultButton: Story = {
     endIcon,
     ...args
   }: {
-    size: ButtonSize;
+    size: Size;
     endIcon: boolean;
     children: ReactNode;
   }) => (
@@ -103,8 +117,19 @@ export const StyleButton: Story = {
             {buttonCompoundArgs.variant.map((variant) => (
               <Fragment key={variant}>
                 {buttonCompoundArgs.size.map((size) => (
-                  <li key={color + variant + size}>
+                  <li
+                    css={css`
+                      display: flex;
+                      gap: 4px;
+                      flex-direction: column;
+                    `}
+                    key={color + variant + size}
+                  >
                     <label
+                      css={css`
+                        font-size: 12px;
+                        display: block;
+                      `}
                       className="text-xs block bg-white p-1 rounded-md w-fit mx-auto m"
                       htmlFor={`${color}-${variant}-${size}`}
                     >
@@ -132,7 +157,25 @@ export const StyleButton: Story = {
   },
   decorators: [
     (Story) => (
-      <ul className="grid grid-cols-5 gap-4 text-center align-middle items-center">
+      <ul
+        css={css`
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          grid-column-gap: 8px;
+          grid-row-gap: 16px;
+          text-align: center;
+          align-items: center;
+          background-color: #fff;
+          background-image: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.03) 50%,
+              transparent 50%
+            ),
+            linear-gradient(rgba(0, 0, 0, 0.03) 50%, transparent 50%);
+          background-size: 10px 10px;
+          padding: 24px;
+        `}
+      >
         <Story />
       </ul>
     ),
@@ -164,38 +207,53 @@ export const ActionButton: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await Promise.allSettled(
-      Object.entries(buttonStyleProps).map(async ([name, value]) => {
-        const button = canvas.getByText(name);
-        await expect(button).toBeInTheDocument();
-        value && (await expect(button).toHaveClass(value));
-      }),
-    );
+    const hover = canvas.getByText("hover");
+    userEvent.hover(hover);
+    await expect(hover).toBeInTheDocument();
+    await expect(hover).toHaveStyle({ cursor: "pointer" });
+
+    const disabled = canvas.getByText("disabled");
+    await expect(disabled).toBeInTheDocument();
+    await expect(disabled).toHaveStyle({
+      opacity: "0.3",
+      cursor: "not-allowed",
+    });
+
+    const fullWidth = canvas.getByText("fullWidth");
+    await expect(fullWidth).toBeInTheDocument();
+    await expect(fullWidth).toHaveStyle({ width: "200px" });
   },
   render: ({ color, size, variant }) => {
     return (
-      <>
-        {Object.keys(buttonStyleProps).map((name) => (
-          <li className="w-52" key={name}>
-            <Button
-              color={color}
-              disabled={name === "disabled"}
-              fullWidth={name === "fullWidth"}
-              size={size}
-              variant={variant}
-            >
-              {name}
-            </Button>
-          </li>
-        ))}
-      </>
+      <ul
+        css={css`
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          width: 200px;
+          & li {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+          }
+        `}
+      >
+        <li>
+          <Button color={color} size={size} variant={variant}>
+            hover
+          </Button>
+        </li>
+        <li>
+          <Button color={color} size={size} variant={variant} disabled>
+            disabled
+          </Button>
+        </li>
+        <li>
+          <Button color={color} size={size} variant={variant} fullWidth>
+            fullWidth
+          </Button>
+        </li>
+      </ul>
     );
   },
-  decorators: [
-    (Story) => (
-      <ul className="flex flex-col gap-4 text-center align-middle items-center w-52">
-        <Story />
-      </ul>
-    ),
-  ],
 };

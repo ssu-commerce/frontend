@@ -11,6 +11,7 @@
     "src/**/__testfixtures__/**"
   ],
   "compilerOptions": {
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client"],
+    "jsxImportSource": "@emotion/react"
   }
 }
