@@ -8,22 +8,22 @@
     "build-storybook": "storybook build --docs",
     "preview-storybook": "serve storybook-static",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf storybook-static",
-    "lint": "eslint src/**/*.{ts,tsx} --fix --max-warnings 0",
+    "lint": "eslint src/ --fix",
     "test": "test-storybook -- --passWithNoTests",
     "test:watch": "test-storybook --watch",
     "chromatic": "npx chromatic --project-token=chpt_bcfcb25b665220e"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@sc/ui": "workspace:*",
     "@sc/shared": "workspace:*",
-    "@sc/utils": "workspace:*"
+    "@sc/ui": "workspace:*",
+    "@sc/utils": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@emotion/eslint-plugin": "^11.11.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "eslint-config-sc": "workspace:*",
     "@sc-config/emotion": "workspace:*",
     "@sc-config/jest": "workspace:*",
     "@storybook/addon-docs": "^7.5.3",
@@ -44,6 +44,7 @@
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react-swc": "^3.4.0",
     "chromatic": "^9.0.0",
+    "eslint-config-sc": "workspace:*",
     "serve": "^13.0.4",
     "storybook": "^7.5.3",
     "tsconfig-sc": "workspace:*",

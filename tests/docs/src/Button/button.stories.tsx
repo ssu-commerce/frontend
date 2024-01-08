@@ -1,13 +1,5 @@
-import {
-  Button,
-  Size,
-  ArrowIcon,
-  EColor,
-  ESize,
-  EVariant,
-  Color,
-  Variant,
-} from "@sc/ui";
+import type { Size, Color, Variant } from "@sc/ui";
+import { Button, ArrowIcon, EColor, EVariant } from "@sc/ui";
 import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
@@ -18,7 +10,7 @@ import { css } from "@emotion/react";
 const buttonCompoundArgs = {
   color: Object.keys(EColor) as Color[],
   variant: Object.keys(EVariant) as Variant[],
-  size: Object.keys(ESize) as Size[],
+  size: ["xs", "sm", "md", "lg", "xl"] as Size[],
 };
 
 const meta = {
@@ -99,6 +91,7 @@ export const LinkButton: Story = {
     const canvas = within(canvasElement);
     const anchor = canvas.getByText("Anchor");
     await expect(anchor.tagName).toBe("A");
+
     await userEvent.click(anchor);
     const moveURL = window.location.href;
     await expect(moveURL).toBe(`${currentURL}#`);
@@ -126,11 +119,11 @@ export const StyleButton: Story = {
                     key={color + variant + size}
                   >
                     <label
+                      className="text-xs block bg-white p-1 rounded-md w-fit mx-auto m"
                       css={css`
                         font-size: 12px;
                         display: block;
                       `}
-                      className="text-xs block bg-white p-1 rounded-md w-fit mx-auto m"
                       htmlFor={`${color}-${variant}-${size}`}
                     >
                       [{color} / {variant} / {size}]
@@ -208,7 +201,7 @@ export const ActionButton: Story = {
     const canvas = within(canvasElement);
 
     const hover = canvas.getByText("hover");
-    userEvent.hover(hover);
+    await userEvent.hover(hover);
     await expect(hover).toBeInTheDocument();
     await expect(hover).toHaveStyle({ cursor: "pointer" });
 
@@ -244,12 +237,12 @@ export const ActionButton: Story = {
           </Button>
         </li>
         <li>
-          <Button color={color} size={size} variant={variant} disabled>
+          <Button color={color} disabled size={size} variant={variant}>
             disabled
           </Button>
         </li>
         <li>
-          <Button color={color} size={size} variant={variant} fullWidth>
+          <Button color={color} fullWidth size={size} variant={variant}>
             fullWidth
           </Button>
         </li>

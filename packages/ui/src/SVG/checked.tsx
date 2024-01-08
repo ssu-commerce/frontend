@@ -1,4 +1,4 @@
-import { IconProps } from ".";
+import type { IconProps } from ".";
 
 function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
   switch (size) {
@@ -6,10 +6,10 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
     case "xs":
       return (
         <svg
-          width="16"
+          fill="none"
           height="16"
           viewBox="0 0 16 16"
-          fill="none"
+          width="16"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -22,10 +22,10 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
     case "sm":
       return (
         <svg
-          width="20"
+          fill="none"
           height="20"
           viewBox="0 0 20 20"
-          fill="none"
+          width="20"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -38,10 +38,10 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
     case "md":
       return (
         <svg
-          width="24"
+          fill="none"
           height="24"
           viewBox="0 0 24 24"
-          fill="none"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -54,10 +54,10 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
     case "lg":
       return (
         <svg
-          width="28"
+          fill="none"
           height="28"
           viewBox="0 0 28 28"
-          fill="none"
+          width="28"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -70,10 +70,10 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
     case "xl":
       return (
         <svg
-          width="32"
+          fill="none"
           height="32"
           viewBox="0 0 32 32"
-          fill="none"
+          width="32"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -82,21 +82,22 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
           />
         </svg>
       );
+    default:
+      return (
+        <svg
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14.2222 0H1.77778C0.791111 0 0 0.8 0 1.77778V14.2222C0 15.2 0.791111 16 1.77778 16H14.2222C15.2089 16 16 15.2 16 14.2222V1.77778C16 0.8 15.2089 0 14.2222 0ZM6.22222 12.4444L1.77778 8L3.03111 6.74667L6.22222 9.92889L12.9689 3.18222L14.2222 4.44444L6.22222 12.4444Z"
+            fill={color}
+          />
+        </svg>
+      );
   }
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M14.2222 0H1.77778C0.791111 0 0 0.8 0 1.77778V14.2222C0 15.2 0.791111 16 1.77778 16H14.2222C15.2089 16 16 15.2 16 14.2222V1.77778C16 0.8 15.2089 0 14.2222 0ZM6.22222 12.4444L1.77778 8L3.03111 6.74667L6.22222 9.92889L12.9689 3.18222L14.2222 4.44444L6.22222 12.4444Z"
-        fill={color}
-      />
-    </svg>
-  );
 }
 
 export { CheckedIcon };

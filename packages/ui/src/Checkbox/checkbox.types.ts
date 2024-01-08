@@ -5,21 +5,16 @@ import type {
   ReactNode,
   ChangeEventHandler,
 } from "react";
-import type { Action, Color, Size, Variant } from "../types";
-
-export type CheckboxColor = Color;
-
-export type CheckboxSize = Size;
-
-export type CheckboxVariant = Variant;
+import type { ColorKey, SizeKey } from "../constants";
+import type { Action } from "../types";
 
 export type CheckboxProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
   Partial<{
     checked: boolean;
     defaultChecked: boolean;
     disabled: boolean;
-    color: CheckboxColor;
-    size: CheckboxSize;
+    color: ColorKey;
+    size: SizeKey;
     testId: string;
     inputRef: RefObject<HTMLInputElement>;
     inputProps: InputHTMLAttributes<HTMLInputElement>;
@@ -27,7 +22,12 @@ export type CheckboxProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
     required: boolean;
     name: string;
     children: ReactNode;
-    value: string | ReadonlyArray<string> | number;
+    value: string | readonly string[] | number;
   }>;
 
 export type CheckboxStyleProps = keyof CheckboxProps & Action;
+
+export interface StyleLabelProps {
+  size: SizeKey;
+  disabled?: boolean;
+}

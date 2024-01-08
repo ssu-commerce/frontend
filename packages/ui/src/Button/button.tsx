@@ -1,19 +1,19 @@
-import type { ForwardedRef, LegacyRef, ReactElement, ReactNode } from "react";
 import { forwardRef } from "react";
+import type { ForwardedRef, LegacyRef, ReactElement, ReactNode } from "react";
+import { ColorKey, SizeKey, VariantKey } from "../constants";
 import type { ButtonProps } from "./button.types";
 import * as C from "./button.style";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     children,
-    className,
-    color = "default",
+    color = ColorKey.Default,
     endIcon,
     fullWidth,
     href,
-    size = "sm",
+    size = SizeKey.SM,
     startIcon,
-    variant = "contained",
+    variant = VariantKey.Contained,
     type = "button",
     target = "_self",
     testId,
@@ -24,13 +24,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   const childrenNode = (): ReactNode => (
     <>
       {startIcon ? (
-        <C.Icon size={size} variant={variant} color={color}>
+        <C.Icon color={color} size={size} variant={variant}>
           {startIcon}
         </C.Icon>
       ) : null}
       {children}
       {endIcon ? (
-        <C.Icon size={size} variant={variant} color={color}>
+        <C.Icon color={color} size={size} variant={variant}>
           {endIcon}
         </C.Icon>
       ) : null}
@@ -42,13 +42,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       <C.Anchor
         as="a"
         color={color}
-        variant={variant}
-        size={size}
-        fullWidth={fullWidth}
         data-testid={testId}
+        fullWidth={fullWidth}
         href={href}
-        target={target}
         ref={ref as LegacyRef<HTMLAnchorElement>}
+        size={size}
+        target={target}
+        variant={variant}
         {...props}
       >
         {childrenNode()}
@@ -59,11 +59,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   return (
     <C.Button
       color={color}
-      variant={variant}
-      size={size}
-      fullWidth={fullWidth}
       data-testid={testId}
+      fullWidth={fullWidth}
       ref={ref}
+      size={size}
+      type={type}
+      variant={variant}
       {...props}
     >
       {childrenNode()}

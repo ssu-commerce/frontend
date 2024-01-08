@@ -1,4 +1,4 @@
-import { IconProps } from ".";
+import type { IconProps } from ".";
 
 function UnCheckedIcon({
   color = "#ffffff",
@@ -6,12 +6,13 @@ function UnCheckedIcon({
 }: IconProps): JSX.Element {
   switch (size) {
     case 16:
+    case "xs":
       return (
         <svg
-          width="16"
+          fill="none"
           height="16"
           viewBox="0 0 16 16"
-          fill="none"
+          width="16"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -21,12 +22,13 @@ function UnCheckedIcon({
         </svg>
       );
     case 20:
+    case "sm":
       return (
         <svg
-          width="20"
+          fill="none"
           height="20"
           viewBox="0 0 20 20"
-          fill="none"
+          width="20"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -36,12 +38,13 @@ function UnCheckedIcon({
         </svg>
       );
     case 24:
+    case "md":
       return (
         <svg
-          width="24"
+          fill="none"
           height="24"
           viewBox="0 0 24 24"
-          fill="none"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -51,12 +54,13 @@ function UnCheckedIcon({
         </svg>
       );
     case 28:
+    case "lg":
       return (
         <svg
-          width="28"
+          fill="none"
           height="28"
           viewBox="0 0 28 28"
-          fill="none"
+          width="28"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -66,12 +70,13 @@ function UnCheckedIcon({
         </svg>
       );
     case 32:
+    case "xl":
       return (
         <svg
-          width="32"
+          fill="none"
           height="32"
           viewBox="0 0 32 32"
-          fill="none"
+          width="32"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -80,21 +85,22 @@ function UnCheckedIcon({
           />
         </svg>
       );
+    default:
+      return (
+        <svg
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14.2222 1.77778V14.2222H1.77778V1.77778H14.2222ZM14.2222 0H1.77778C0.8 0 0 0.8 0 1.77778V14.2222C0 15.2 0.8 16 1.77778 16H14.2222C15.2 16 16 15.2 16 14.2222V1.77778C16 0.8 15.2 0 14.2222 0Z"
+            fill={color}
+          />
+        </svg>
+      );
   }
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M14.2222 1.77778V14.2222H1.77778V1.77778H14.2222ZM14.2222 0H1.77778C0.8 0 0 0.8 0 1.77778V14.2222C0 15.2 0.8 16 1.77778 16H14.2222C15.2 16 16 15.2 16 14.2222V1.77778C16 0.8 15.2 0 14.2222 0Z"
-        fill={color}
-      />
-    </svg>
-  );
 }
 
 export { UnCheckedIcon };

@@ -3,8 +3,13 @@ import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import type { ChangeEvent, ReactElement } from "react";
 import { useState } from "react";
-import { Checkbox } from "@sc/ui";
-import { checkboxCompoundArgs } from "./checkbox.type";
+import type { Color, Size} from "@sc/ui";
+import { EColor, ESize, Checkbox } from "@sc/ui";
+
+const checkboxCompoundArgs = {
+  color: Object.keys(EColor) as Color[],
+  size: Object.keys(ESize) as Size[],
+};
 
 const meta = {
   title: "UI/Checkbox",

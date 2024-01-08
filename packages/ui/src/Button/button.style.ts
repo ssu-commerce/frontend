@@ -1,39 +1,11 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { Color, Size, Variant } from "../types";
-import { EColor, ESize } from "../constants";
+import type { SizeKey } from "../constants";
+import { Color, Size, VariantKey } from "../constants";
+import { calcPixel } from "../utils/style";
+import type { StyleButtonProps, StyleIconProps } from "./button.types";
 
-interface IconProps {
-  color: Color;
-  size: Size;
-  variant: Variant;
-}
-
-interface ButtonProps {
-  color: Color;
-  size: Size;
-  variant: Variant;
-  disabled?: boolean;
-  fullWidth?: boolean;
-}
-
-const FontSize: Record<Size, string> = {
-  xs: "12px",
-  sm: "14px",
-  md: "16px",
-  lg: "18px",
-  xl: "20px",
-};
-
-const LineHeight: Record<Size, string> = {
-  xs: "16px",
-  sm: "20px",
-  md: "24px",
-  lg: "28px",
-  xl: "30px",
-};
-
-const MinWidth: Record<Size, string> = {
+const MinWidth: Record<SizeKey, string> = {
   xs: "24px",
   sm: "28px",
   md: "32px",
@@ -41,56 +13,47 @@ const MinWidth: Record<Size, string> = {
   xl: "40px",
 };
 
-const Padding: Record<Size, string> = {
-  xs: "4px 8px",
-  sm: "4px 12px",
-  md: "6px 16px",
-  lg: "6px 20px",
-  xl: "6px 24px",
-};
-
-const RegexPixel = /\d+px$/;
-
-const calcPixel = (pixel: string, num: number): string => {
-  if (RegexPixel.test(pixel)) {
-    const size = Number(pixel.replace("px", ""));
-    return size + num + "px";
-  }
-  return pixel;
-};
-
 export const Button = styled.button(
-  ({ color: colorType, size, variant, disabled, fullWidth }: ButtonProps) => {
-    const color = EColor[colorType];
+  ({
+    color: colorType,
+    size,
+    variant,
+    disabled,
+    fullWidth,
+  }: StyleButtonProps) => {
+    const color = Color.RGB[colorType];
+    const [h, w] = Size.Padding[size].split(" ");
+
     let variantColor = {
       color: "#ffffff",
       backgroundColor: "transparent",
       border: "0",
-      padding: Padding[size],
+      padding: Size.Padding[size],
     };
 
     switch (variant) {
-      case "contained":
+      case VariantKey.Contained:
         variantColor = {
           ...variantColor,
           backgroundColor: color,
         };
         break;
-      case "outlined":
-        const [h, w] = Padding[size].split(" ");
+      case VariantKey.Outlined:
         variantColor = {
           ...variantColor,
           backgroundColor: "#ffffff",
-          color: color,
+          color,
           border: `2px solid ${color}`,
           padding: `${calcPixel(h, -2)} ${calcPixel(w, -2)}`,
         };
         break;
-      case "text":
+      case VariantKey.Text:
         variantColor = {
           ...variantColor,
-          color: color,
+          color,
         };
+        break;
+      default:
         break;
     }
 
@@ -100,10 +63,10 @@ export const Button = styled.button(
       justify-content: center;
       align-items: center;
 
-      gap: 2px;
+      gap: 8px;
       border-radius: 4px;
-      font-size: ${FontSize[size]};
-      line-height: ${LineHeight[size]};
+      font-size: ${Size.FontSize[size]};
+      line-height: ${Size.LineHeight[size]};
       min-width: ${MinWidth[size]};
       ${fullWidth && {
         width: "100%",
@@ -130,16 +93,16 @@ export const Button = styled.button(
 
 export const Anchor = Button.withComponent("a");
 
-export const Icon = styled.span(({ color, size, variant }: IconProps) => {
+export const Icon = styled.span(({ color, size, variant }: StyleIconProps) => {
   return `
     display: flex;
     justify-content: center;
     alignitems: center;
     background-color: transparent;
-    width: ${ESize[size]};
-    height: ${ESize[size]};
+    width: ${Size.Pixel[size]}px;
+    height: ${Size.Pixel[size]}px;
     & * {
-      fill: ${variant === "contained" ? "#ffffff" : EColor[color]}
+      fill: ${variant === VariantKey.Contained ? "#ffffff" : Color.RGB[color]}
     };
   `;
 });

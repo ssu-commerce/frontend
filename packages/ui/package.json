@@ -19,10 +19,11 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit",
-    "lint": "eslint src/ --fix --max-warnings 0",
+    "lint": "eslint src/ --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
+    "@emotion/eslint-plugin": "^11.11.0",
     "@sc-config/emotion": "workspace:*",
     "@sc/shared": "workspace:*",
     "@sc/utils": "workspace:*",

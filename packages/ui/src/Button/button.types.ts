@@ -3,19 +3,34 @@ import type {
   ButtonHTMLAttributes,
   ReactNode,
 } from "react";
-import { Color, Size, Variant, Action } from "../types";
+import type { ColorKey, SizeKey, VariantKey } from "../constants";
+import type { Action } from "../types";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement> &
   Partial<{
-    color: Color;
+    color: ColorKey;
     endIcon: ReactNode;
     fullWidth: boolean;
     href: string;
-    size: Size;
+    size: SizeKey;
     startIcon: ReactNode;
-    variant: Variant;
+    variant: VariantKey;
     testId: string;
   }>;
 
 export type ButtonStyleProps = keyof ButtonProps & Action;
+
+export interface StyleIconProps {
+  color: ColorKey;
+  size: SizeKey;
+  variant: VariantKey;
+}
+
+export interface StyleButtonProps {
+  color: ColorKey;
+  size: SizeKey;
+  variant: VariantKey;
+  disabled?: boolean;
+  fullWidth?: boolean;
+}

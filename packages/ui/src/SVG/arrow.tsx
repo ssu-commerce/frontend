@@ -1,25 +1,26 @@
-import { DIRECTION, IconProps } from ".";
+import { DirectionKey, DirectionDegree } from "../constants";
+import type { IconProps } from "./svg.types";
 
 export interface ArrowIconProps extends IconProps {
-  direction?: keyof typeof DIRECTION;
+  direction?: DirectionKey;
 }
 
 function ArrowIcon({
   color = "#000000",
   size = 20,
-  direction = "top",
+  direction = DirectionKey.Top,
 }: ArrowIconProps): JSX.Element {
   switch (size) {
     case 16:
     case "xs":
       return (
         <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
           fill="none"
+          height="16"
+          transform={`rotate(${DirectionDegree[direction]})`}
+          viewBox="0 0 16 16"
+          width="16"
           xmlns="http://www.w3.org/2000/svg"
-          transform={`rotate(${DIRECTION[direction]})`}
         >
           <path
             d="M4.94 10.2733L8 7.22L11.06 10.2733L12 9.33334L8 5.33334L4 9.33334L4.94 10.2733Z"
@@ -31,12 +32,12 @@ function ArrowIcon({
     case "sm":
       return (
         <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
           fill="none"
+          height="20"
+          transform={`rotate(${DirectionDegree[direction]})`}
+          viewBox="0 0 20 20"
+          width="20"
           xmlns="http://www.w3.org/2000/svg"
-          transform={`rotate(${DIRECTION[direction]})`}
         >
           <path
             d="M6.175 12.8417L10 9.025L13.825 12.8417L15 11.6667L10 6.66667L5 11.6667L6.175 12.8417Z"
@@ -48,12 +49,12 @@ function ArrowIcon({
     case "md":
       return (
         <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
           fill="none"
+          height="24"
+          transform={`rotate(${DirectionDegree[direction]})`}
+          viewBox="0 0 24 24"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
-          transform={`rotate(${DIRECTION[direction]})`}
         >
           <g clipPath="url(#clip0_1_78)">
             <path
@@ -63,7 +64,7 @@ function ArrowIcon({
           </g>
           <defs>
             <clipPath id="clip0_1_78">
-              <rect width="24" height="24" fill="white" />
+              <rect fill="white" height="24" width="24" />
             </clipPath>
           </defs>
         </svg>
@@ -72,12 +73,12 @@ function ArrowIcon({
     case "lg":
       return (
         <svg
-          width="28"
-          height="28"
-          viewBox="0 0 28 28"
           fill="none"
+          height="28"
+          transform={`rotate(${DirectionDegree[direction]})`}
+          viewBox="0 0 28 28"
+          width="28"
           xmlns="http://www.w3.org/2000/svg"
-          transform={`rotate(${DIRECTION[direction]})`}
         >
           <g clipPath="url(#clip0_1_106)">
             <path
@@ -87,7 +88,7 @@ function ArrowIcon({
           </g>
           <defs>
             <clipPath id="clip0_1_106">
-              <rect width="28" height="28" fill="white" />
+              <rect fill="white" height="28" width="28" />
             </clipPath>
           </defs>
         </svg>
@@ -96,12 +97,12 @@ function ArrowIcon({
     case "xl":
       return (
         <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
           fill="none"
+          height="32"
+          transform={`rotate(${DirectionDegree[direction]})`}
+          viewBox="0 0 32 32"
+          width="32"
           xmlns="http://www.w3.org/2000/svg"
-          transform={`rotate(${DIRECTION[direction]})`}
         >
           <g clipPath="url(#clip0_1_119)">
             <path
@@ -111,27 +112,28 @@ function ArrowIcon({
           </g>
           <defs>
             <clipPath id="clip0_1_119">
-              <rect width="32" height="32" fill="white" />
+              <rect fill="white" height="32" width="32" />
             </clipPath>
           </defs>
         </svg>
       );
+    default:
+      return (
+        <svg
+          fill="none"
+          height="16"
+          transform={`rotate(${DirectionDegree[direction]})`}
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.94 10.2733L8 7.22L11.06 10.2733L12 9.33334L8 5.33334L4 9.33334L4.94 10.2733Z"
+            fill={color}
+          />
+        </svg>
+      );
   }
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      transform={`rotate(${DIRECTION[direction]})`}
-    >
-      <path
-        d="M4.94 10.2733L8 7.22L11.06 10.2733L12 9.33334L8 5.33334L4 9.33334L4.94 10.2733Z"
-        fill={color}
-      />
-    </svg>
-  );
 }
 
 export { ArrowIcon };
