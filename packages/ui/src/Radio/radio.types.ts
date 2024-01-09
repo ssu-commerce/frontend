@@ -6,21 +6,16 @@ import type {
   ChangeEventHandler,
   ReactElement,
 } from "react";
-import type { Action, Color, Size, Variant } from "../types";
-
-export type RadioColor = Color;
-
-export type RadioSize = Size;
-
-export type RadioVariant = Variant;
+import type { Action } from "../types";
+import { ColorKey, SizeKey } from "../constants";
 
 export type RadioProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
   Partial<{
     checked: boolean;
     defaultChecked: boolean;
     disabled: boolean;
-    color: RadioColor;
-    size: RadioSize;
+    color: ColorKey;
+    size: SizeKey;
     testId: string;
     inputRef: RefObject<HTMLInputElement>;
     inputProps: InputHTMLAttributes<HTMLInputElement>;
@@ -42,3 +37,8 @@ export type RadioGroupProps = Omit<
 };
 
 export type RadioStyleProps = keyof RadioProps & Action;
+
+export interface RadioLabelProps {
+  size: SizeKey;
+  disabled?: boolean;
+}

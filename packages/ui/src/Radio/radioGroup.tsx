@@ -1,5 +1,6 @@
-import { ChangeEvent, Children, cloneElement, useState } from "react";
+import { ChangeEvent, Children, cloneElement } from "react";
 import { RadioGroupProps } from "./radio.types";
+import { GroupWrapper } from "./radio.style";
 
 function RadioGroup({ children, value, onChange, ...args }: RadioGroupProps) {
   const handleChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
@@ -7,12 +8,16 @@ function RadioGroup({ children, value, onChange, ...args }: RadioGroupProps) {
     onChange(selectedValue);
   };
 
-  return Children.map(children, (node) =>
-    cloneElement(node, {
-      onChange: handleChangeChecked,
-      selectedValue: value,
-      ...args,
-    }),
+  return (
+    <GroupWrapper>
+      {Children.map(children, (node) =>
+        cloneElement(node, {
+          onChange: handleChangeChecked,
+          selectedValue: value,
+          ...args,
+        }),
+      )}
+    </GroupWrapper>
   );
 }
 

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { Size } from "../constants";
-import type { CheckboxLabelProps } from "./checkbox.types";
+import { RadioLabelProps } from "./radio.types";
 
-export const Label = styled.label(({ size, disabled }: CheckboxLabelProps) => {
+export const Label = styled.label(({ size, disabled }: RadioLabelProps) => {
   return css`
     display: inline-flex;
     text-align: center;
@@ -28,4 +28,9 @@ export const Label = styled.label(({ size, disabled }: CheckboxLabelProps) => {
 export const Input = styled.input`
   appearance: none;
   position: absolute;
+`;
+
+export const GroupWrapper = styled.div`
+  display: flex;
+  gap: 8px;
 `;

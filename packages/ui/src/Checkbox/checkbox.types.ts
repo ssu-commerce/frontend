@@ -27,7 +27,7 @@ export type CheckboxProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
 
 export type CheckboxStyleProps = keyof CheckboxProps & Action;
 
-export interface StyleLabelProps {
+export interface CheckboxLabelProps {
   size: SizeKey;
   disabled?: boolean;
 }
