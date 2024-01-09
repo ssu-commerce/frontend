@@ -3,12 +3,12 @@ import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import type { ChangeEvent, ReactElement } from "react";
 import { useState } from "react";
-import type { Color, Size} from "@sc/ui";
-import { EColor, ESize, Checkbox } from "@sc/ui";
+import type { Size, Color, Variant } from "@sc/ui";
+import { ColorKey, VariantKey, SizeKey, Checkbox } from "@sc/ui";
 
 const checkboxCompoundArgs = {
-  color: Object.keys(EColor) as Color[],
-  size: Object.keys(ESize) as Size[],
+  color: Object.values(ColorKey) as Color[],
+  size: Object.values(SizeKey) as Size[],
 };
 
 const meta = {
@@ -59,8 +59,8 @@ function DefaultCheckboxWrapper({ children, ...args }): ReactElement {
 
 export const DefaultCheckbox: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
     disabled: false,
     children: "default",
   },
@@ -112,8 +112,8 @@ function MultiCheckboxWrapper(args): ReactElement {
 
 export const MultiCheckbox: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
     disabled: false,
     children: "default",
   },
