@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import type { SizeKey } from "../constants";
+import type { ColorKey, SizeKey } from "../constants";
 import { Color, Size, VariantKey } from "../constants";
 import { calcPixel } from "../utils/style";
-import type { StyleButtonProps, StyleIconProps } from "./button.types";
 
 const MinWidth: Record<SizeKey, string> = {
   xs: "24px",
@@ -15,42 +14,47 @@ const MinWidth: Record<SizeKey, string> = {
 
 export const Button = styled.button(
   ({
-    color: colorType,
-    size,
-    variant,
+    colorType,
+    sizeType,
+    variantType,
     disabled,
     fullWidth,
-  }: StyleButtonProps) => {
-    const color = Color.RGB[colorType];
-    const [h, w] = Size.Padding[size].split(" ");
+  }: {
+    colorType: ColorKey;
+    sizeType: SizeKey;
+    variantType: VariantKey;
+    disabled?: boolean;
+    fullWidth?: boolean;
+  }) => {
+    const [h, w] = Size.Padding[sizeType].split(" ");
 
     let variantColor = {
       color: "#ffffff",
       backgroundColor: "transparent",
       border: "0",
-      padding: Size.Padding[size],
+      padding: Size.Padding[sizeType],
     };
 
-    switch (variant) {
+    switch (variantType) {
       case VariantKey.Contained:
         variantColor = {
           ...variantColor,
-          backgroundColor: color,
+          backgroundColor: Color.RGB[colorType],
         };
         break;
       case VariantKey.Outlined:
         variantColor = {
           ...variantColor,
           backgroundColor: "#ffffff",
-          color,
-          border: `2px solid ${color}`,
+          color: Color.RGB[colorType],
+          border: `2px solid ${Color.RGB[colorType]}`,
           padding: `${calcPixel(h, -2)} ${calcPixel(w, -2)}`,
         };
         break;
       case VariantKey.Text:
         variantColor = {
           ...variantColor,
-          color,
+          color: Color.RGB[colorType],
         };
         break;
       default:
@@ -65,9 +69,9 @@ export const Button = styled.button(
 
       gap: 8px;
       border-radius: 4px;
-      font-size: ${Size.FontSize[size]};
-      line-height: ${Size.LineHeight[size]};
-      min-width: ${MinWidth[size]};
+      font-size: ${Size.FontSize[sizeType]};
+      line-height: ${Size.LineHeight[sizeType]};
+      min-width: ${MinWidth[sizeType]};
       ${fullWidth && {
         width: "100%",
       }}
@@ -93,16 +97,28 @@ export const Button = styled.button(
 
 export const Anchor = Button.withComponent("a");
 
-export const Icon = styled.span(({ color, size, variant }: StyleIconProps) => {
-  return `
+export const Icon = styled.span(
+  ({
+    colorType,
+    sizeType,
+    variantType,
+  }: {
+    colorType: ColorKey;
+    sizeType: SizeKey;
+    variantType: VariantKey;
+  }) => {
+    return `
     display: flex;
     justify-content: center;
     alignitems: center;
-    background-color: transparent;
-    width: ${Size.Pixel[size]}px;
-    height: ${Size.Pixel[size]}px;
+    background-colorType: transparent;
+    width: ${Size.Pixel[sizeType]}px;
+    height: ${Size.Pixel[sizeType]}px;
     & * {
-      fill: ${variant === VariantKey.Contained ? "#ffffff" : Color.RGB[color]}
+      fill: ${
+        variantType === VariantKey.Contained ? "#ffffff" : Color.RGB[colorType]
+      }
     };
   `;
-});
+  },
+);

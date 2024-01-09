@@ -1,108 +1,13 @@
 import type { ChangeEvent, ForwardedRef, ReactElement } from "react";
 import { forwardRef, useEffect, useRef } from "react";
-import { cva } from "class-variance-authority";
-import { cn } from "../utils/class-name-merge";
 import type { TextFieldProps } from "./textfield.types";
-
-export const wrapperVariant = cva(
-  [
-    "ui-rounded",
-    "ui-inline-flex",
-    "ui-gap-1",
-    "ui-border-2",
-    "ui-bg-slate-100",
-    "ui-border-slate-200",
-    "focus-within:ui-bg-white",
-    "hover:ui-bg-white",
-  ],
-  {
-    variants: {
-      color: {
-        default: "focus-within:ui-border-default",
-        primary: "focus-within:ui-border-primary",
-        secondary: "focus-within:ui-border-secondary",
-        error: "focus-within:ui-border-error",
-        info: "focus-within:ui-border-info",
-        success: "focus-within:ui-border-success",
-        warning: "focus-within:ui-border-warning",
-      },
-      size: {
-        sm: "ui-h-8 ui-min-w-8",
-        md: "ui-h-10 ui-min-w-10",
-        lg: "ui-h-12 ui-min-w-12",
-      },
-    },
-    defaultVariants: {
-      color: "default",
-      size: "md",
-    },
-  },
-);
-
-export const textAreaWRapperVariant = cva(
-  [
-    "ui-rounded",
-    "ui-inline-flex",
-    "ui-gap-1",
-    "ui-border-2",
-    "ui-bg-slate-100",
-    "ui-border-slate-200",
-    "ui-h-fit",
-    "focus-within:ui-bg-white",
-    "hover:ui-bg-white",
-    "ui-relative",
-  ],
-  {
-    variants: {
-      color: {
-        default: "focus-within:ui-border-default",
-        primary: "focus-within:ui-border-primary",
-        secondary: "focus-within:ui-border-secondary",
-        error: "focus-within:ui-border-error",
-        info: "focus-within:ui-border-info",
-        success: "focus-within:ui-border-success",
-        warning: "focus-within:ui-border-warning",
-      },
-      size: {
-        sm: "ui-h-8 ui-min-w-8",
-        md: "ui-h-10 ui-min-w-10",
-        lg: "ui-h-12 ui-min-w-12",
-      },
-    },
-    defaultVariants: {
-      color: "default",
-    },
-  },
-);
-
-export const inputVariant = cva(
-  [
-    "ui-rounded",
-    "ui-w-full",
-    "ui-h-full",
-    "ui-outline-none",
-    "ui-bg-transparent",
-    "focus: ui-outline-none",
-    "ui-resize-none",
-  ],
-  {
-    variants: {
-      size: {
-        sm: "ui-text-sm ui-p-1",
-        md: "ui-text-md ui-p-2",
-        lg: "ui-text-lg ui-p-3",
-      },
-    },
-    defaultVariants: {
-      size: "md",
-    },
-  },
-);
+import * as C from "./textfield.style";
+import { ColorKey, SizeKey } from "../constants";
 
 const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
   {
     autoFocus,
-    color = "default",
+    color = ColorKey.Default,
     defaultValue,
     disabled,
     fullWidth,
@@ -116,7 +21,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
     placeholder,
     required,
     rows,
-    size = "md",
+    size = SizeKey.SM,
     type = "text",
     value,
     testId,
@@ -132,10 +37,12 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
   const handleChangeTextArea = (
     e: ChangeEvent<HTMLInputElement & HTMLTextAreaElement>,
   ): void => {
-    onChange?.(e);
+    onChange && onChange(e);
+
     if (multiline && !rows) {
       const textarea = inputRef?.current ?? inputControllRef.current;
       const hiddenTextarea = hiddenTextAreaRef.current;
+
       if (textarea && hiddenTextarea) {
         hiddenTextarea.value = textarea.value;
         if (
@@ -143,7 +50,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
           (!maxRows || hiddenTextarea.rows < maxRows)
         ) {
           hiddenTextarea.rows += 1;
-          textarea.style.height = `${hiddenTextarea.scrollHeight}px`;
+          textarea.rows += 1;
         }
       }
     }
@@ -161,22 +68,15 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
 
   if (multiline)
     return (
-      <div
-        className={cn(
-          textAreaWRapperVariant({ color }),
-          disabled && "ui-opacity-30 hover:ui-opacity-30 ui-cursor-not-allowed",
-          fullWidth && "ui-w-full",
-          className,
-        )}
+      <C.TextareaWrapper
+        color={color}
+        size={size}
         ref={ref}
+        fullWidth={fullWidth}
         {...props}
       >
-        <textarea
-          className={cn(
-            inputVariant({ size }),
-            disabled && "ui-cursor-not-allowed",
-            inputProps?.className,
-          )}
+        <C.Textarea
+          styleSize={size}
           data-testid={testId}
           defaultValue={defaultValue}
           disabled={disabled}
@@ -188,40 +88,32 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
           required={required}
           rows={rows ?? minRows}
           value={value}
+          css={{
+            height: "auto",
+          }}
           {...inputProps}
         />
-        <textarea
+        <C.HiddenTextarea
           aria-hidden="true"
-          className={cn(
-            inputVariant({ size }),
-            "ui-invisible ui-h-fit ui-absolute ui-inset-0",
-          )}
           defaultValue={defaultValue}
           ref={hiddenTextAreaRef}
           rows={rows ?? minRows}
           tabIndex={-1}
           value={value}
         />
-      </div>
+      </C.TextareaWrapper>
     );
 
   return (
-    <div
-      className={cn(
-        wrapperVariant({ color, size }),
-        disabled && "ui-opacity-30 hover:ui-opacity-30 ui-cursor-not-allowed",
-        fullWidth && "ui-w-full",
-        className,
-      )}
+    <C.TextFieldWrapper
+      color={color}
+      size={size}
+      fullWidth={fullWidth}
       ref={ref}
       {...props}
     >
-      <input
-        className={cn(
-          inputVariant({ size }),
-          disabled && "ui-cursor-not-allowed",
-          inputProps?.className,
-        )}
+      <C.TextInput
+        styleSize={size}
         data-testid={testId}
         defaultValue={defaultValue}
         disabled={disabled}
@@ -235,7 +127,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
         value={value}
         {...inputProps}
       />
-    </div>
+    </C.TextFieldWrapper>
   );
 });
 

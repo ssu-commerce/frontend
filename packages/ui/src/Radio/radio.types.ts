@@ -37,8 +37,3 @@ export type RadioGroupProps = Omit<
 };
 
 export type RadioStyleProps = keyof RadioProps & Action;
-
-export interface RadioLabelProps {
-  size: SizeKey;
-  disabled?: boolean;
-}

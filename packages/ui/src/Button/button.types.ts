@@ -20,17 +20,3 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   }>;
 
 export type ButtonStyleProps = keyof ButtonProps & Action;
-
-export interface StyleIconProps {
-  color: ColorKey;
-  size: SizeKey;
-  variant: VariantKey;
-}
-
-export interface StyleButtonProps {
-  color: ColorKey;
-  size: SizeKey;
-  variant: VariantKey;
-  disabled?: boolean;
-  fullWidth?: boolean;
-}

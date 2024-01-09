@@ -6,17 +6,13 @@ import type {
   RefObject,
   TextareaHTMLAttributes,
 } from "react";
-import type { Action, Color } from "../types";
-
-// TODO: Omit등 Size override 필요
-export type TextFieldSize = "sm" | "md" | "lg";
-
-export type TextFieldColor = Color;
+import type { Action } from "../types";
+import { ColorKey, SizeKey } from "../constants";
 
 export type TextFieldProps = HTMLAttributes<HTMLDivElement> &
   Partial<{
     autoFocus: boolean;
-    color: TextFieldColor;
+    color: ColorKey;
     defaultValue: string | readonly string[] | number;
     disabled: boolean;
     error: boolean;
@@ -32,7 +28,7 @@ export type TextFieldProps = HTMLAttributes<HTMLDivElement> &
     placeholder: string;
     required: boolean;
     rows: number;
-    size: TextFieldSize;
+    size: SizeKey;
     type: HTMLInputTypeAttribute;
     value: string | readonly string[] | number;
     testId: string;

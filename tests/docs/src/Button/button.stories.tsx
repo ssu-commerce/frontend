@@ -108,52 +108,6 @@ export const StyleButton: Story = {
   },
   render: ({ disabled }) => {
     return (
-      <>
-        {buttonCompoundArgs.color.map((color) => (
-          <Fragment key={color}>
-            {buttonCompoundArgs.variant.map((variant) => (
-              <Fragment key={variant}>
-                {buttonCompoundArgs.size.map((size) => (
-                  <li
-                    css={css`
-                      display: flex;
-                      gap: 4px;
-                      flex-direction: column;
-                    `}
-                    key={color + variant + size}
-                  >
-                    <label
-                      className="text-xs block bg-white p-1 rounded-md w-fit mx-auto m"
-                      css={css`
-                        font-size: 12px;
-                        display: block;
-                      `}
-                      htmlFor={`${color}-${variant}-${size}`}
-                    >
-                      [{color} / {variant} / {size}]
-                    </label>
-                    <Button
-                      className="my-2"
-                      color={color}
-                      disabled={disabled}
-                      endIcon={<ArrowIcon size={size} />}
-                      id={`${color}-${variant}-${size}`}
-                      size={size}
-                      variant={variant}
-                    >
-                      button
-                    </Button>
-                  </li>
-                ))}
-              </Fragment>
-            ))}
-          </Fragment>
-        ))}
-      </>
-    );
-  },
-  decorators: [
-    (Story) => (
       <ul
         css={css`
           display: grid;
@@ -173,10 +127,47 @@ export const StyleButton: Story = {
           padding: 24px;
         `}
       >
-        <Story />
+        {buttonCompoundArgs.color.map((color) => (
+          <Fragment key={color}>
+            {buttonCompoundArgs.variant.map((variant) => (
+              <Fragment key={variant}>
+                {buttonCompoundArgs.size.map((size) => (
+                  <li
+                    css={css`
+                      display: flex;
+                      gap: 4px;
+                      flex-direction: column;
+                    `}
+                    key={color + variant + size}
+                  >
+                    <label
+                      css={css`
+                        font-size: 12px;
+                        display: block;
+                      `}
+                      htmlFor={`${color}-${variant}-${size}`}
+                    >
+                      [{color} / {variant} / {size}]
+                    </label>
+                    <Button
+                      color={color}
+                      disabled={disabled}
+                      endIcon={<ArrowIcon size={size} />}
+                      id={`${color}-${variant}-${size}`}
+                      size={size}
+                      variant={variant}
+                    >
+                      button
+                    </Button>
+                  </li>
+                ))}
+              </Fragment>
+            ))}
+          </Fragment>
+        ))}
       </ul>
-    ),
-  ],
+    );
+  },
   argTypes: {
     color: {
       control: false,
@@ -195,9 +186,9 @@ export const StyleButton: Story = {
 
 export const ActionButton: Story = {
   args: {
-    color: "default",
-    variant: "contained",
-    size: "sm",
+    color: ColorKey.Default,
+    variant: VariantKey.Contained,
+    size: SizeKey.SM,
     children: "Button",
   },
 
