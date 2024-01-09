@@ -1,6 +1,6 @@
 import type { CardProps } from "./card.types";
 
-function Card({ className, title, children, href }: CardProps): JSX.Element {
+const Card = ({ className, title, children, href }: CardProps): JSX.Element => {
   return (
     <a
       className={className}

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { Size, SizeKey } from "../constants";
+import type { SizeKey } from "../constants";
+import { Size } from "../constants";
 
 export const Label = styled.label(
   ({ sizeType, disabled }: { sizeType: SizeKey; disabled?: boolean }) => {

@@ -1,9 +1,13 @@
+import { SizeKey } from "../constants";
 import type { IconProps } from ".";
 
-function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
+const CheckedIcon = ({
+  color = "#000000",
+  size = 20,
+}: IconProps): JSX.Element => {
   switch (size) {
     case 16:
-    case "xs":
+    case SizeKey.XS:
       return (
         <svg
           fill="none"
@@ -19,7 +23,7 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
         </svg>
       );
     case 20:
-    case "sm":
+    case SizeKey.SM:
       return (
         <svg
           fill="none"
@@ -35,7 +39,7 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
         </svg>
       );
     case 24:
-    case "md":
+    case SizeKey.MD:
       return (
         <svg
           fill="none"
@@ -51,7 +55,7 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
         </svg>
       );
     case 28:
-    case "lg":
+    case LG:
       return (
         <svg
           fill="none"
@@ -67,7 +71,7 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
         </svg>
       );
     case 32:
-    case "xl":
+    case XL:
       return (
         <svg
           fill="none"
@@ -98,6 +102,6 @@ function CheckedIcon({ color = "#000000", size = 20 }: IconProps): JSX.Element {
         </svg>
       );
   }
-}
+};
 
 export { CheckedIcon };

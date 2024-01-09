@@ -2,14 +2,13 @@ import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { Fragment } from "react";
-import type { Size, Color, Variant } from "@sc/ui";
 import { ColorKey, VariantKey, SizeKey, TextField } from "@sc/ui";
 import { css } from "@emotion/react";
 
 const textFieldCompoundArgs = {
-  color: Object.values(ColorKey) as Color[],
-  variant: Object.values(VariantKey) as Variant[],
-  size: Object.values(SizeKey) as Size[],
+  color: Object.values(ColorKey) as ColorKey[],
+  variant: Object.values(VariantKey) as VariantKey[],
+  size: Object.values(SizeKey) as SizeKey[],
 };
 
 const meta = {
@@ -46,8 +45,8 @@ type Story = StoryObj<typeof TextField>;
 
 export const DefaultTextField: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
     disabled: false,
     placeholder: "placeholder",
   },
@@ -119,7 +118,6 @@ export const StyleTextField: Story = {
 export const ActionTextField: Story = {
   args: {
     color: ColorKey.Default,
-    variant: VariantKey.Contained,
     size: SizeKey.SM,
   },
 
@@ -149,7 +147,7 @@ export const ActionTextField: Story = {
     await expect(fullWidth).toBeInTheDocument();
     await expect(fullWidth.closest("div")).toHaveStyle({ width: "200px" });
   },
-  render: ({ color, size, variant }) => {
+  render: ({ color, size }) => {
     return (
       <ul
         css={css`
@@ -165,29 +163,22 @@ export const ActionTextField: Story = {
         `}
       >
         <li>
-          <TextField
-            color={color}
-            size={size}
-            variant={variant}
-            placeholder="hover"
-          />
+          <TextField color={color} placeholder="hover" size={size} />
         </li>
         <li>
           <TextField
             color={color}
             disabled
-            size={size}
-            variant={variant}
             placeholder="disabled"
+            size={size}
           />
         </li>
         <li>
           <TextField
             color={color}
             fullWidth
-            size={size}
-            variant={variant}
             placeholder="fullWidth"
+            size={size}
           />
         </li>
       </ul>
@@ -198,7 +189,6 @@ export const ActionTextField: Story = {
 export const TextAreaTextField: Story = {
   args: {
     color: ColorKey.Default,
-    variant: VariantKey.Contained,
     size: SizeKey.SM,
   },
   play: async ({ canvasElement }) => {

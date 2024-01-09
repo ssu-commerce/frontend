@@ -1,12 +1,13 @@
+import { SizeKey } from "../constants";
 import type { IconProps } from ".";
 
-function UnCheckedIcon({
+const UnCheckedIcon = ({
   color = "#ffffff",
   size = 20,
-}: IconProps): JSX.Element {
+}: IconProps): JSX.Element => {
   switch (size) {
     case 16:
-    case "xs":
+    case SizeKey.XS:
       return (
         <svg
           fill="none"
@@ -22,7 +23,7 @@ function UnCheckedIcon({
         </svg>
       );
     case 20:
-    case "sm":
+    case SizeKey.SM:
       return (
         <svg
           fill="none"
@@ -38,7 +39,7 @@ function UnCheckedIcon({
         </svg>
       );
     case 24:
-    case "md":
+    case SizeKey.MD:
       return (
         <svg
           fill="none"
@@ -54,7 +55,7 @@ function UnCheckedIcon({
         </svg>
       );
     case 28:
-    case "lg":
+    case LG:
       return (
         <svg
           fill="none"
@@ -70,7 +71,7 @@ function UnCheckedIcon({
         </svg>
       );
     case 32:
-    case "xl":
+    case XL:
       return (
         <svg
           fill="none"
@@ -101,6 +102,6 @@ function UnCheckedIcon({
         </svg>
       );
   }
-}
+};
 
 export { UnCheckedIcon };

@@ -1,18 +1,18 @@
-import { DirectionKey, DirectionDegree } from "../constants";
+import { DirectionKey, DirectionDegree, SizeKey } from "../constants";
 import type { IconProps } from "./svg.types";
 
 export interface ArrowIconProps extends IconProps {
   direction?: DirectionKey;
 }
 
-function ArrowIcon({
+const ArrowIcon = ({
   color = "#000000",
   size = 20,
   direction = DirectionKey.Top,
-}: ArrowIconProps): JSX.Element {
+}: ArrowIconProps): JSX.Element => {
   switch (size) {
     case 16:
-    case "xs":
+    case SizeKey.XS:
       return (
         <svg
           fill="none"
@@ -29,7 +29,7 @@ function ArrowIcon({
         </svg>
       );
     case 20:
-    case "sm":
+    case SizeKey.SM:
       return (
         <svg
           fill="none"
@@ -46,7 +46,7 @@ function ArrowIcon({
         </svg>
       );
     case 24:
-    case "md":
+    case SizeKey.MD:
       return (
         <svg
           fill="none"
@@ -70,7 +70,7 @@ function ArrowIcon({
         </svg>
       );
     case 28:
-    case "lg":
+    case LG:
       return (
         <svg
           fill="none"
@@ -94,7 +94,7 @@ function ArrowIcon({
         </svg>
       );
     case 32:
-    case "xl":
+    case XL:
       return (
         <svg
           fill="none"
@@ -134,6 +134,6 @@ function ArrowIcon({
         </svg>
       );
   }
-}
+};
 
 export { ArrowIcon };

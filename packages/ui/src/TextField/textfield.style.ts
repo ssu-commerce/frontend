@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { Color, ColorKey, Size, SizeKey } from "../constants";
+import type { ColorKey, SizeKey } from "../constants";
+import { Color, Size } from "../constants";
 
 const MinWidth: Record<SizeKey, string> = {
   xs: "24px",
@@ -8,14 +9,6 @@ const MinWidth: Record<SizeKey, string> = {
   md: "32px",
   lg: "36px",
   xl: "40px",
-};
-
-const Height: Record<SizeKey, string> = {
-  xs: "12px",
-  sm: "16px",
-  md: "20px",
-  lg: "24px",
-  xl: "28px",
 };
 
 export const TextFieldWrapper = styled.div(

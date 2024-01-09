@@ -42,7 +42,7 @@ export default meta;
 
 type Story = StoryObj<typeof Radio>;
 
-function DefaultRadioWrapper({ children, ...args }): ReactElement {
+const DefaultRadioWrapper = ({ children, ...args }): ReactElement => {
   const [checked, setChecked] = useState(false);
   return (
     <Radio
@@ -55,7 +55,7 @@ function DefaultRadioWrapper({ children, ...args }): ReactElement {
       {children}
     </Radio>
   );
-}
+};
 
 export const DefaultRadio: Story = {
   args: {
@@ -75,7 +75,7 @@ export const DefaultRadio: Story = {
   },
 };
 
-function MultiRadioWrapper(args): ReactElement {
+const MultiRadioWrapper = (args): ReactElement => {
   const [selectedValue, setSelectedValue] = useState<string>("");
   const radioList = ["radio-1", "radio-2", "disabled"];
 
@@ -100,7 +100,7 @@ function MultiRadioWrapper(args): ReactElement {
       })}
     </RadioGroup>
   );
-}
+};
 
 export const MultiRadio: Story = {
   args: {

@@ -1,8 +1,8 @@
 import type { ChangeEvent, ForwardedRef, ReactElement } from "react";
 import { forwardRef, useEffect, useRef } from "react";
+import { ColorKey, SizeKey } from "../constants";
 import type { TextFieldProps } from "./textfield.types";
 import * as C from "./textfield.style";
-import { ColorKey, SizeKey } from "../constants";
 
 const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
   {
@@ -25,7 +25,6 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
     type = "text",
     value,
     testId,
-    className,
     id,
     ...props
   }: TextFieldProps,
@@ -70,13 +69,15 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
     return (
       <C.TextareaWrapper
         color={color}
-        size={size}
-        ref={ref}
         fullWidth={fullWidth}
+        ref={ref}
+        size={size}
         {...props}
       >
         <C.Textarea
-          styleSize={size}
+          css={{
+            height: "auto",
+          }}
           data-testid={testId}
           defaultValue={defaultValue}
           disabled={disabled}
@@ -87,10 +88,8 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
           ref={inputRef ?? inputControllRef}
           required={required}
           rows={rows ?? minRows}
+          styleSize={size}
           value={value}
-          css={{
-            height: "auto",
-          }}
           {...inputProps}
         />
         <C.HiddenTextarea
@@ -107,13 +106,12 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
   return (
     <C.TextFieldWrapper
       color={color}
-      size={size}
       fullWidth={fullWidth}
       ref={ref}
+      size={size}
       {...props}
     >
       <C.TextInput
-        styleSize={size}
         data-testid={testId}
         defaultValue={defaultValue}
         disabled={disabled}
@@ -123,6 +121,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
         placeholder={placeholder}
         ref={inputRef ?? inputControllRef}
         required={required}
+        styleSize={size}
         type={type}
         value={value}
         {...inputProps}

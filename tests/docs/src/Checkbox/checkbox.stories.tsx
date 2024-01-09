@@ -42,7 +42,7 @@ export default meta;
 
 type Story = StoryObj<typeof Checkbox>;
 
-function DefaultCheckboxWrapper({ children, ...args }): ReactElement {
+const DefaultCheckboxWrapper = ({ children, ...args }): ReactElement => {
   const [checked, setChecked] = useState(false);
   return (
     <Checkbox
@@ -55,7 +55,7 @@ function DefaultCheckboxWrapper({ children, ...args }): ReactElement {
       {children}
     </Checkbox>
   );
-}
+};
 
 export const DefaultCheckbox: Story = {
   args: {
@@ -77,11 +77,11 @@ export const DefaultCheckbox: Story = {
   },
 };
 
-function MultiCheckboxWrapper(args): ReactElement {
+const MultiCheckboxWrapper = (args): ReactElement => {
   const [checked, setChecked] = useState<string[]>([]);
   const checkboxList = ["checkbox-1", "checkbox-2", "disabled"];
 
-  const handleChangeCheck = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCheck = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     if (checked.includes(value))
       setChecked(checked.filter((checkValue) => checkValue !== value));
@@ -108,7 +108,7 @@ function MultiCheckboxWrapper(args): ReactElement {
       })}
     </ul>
   );
-}
+};
 
 export const MultiCheckbox: Story = {
   args: {

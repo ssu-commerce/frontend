@@ -1,8 +1,14 @@
-import { ChangeEvent, Children, cloneElement } from "react";
-import { RadioGroupProps } from "./radio.types";
+import type { ChangeEvent } from "react";
+import { Children, cloneElement } from "react";
+import type { RadioGroupProps } from "./radio.types";
 import { GroupWrapper } from "./radio.style";
 
-function RadioGroup({ children, value, onChange, ...args }: RadioGroupProps) {
+const RadioGroup = ({
+  children,
+  value,
+  onChange,
+  ...args
+}: RadioGroupProps) => {
   const handleChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedValue = e.target.value;
     onChange(selectedValue);
@@ -19,6 +25,6 @@ function RadioGroup({ children, value, onChange, ...args }: RadioGroupProps) {
       )}
     </GroupWrapper>
   );
-}
+};
 
 export { RadioGroup };

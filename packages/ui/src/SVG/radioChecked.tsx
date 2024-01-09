@@ -1,9 +1,9 @@
 import type { IconProps } from ".";
 
-function RadioCheckedIcon({
+const RadioCheckedIcon = ({
   color = "#000000",
   size = 20,
-}: IconProps): JSX.Element {
+}: IconProps): JSX.Element => {
   switch (size) {
     case 16:
       return (

@@ -7,7 +7,7 @@ import type {
   TextareaHTMLAttributes,
 } from "react";
 import type { Action } from "../types";
-import { ColorKey, SizeKey } from "../constants";
+import type { ColorKey, SizeKey } from "../constants";
 
 export type TextFieldProps = HTMLAttributes<HTMLDivElement> &
   Partial<{

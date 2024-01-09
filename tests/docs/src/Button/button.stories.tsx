@@ -1,16 +1,14 @@
-import type { Size, Color, Variant } from "@sc/ui";
 import { ColorKey, VariantKey, SizeKey, Button, ArrowIcon } from "@sc/ui";
 import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
-import type { ReactNode } from "react";
 import { Fragment } from "react";
 import { css } from "@emotion/react";
 
 const buttonCompoundArgs = {
-  color: Object.values(ColorKey) as Color[],
-  variant: Object.values(VariantKey) as Variant[],
-  size: Object.values(SizeKey) as Size[],
+  color: Object.values(ColorKey) as ColorKey[],
+  variant: Object.values(VariantKey) as VariantKey[],
+  size: Object.values(SizeKey) as SizeKey[],
 };
 
 const meta = {
@@ -62,15 +60,7 @@ export const DefaultButton: Story = {
     const button = canvas.getByText("Button");
     await expect(button.tagName).toBe("BUTTON");
   },
-  render: ({
-    size = SizeKey.SM,
-    endIcon,
-    ...args
-  }: {
-    size: Size;
-    endIcon: boolean;
-    children: ReactNode;
-  }) => (
+  render: ({ size = SizeKey.SM, endIcon, ...args }) => (
     <Button
       endIcon={endIcon ? <ArrowIcon size={size} /> : null}
       size={size}
