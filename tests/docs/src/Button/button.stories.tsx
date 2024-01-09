@@ -1,5 +1,5 @@
 import type { Size, Color, Variant } from "@sc/ui";
-import { Button, ArrowIcon, EColor, EVariant } from "@sc/ui";
+import { ColorKey, VariantKey, SizeKey, Button, ArrowIcon } from "@sc/ui";
 import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
@@ -8,9 +8,9 @@ import { Fragment } from "react";
 import { css } from "@emotion/react";
 
 const buttonCompoundArgs = {
-  color: Object.keys(EColor) as Color[],
-  variant: Object.keys(EVariant) as Variant[],
-  size: ["xs", "sm", "md", "lg", "xl"] as Size[],
+  color: Object.values(ColorKey) as Color[],
+  variant: Object.values(VariantKey) as Variant[],
+  size: Object.values(SizeKey) as Size[],
 };
 
 const meta = {
@@ -51,9 +51,9 @@ type Story = StoryObj<typeof Button>;
 
 export const DefaultButton: Story = {
   args: {
-    color: "default",
-    variant: "contained",
-    size: "sm",
+    color: ColorKey.Default,
+    variant: VariantKey.Contained,
+    size: SizeKey.SM,
     disabled: false,
     children: "Button",
   },
@@ -63,7 +63,7 @@ export const DefaultButton: Story = {
     await expect(button.tagName).toBe("BUTTON");
   },
   render: ({
-    size = "sm",
+    size = SizeKey.SM,
     endIcon,
     ...args
   }: {
@@ -71,7 +71,11 @@ export const DefaultButton: Story = {
     endIcon: boolean;
     children: ReactNode;
   }) => (
-    <Button endIcon={endIcon ? <ArrowIcon size={size} /> : null} {...args}>
+    <Button
+      endIcon={endIcon ? <ArrowIcon size={size} /> : null}
+      size={size}
+      {...args}
+    >
       {args.children}
     </Button>
   ),
@@ -79,9 +83,9 @@ export const DefaultButton: Story = {
 
 export const LinkButton: Story = {
   args: {
-    color: "default",
-    variant: "contained",
-    size: "sm",
+    color: ColorKey.Default,
+    variant: VariantKey.Contained,
+    size: SizeKey.SM,
     disabled: false,
     children: "Anchor",
     href: "#",
