@@ -1,30 +1,21 @@
 import type {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
-  ComponentProps,
-  FunctionComponent,
-  ReactElement,
   ReactNode,
 } from "react";
-import type { Action, Color, Size, Variant } from "../types";
-
-export type ButtonColor = Color;
-
-export type ButtonSize = Size;
-
-export type ButtonVariant = Variant;
+import type { ColorKey, SizeKey, VariantKey } from "../constants";
+import type { Action } from "../types";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement> &
   Partial<{
-    color: ButtonColor;
+    color: ColorKey;
     endIcon: ReactNode;
     fullWidth: boolean;
     href: string;
-    size: ButtonSize;
-    // startIcon: ReactElement & FunctionComponent<ComponentProps<"svg">>;
+    size: SizeKey;
     startIcon: ReactNode;
-    variant: ButtonVariant;
+    variant: VariantKey;
     testId: string;
   }>;
 

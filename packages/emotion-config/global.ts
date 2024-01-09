@@ -52,6 +52,11 @@ export const globalStyle = css`
       monospace;
   }
 
+  input {
+    padding: 0;
+    margin: 0;
+  }
+
   div#root {
     width: 100%;
     height: 100%;

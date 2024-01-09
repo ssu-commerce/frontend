@@ -3,8 +3,13 @@ import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import type { ChangeEvent, ReactElement } from "react";
 import { useState } from "react";
-import { Checkbox } from "@sc/ui";
-import { checkboxCompoundArgs } from "./checkbox.type";
+import type { Size, Color } from "@sc/ui";
+import { ColorKey, SizeKey, Checkbox } from "@sc/ui";
+
+const checkboxCompoundArgs = {
+  color: Object.values(ColorKey) as Color[],
+  size: Object.values(SizeKey) as Size[],
+};
 
 const meta = {
   title: "UI/Checkbox",
@@ -37,7 +42,7 @@ export default meta;
 
 type Story = StoryObj<typeof Checkbox>;
 
-function DefaultCheckboxWrapper({ children, ...args }): ReactElement {
+const DefaultCheckboxWrapper = ({ children, ...args }): ReactElement => {
   const [checked, setChecked] = useState(false);
   return (
     <Checkbox
@@ -50,12 +55,12 @@ function DefaultCheckboxWrapper({ children, ...args }): ReactElement {
       {children}
     </Checkbox>
   );
-}
+};
 
 export const DefaultCheckbox: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
     disabled: false,
     children: "default",
   },
@@ -72,11 +77,11 @@ export const DefaultCheckbox: Story = {
   },
 };
 
-function MultiCheckboxWrapper(args): ReactElement {
+const MultiCheckboxWrapper = (args): ReactElement => {
   const [checked, setChecked] = useState<string[]>([]);
   const checkboxList = ["checkbox-1", "checkbox-2", "disabled"];
 
-  const handleChangeCheck = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCheck = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     if (checked.includes(value))
       setChecked(checked.filter((checkValue) => checkValue !== value));
@@ -103,12 +108,12 @@ function MultiCheckboxWrapper(args): ReactElement {
       })}
     </ul>
   );
-}
+};
 
 export const MultiCheckbox: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
     disabled: false,
     children: "default",
   },

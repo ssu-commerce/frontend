@@ -10,5 +10,6 @@
     }
   ],
   "eslint.experimental.useFlatConfig": true,
-  "eslint.format.enable": true
+  "eslint.format.enable": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

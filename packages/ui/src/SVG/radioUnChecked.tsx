@@ -1,17 +1,17 @@
-import { IconProps } from ".";
+import type { IconProps } from ".";
 
-function RadioUnCheckedIcon({
+const RadioUnCheckedIcon = ({
   color = "#ffffff",
   size = 20,
-}: IconProps): JSX.Element {
+}: IconProps): JSX.Element => {
   switch (size) {
     case 16:
       return (
         <svg
-          width="16"
+          fill="none"
           height="16"
           viewBox="0 0 16 16"
-          fill="none"
+          width="16"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -23,10 +23,10 @@ function RadioUnCheckedIcon({
     case 20:
       return (
         <svg
-          width="20"
+          fill="none"
           height="20"
           viewBox="0 0 20 20"
-          fill="none"
+          width="20"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -38,10 +38,10 @@ function RadioUnCheckedIcon({
     case 24:
       return (
         <svg
-          width="24"
+          fill="none"
           height="24"
           viewBox="0 0 24 24"
-          fill="none"
+          width="24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -53,10 +53,10 @@ function RadioUnCheckedIcon({
     case 28:
       return (
         <svg
-          width="28"
+          fill="none"
           height="28"
           viewBox="0 0 28 28"
-          fill="none"
+          width="28"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -68,10 +68,10 @@ function RadioUnCheckedIcon({
     case 32:
       return (
         <svg
-          width="32"
+          fill="none"
           height="32"
           viewBox="0 0 32 32"
-          fill="none"
+          width="32"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -80,21 +80,22 @@ function RadioUnCheckedIcon({
           />
         </svg>
       );
+    default:
+      return (
+        <svg
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 0C3.584 0 0 3.584 0 8C0 12.416 3.584 16 8 16C12.416 16 16 12.416 16 8C16 3.584 12.416 0 8 0ZM8 14.4C4.464 14.4 1.6 11.536 1.6 8C1.6 4.464 4.464 1.6 8 1.6C11.536 1.6 14.4 4.464 14.4 8C14.4 11.536 11.536 14.4 8 14.4Z"
+            fill={color}
+          />
+        </svg>
+      );
   }
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M8 0C3.584 0 0 3.584 0 8C0 12.416 3.584 16 8 16C12.416 16 16 12.416 16 8C16 3.584 12.416 0 8 0ZM8 14.4C4.464 14.4 1.6 11.536 1.6 8C1.6 4.464 4.464 1.6 8 1.6C11.536 1.6 14.4 4.464 14.4 8C14.4 11.536 11.536 14.4 8 14.4Z"
-        fill={color}
-      />
-    </svg>
-  );
 }
 
 export { RadioUnCheckedIcon };

@@ -46,19 +46,33 @@ module.exports = {
   ignorePatterns: ["node_modules/", "dist/", ".eslintrc.js", "**/*.css"],
   rules: {
     "import/no-default-export": "off",
-    "@typescript-eslint/explicit-function-return-type": "error",
-    "unicorn/filename-case": "off",
     "jsx-a11y/no-autofocus": [
       2,
       {
         ignoreNonDOM: true,
       },
     ],
+    "react/function-component-definition": [
+      "warn",
+      {
+        namedComponents: "arrow-function",
+        unnamedComponents: "arrow-function",
+      },
+    ],
+    "unicorn/filename-case": [
+      "error",
+      {
+        cases: {
+          camelCase: true,
+          pascalCase: true,
+        },
+      },
+    ],
     "@typescript-eslint/naming-convention": [
       "error",
       {
         selector: "enum",
-        format: ["UPPER_CASE"],
+        format: ["PascalCase", "UPPER_CASE"],
         leadingUnderscore: "allow",
         trailingUnderscore: "allow",
       },
@@ -77,9 +91,13 @@ module.exports = {
       },
       {
         selector: ["function"],
-        format: ["camelCase"],
+        format: ["camelCase", "PascalCase"],
         leadingUnderscore: "allow",
       },
     ],
+    "react/display-name": "off",
+    "eslint-comments/require-description": "off",
+    "no-prototype-builtins": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
   },
 };

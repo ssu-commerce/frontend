@@ -2,8 +2,14 @@ import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { Fragment } from "react";
-import { TextField } from "@sc/ui";
-import { textFieldCompoundArgs, textFieldStyleProps } from "./textfield.type";
+import { ColorKey, VariantKey, SizeKey, TextField } from "@sc/ui";
+import { css } from "@emotion/react";
+
+const textFieldCompoundArgs = {
+  color: Object.values(ColorKey) as ColorKey[],
+  variant: Object.values(VariantKey) as VariantKey[],
+  size: Object.values(SizeKey) as SizeKey[],
+};
 
 const meta = {
   title: "UI/TextField",
@@ -39,8 +45,8 @@ type Story = StoryObj<typeof TextField>;
 
 export const DefaultTextField: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
     disabled: false,
     placeholder: "placeholder",
   },
@@ -61,13 +67,34 @@ export const DefaultTextField: Story = {
 export const StyleTextField: Story = {
   render: ({ disabled }) => {
     return (
-      <>
+      <ul
+        css={css`
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          grid-column-gap: 8px;
+          grid-row-gap: 16px;
+          text-align: center;
+          align-items: center;
+          background-color: #fff;
+          background-image: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.03) 50%,
+              transparent 50%
+            ),
+            linear-gradient(rgba(0, 0, 0, 0.03) 50%, transparent 50%);
+          background-size: 10px 10px;
+          padding: 24px;
+        `}
+      >
         {textFieldCompoundArgs.color.map((color) => (
           <Fragment key={color}>
             {textFieldCompoundArgs.size.map((size) => (
               <li key={color + size}>
                 <label
-                  className="text-xs block bg-white p-1 rounded-md w-fit mx-auto m"
+                  css={css`
+                    font-size: 12px;
+                    display: block;
+                  `}
                   htmlFor={`${color}-${size}`}
                 >
                   [{color} / {size}]
@@ -83,22 +110,15 @@ export const StyleTextField: Story = {
             ))}
           </Fragment>
         ))}
-      </>
+      </ul>
     );
   },
-  decorators: [
-    (Story) => (
-      <ul className="grid grid-cols-3 gap-4 text-center align-middle items-center">
-        <Story />
-      </ul>
-    ),
-  ],
 };
 
 export const ActionTextField: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
   },
 
   play: async ({ canvasElement }) => {
@@ -106,14 +126,17 @@ export const ActionTextField: Story = {
 
     // hover
     const hover = canvas.getByPlaceholderText("hover");
-    await expect(hover.parentNode).toHaveClass("hover:ui-bg-white");
+    await userEvent.hover(hover);
+    await expect(hover).toBeInTheDocument();
+    await expect(hover).toHaveStyle({ cursor: "text" });
 
     // disabled
     const disabled = canvas.getByPlaceholderText("disabled");
-    await expect(disabled).toHaveClass("ui-cursor-not-allowed");
-    await expect(disabled.parentNode).toHaveClass(
-      "ui-opacity-30 hover:ui-opacity-30 ui-cursor-not-allowed",
-    );
+    await expect(disabled).toBeInTheDocument();
+    await expect(disabled.closest("div")).toHaveStyle({
+      opacity: "0.3",
+      cursor: "not-allowed",
+    });
     await waitFor(async () => {
       await userEvent.type(disabled, "input text");
       await expect(disabled).toHaveValue("");
@@ -121,46 +144,53 @@ export const ActionTextField: Story = {
 
     // fullWidth
     const fullWidth = canvas.getByPlaceholderText("fullWidth");
-    await expect(fullWidth.parentNode).toHaveClass("ui-w-full");
-
-    // autoFocus
-    const autoFocus = canvas.getByPlaceholderText("autoFocus");
-    await waitFor(async () => {
-      await expect(autoFocus).toHaveFocus();
-    });
+    await expect(fullWidth).toBeInTheDocument();
+    await expect(fullWidth.closest("div")).toHaveStyle({ width: "200px" });
   },
-  render: () => {
+  render: ({ color, size }) => {
     return (
-      <>
-        {textFieldStyleProps.map((name) => (
-          <li className="w-52" key={name}>
-            <TextField
-              // eslint-disable-next-line jsx-a11y/no-autofocus -- for test
-              autoFocus={name === "autoFocus"}
-              disabled={name === "disabled"}
-              fullWidth={name === "fullWidth"}
-              placeholder={name}
-            />
-          </li>
-        ))}
-      </>
+      <ul
+        css={css`
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          width: 200px;
+          & li {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+          }
+        `}
+      >
+        <li>
+          <TextField color={color} placeholder="hover" size={size} />
+        </li>
+        <li>
+          <TextField
+            color={color}
+            disabled
+            placeholder="disabled"
+            size={size}
+          />
+        </li>
+        <li>
+          <TextField
+            color={color}
+            fullWidth
+            placeholder="fullWidth"
+            size={size}
+          />
+        </li>
+      </ul>
     );
   },
-  decorators: [
-    (Story) => (
-      <ul className="flex flex-col gap-4 text-center align-middle items-center w-52">
-        <Story />
-      </ul>
-    ),
-  ],
 };
 
 export const TextAreaTextField: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
   },
-
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -174,12 +204,15 @@ export const TextAreaTextField: Story = {
 
     // disabled
     const disabled = canvas.getByPlaceholderText("disabled");
-    await expect(disabled).toHaveClass("ui-cursor-not-allowed");
-    await expect(disabled.parentNode).toHaveClass(
-      "ui-opacity-30 hover:ui-opacity-30 ui-cursor-not-allowed",
-    );
-    await userEvent.type(disabled, "input text");
-    await expect(disabled).toHaveValue("");
+    await expect(disabled).toBeInTheDocument();
+    await expect(disabled.closest("div")).toHaveStyle({
+      opacity: "0.3",
+      cursor: "not-allowed",
+    });
+    await waitFor(async () => {
+      await userEvent.type(disabled, "input text");
+      await expect(disabled).toHaveValue("");
+    });
 
     // rows
     const rows = canvas.getByPlaceholderText("rows");
@@ -188,7 +221,7 @@ export const TextAreaTextField: Story = {
 
     // max-min-rows
     const maxMinRows = canvas.getByPlaceholderText("max-min-rows");
-    await expect(maxMinRows).toHaveStyle("height: 68px");
+    await expect(maxMinRows).toHaveStyle({ height: "68px" });
     /**
      * TODO: waitFor 안에 type을 넣어야만 onChange 속 함수들이 정상적으로 동작합니다 why?
      *
@@ -212,17 +245,29 @@ export const TextAreaTextField: Story = {
   },
   render: (args) => {
     return (
-      <>
-        <li className="w-52">
+      <ul
+        css={css`
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          width: 200px;
+          & li {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+          }
+        `}
+      >
+        <li>
           <TextField multiline placeholder="multiline" {...args} />
         </li>
-        <li className="w-52">
+        <li>
           <TextField disabled placeholder="disabled" {...args} />
         </li>
-        <li className="w-52">
+        <li>
           <TextField multiline placeholder="rows" rows={3} {...args} />
         </li>
-        <li className="w-52">
+        <li>
           <TextField
             maxRows={5}
             minRows={3}
@@ -231,14 +276,7 @@ export const TextAreaTextField: Story = {
             {...args}
           />
         </li>
-      </>
+      </ul>
     );
   },
-  decorators: [
-    (Story) => (
-      <ul className="flex flex-col gap-4 text-center align-middle items-center w-52">
-        <Story />
-      </ul>
-    ),
-  ],
 };

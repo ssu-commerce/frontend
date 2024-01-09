@@ -1,3 +1,4 @@
 module.exports = {
-  extends: ["sc/react", "sc/library"],
+  extends: ["sc/library", "sc/react"],
+  plugins: ["@emotion"],
 };

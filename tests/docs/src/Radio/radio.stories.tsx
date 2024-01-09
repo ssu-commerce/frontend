@@ -1,10 +1,15 @@
-import { Radio, RadioGroup } from "@sc/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import type { ReactElement } from "react";
 import { useState } from "react";
-import { radioCompoundArgs } from "./radio.type";
+import type { Size, Color } from "@sc/ui";
+import { ColorKey, SizeKey, Radio, RadioGroup } from "@sc/ui";
+
+const radioCompoundArgs = {
+  color: Object.values(ColorKey) as Color[],
+  size: Object.values(SizeKey) as Size[],
+};
 
 const meta = {
   title: "UI/Radio",
@@ -37,7 +42,7 @@ export default meta;
 
 type Story = StoryObj<typeof Radio>;
 
-function DefaultRadioWrapper({ children, ...args }): ReactElement {
+const DefaultRadioWrapper = ({ children, ...args }): ReactElement => {
   const [checked, setChecked] = useState(false);
   return (
     <Radio
@@ -50,12 +55,12 @@ function DefaultRadioWrapper({ children, ...args }): ReactElement {
       {children}
     </Radio>
   );
-}
+};
 
 export const DefaultRadio: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
     disabled: false,
     children: "default",
   },
@@ -70,7 +75,7 @@ export const DefaultRadio: Story = {
   },
 };
 
-function MultiRadioWrapper(args): ReactElement {
+const MultiRadioWrapper = (args): ReactElement => {
   const [selectedValue, setSelectedValue] = useState<string>("");
   const radioList = ["radio-1", "radio-2", "disabled"];
 
@@ -95,12 +100,12 @@ function MultiRadioWrapper(args): ReactElement {
       })}
     </RadioGroup>
   );
-}
+};
 
 export const MultiRadio: Story = {
   args: {
-    color: "default",
-    size: "sm",
+    color: ColorKey.Default,
+    size: SizeKey.SM,
     disabled: false,
     children: "default",
   },
