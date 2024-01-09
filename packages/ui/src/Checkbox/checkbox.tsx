@@ -26,7 +26,7 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
   ref: ForwardedRef<HTMLLabelElement>,
 ): ReactElement<CheckboxProps> {
   return (
-    <C.Label ref={ref} {...props} disabled={disabled} size={size}>
+    <C.Label ref={ref} {...props} disabled={disabled} sizeType={size}>
       <C.Input
         checked={checked}
         data-testid={testId}
