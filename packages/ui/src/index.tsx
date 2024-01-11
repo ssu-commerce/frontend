@@ -1,3 +1,4 @@
+"use client";
 export * from "./Button/button";
 export * from "./TextField/textfield";
 export * from "./Checkbox/checkbox";

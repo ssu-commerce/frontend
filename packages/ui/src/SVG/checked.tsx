@@ -55,7 +55,7 @@ const CheckedIcon = ({
         </svg>
       );
     case 28:
-    case LG:
+    case SizeKey.LG:
       return (
         <svg
           fill="none"
@@ -71,7 +71,7 @@ const CheckedIcon = ({
         </svg>
       );
     case 32:
-    case XL:
+    case SizeKey.XL:
       return (
         <svg
           fill="none"

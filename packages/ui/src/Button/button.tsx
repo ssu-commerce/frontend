@@ -1,3 +1,4 @@
+"use client";
 import { forwardRef } from "react";
 import type { ForwardedRef, LegacyRef, ReactElement, ReactNode } from "react";
 import { ColorKey, SizeKey, VariantKey } from "../constants";
