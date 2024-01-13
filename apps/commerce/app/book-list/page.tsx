@@ -1,3 +1,5 @@
+"use client";
+
 export default function BookList(): JSX.Element {
   return (
     <main>
@@ -5,7 +7,7 @@ export default function BookList(): JSX.Element {
         <li>책1</li>
         <li>책2</li>
         <li>책3</li>
-        <li>책14</li>
+        <li>책4</li>
       </ul>
     </main>
   );

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { globalStyles } from "./styles";
-
-const inter = Inter({ subsets: ["latin"] });
+import StyledJsxRegistry from "./emotion";
+import { ThemeProviders } from "./theme";
+import styled from "./root.module.css";
+import Layout from "../component/layout/layout";
 
 export const metadata: Metadata = {
   title: "Create Turborepo",
@@ -16,10 +16,15 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="ko">
-      <body className={inter.className}>
-        {globalStyles}
-        {children}
+      <head></head>
+      <body className={styled.body}>
+        <StyledJsxRegistry>
+          <ThemeProviders>
+            <Layout>{children}</Layout>
+          </ThemeProviders>
+        </StyledJsxRegistry>
       </body>
+      <div id="portal" />
     </html>
   );
 }

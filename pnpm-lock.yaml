@@ -108,6 +108,9 @@ importers:
 
   apps/commerce:
     dependencies:
+      '@emotion/cache':
+        specifier: ^11.11.0
+        version: 11.11.0
       '@emotion/eslint-plugin':
         specifier: ^11.11.0
         version: 11.11.0(eslint@8.56.0)
