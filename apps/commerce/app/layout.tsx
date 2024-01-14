@@ -17,14 +17,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head></head>
-      <body className={styled.body}>
+      <body suppressHydrationWarning={true} className={styled.body}>
         <StyledJsxRegistry>
           <ThemeProviders>
             <Layout>{children}</Layout>
           </ThemeProviders>
         </StyledJsxRegistry>
+        {/* <div id="portal" /> */}
       </body>
-      <div id="portal" />
     </html>
   );
 }

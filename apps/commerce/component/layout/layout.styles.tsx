@@ -1,25 +1,34 @@
-
 import styled from "@emotion/styled";
 
 export const Header = styled.header`
   display: flex;
   flex-basis: auto;
+  align-items: center;
   width: 100%;
+  padding: 0 56px;
+  height: 100%;
   & > * {
     flex: 1;
   }
 `;
 
 export const Logo = styled.h1`
-  width: 185px;
-  height: 40px;
-  display: flex;
-  align-items: center;
+  font-size: 0;
+  display: inline-block;
+  & > a {
+    display: inline-block;
+  }
 `;
 
 export const LNB = styled.ul`
   display: flex;
   gap: 75px;
+`;
+
+export const Account = styled.ul`
+  justify-content: end;
+  display: flex;
+  gap: 45px;
 `;
 
 export const Item = styled.li`
@@ -31,12 +40,6 @@ export const Item = styled.li`
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
-`;
-
-export const Account = styled.ul`
-  justify-content: end;
-  display: flex;
-  gap: 45px;
 `;
 
 export const Main = styled.main``;

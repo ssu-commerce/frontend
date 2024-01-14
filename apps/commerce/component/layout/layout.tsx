@@ -27,14 +27,14 @@ export default function RootLayout({
         </S.Logo>
         <S.LNB>
           {Layout.Header.LNB.map(({ title, href }) => (
-            <S.Item>
+            <S.Item key={title}>
               <Link href={href}>{title}</Link>
             </S.Item>
           ))}
         </S.LNB>
         <S.Account>
           {Layout.Header.Account.map(({ src, alt, href }) => (
-            <S.Item>
+            <S.Item key={alt}>
               <Link href={href}>
                 <Image
                   width={28}
