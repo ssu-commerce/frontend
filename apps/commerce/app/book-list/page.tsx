@@ -1,6 +1,6 @@
 "use client";
 
-export default function BookList(): JSX.Element {
+export const BookList = (): JSX.Element => {
   return (
     <main>
       <ul>
@@ -11,4 +11,6 @@ export default function BookList(): JSX.Element {
       </ul>
     </main>
   );
-}
+};
+
+export default BookList;

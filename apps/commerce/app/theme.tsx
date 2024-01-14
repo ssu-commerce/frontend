@@ -3,11 +3,11 @@
 import { Global } from "@emotion/react";
 import { globalStyle } from "@sc-config/emotion";
 
-export function ThemeProviders({ children }) {
+export const ThemeProvider = ({ children }) => {
   return (
     <>
       <Global styles={globalStyle} />
       {children}
     </>
   );
-}
+};

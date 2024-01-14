@@ -1,5 +1,7 @@
 "use client";
 
-export default function Page(): JSX.Element {
+export const Page = (): JSX.Element => {
   return <div>main</div>;
-}
+};
+
+export default Page;
