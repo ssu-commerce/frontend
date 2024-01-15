@@ -6,6 +6,7 @@ import type {
   RefObject,
   TextareaHTMLAttributes,
 } from "react";
+import type { Interpolation, Theme } from "@emotion/react";
 import type { Action } from "../types";
 import type { ColorKey, SizeKey } from "../constants";
 
@@ -33,6 +34,7 @@ export type TextFieldProps = HTMLAttributes<HTMLDivElement> &
     value: string | readonly string[] | number;
     testId: string;
     id: string;
+    css: Interpolation<Theme>;
   }>;
 
 export type TextFieldStyleProps = keyof TextFieldProps & Action;

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Layout } from "./layout.constants";
-import * as S from "./layout.styles";
+import { Layout } from "./constants";
+import * as S from "./styles";
 
 export default function RootLayout({
   children,

@@ -21,22 +21,22 @@ export const Layout = {
     Account: [
       {
         alt: "account",
-        src: "/assets/svg/account_icons.svg",
+        src: "/assets/svg/account_icon.svg",
         href: "/account",
       },
       {
         alt: "search",
-        src: "/assets/svg/search_icons.svg",
+        src: "/assets/svg/search_icon.svg",
         href: "/search",
       },
       {
         alt: "heart",
-        src: "/assets/svg/heart_icons.svg",
+        src: "/assets/svg/heart_icon.svg",
         href: "/heart",
       },
       {
         alt: "shopping_cart",
-        src: "/assets/svg/shopping_cart_icons.svg",
+        src: "/assets/svg/shopping_cart_icon.svg",
         href: "/shopping_cart",
       },
     ],

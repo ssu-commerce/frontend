@@ -12,6 +12,14 @@ const MinWidth: Record<SizeKey, string> = {
   xl: "40px",
 };
 
+const Padding: Record<SizeKey, string> = {
+  xs: "4px",
+  sm: "6px",
+  md: "8px",
+  lg: "10px",
+  xl: "12px",
+};
+
 export const Button = styled.button(
   ({
     colorType,
@@ -55,6 +63,7 @@ export const Button = styled.button(
         variantColor = {
           ...variantColor,
           color: Color.RGB[colorType],
+          padding: Padding[sizeType],
         };
         break;
       default:

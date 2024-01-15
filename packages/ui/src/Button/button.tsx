@@ -1,4 +1,5 @@
 "use client";
+
 import { forwardRef } from "react";
 import type { ForwardedRef, LegacyRef, ReactElement, ReactNode } from "react";
 import { ColorKey, SizeKey, VariantKey } from "../constants";
@@ -18,6 +19,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     type = "button",
     target = "_self",
     testId,
+    css,
     ...props
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>,
@@ -43,6 +45,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       <C.Anchor
         as="a"
         colorType={color}
+        css={css}
         data-testid={testId}
         fullWidth={fullWidth}
         href={href}
@@ -60,6 +63,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   return (
     <C.Button
       colorType={color}
+      css={css}
       data-testid={testId}
       fullWidth={fullWidth}
       ref={ref}

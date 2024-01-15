@@ -1,3 +1,5 @@
+"use client";
+
 import type { ChangeEvent, ForwardedRef, ReactElement } from "react";
 import { forwardRef, useEffect, useRef } from "react";
 import { ColorKey, SizeKey } from "../constants";
@@ -26,6 +28,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
     value,
     testId,
     id,
+    css,
     ...props
   }: TextFieldProps,
   ref: ForwardedRef<HTMLDivElement>,
@@ -69,6 +72,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
     return (
       <C.TextareaWrapper
         color={color}
+        css={css}
         fullWidth={fullWidth}
         ref={ref}
         size={size}
@@ -106,6 +110,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
   return (
     <C.TextFieldWrapper
       color={color}
+      css={css}
       fullWidth={fullWidth}
       ref={ref}
       size={size}

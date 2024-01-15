@@ -5,14 +5,12 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist/**"
-  ],
+  "main": "./dist/index.mjs",
   "exports": {
-    ".": "./dist",
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/indes.d.ts"
+    },
     "./style.css": "./dist/index.css"
   },
   "scripts": {

@@ -1,0 +1,67 @@
+export const MOCK = {
+  bookList: [
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image1.png",
+      title: "title 1",
+      subtitle: "subtitle 1",
+      price: 100000,
+    },
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image2.png",
+      title: "title 2",
+      subtitle: "subtitle 2",
+      price: 100000,
+    },
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image3.png",
+      title: "title 3",
+      subtitle: "subtitle 3",
+      price: 100000,
+    },
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image4.png",
+      title: "title 4",
+      subtitle: "subtitle 4",
+      price: 100000,
+    },
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image5.png",
+      title: "title 5",
+      subtitle: "subtitle 5",
+      price: 100000,
+    },
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image6.png",
+      title: "title 6",
+      subtitle: "subtitle 6",
+      price: 100000,
+    },
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image7.png",
+      title: "title 7",
+      subtitle: "subtitle 7",
+      price: 100000,
+    },
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image8.png",
+      title: "title 8",
+      subtitle: "subtitle 8",
+      price: 100000,
+    },
+    {
+      href: "/book",
+      previewSrc: "/assets/mock-image/image9.png",
+      title: "title 9",
+      subtitle: "subtitle 9",
+      price: 100000,
+    },
+  ],
+};

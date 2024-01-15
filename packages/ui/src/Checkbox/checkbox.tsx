@@ -1,3 +1,5 @@
+"use client";
+
 import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
 import { CheckedIcon, UnCheckedIcon } from "../SVG";
@@ -21,12 +23,13 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
     testId,
     value,
     children,
+    css,
     ...props
   },
   ref: ForwardedRef<HTMLLabelElement>,
 ): ReactElement<CheckboxProps> {
   return (
-    <C.Label ref={ref} {...props} disabled={disabled} sizeType={size}>
+    <C.Label ref={ref} {...props} css={css} disabled={disabled} sizeType={size}>
       <C.Input
         checked={checked}
         data-testid={testId}

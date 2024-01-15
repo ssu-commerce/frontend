@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Layout from "../component/layout/layout";
+import Layout from "component/layout";
 import StyledJsxProvider from "./emotion";
 import { ThemeProvider } from "./theme";
 import styled from "./root.module.css";
