@@ -2,20 +2,29 @@
 
 import Image from "next/image";
 import { Button, ColorKey, SizeKey, TextField, VariantKey } from "@sc/ui";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import Carousel from "component/carousel";
 import FilterIcon from "assets/svg/filter_icon.svg";
 import BigRoundIcon from "assets/svg/grid_big_round_icon.svg";
-import ViewListIcon from "assets/svg/view_list_icon.svg";
-import { BookCard } from "component/card";
+import BiViewListIcon from "assets/svg/bi_view_list_icon.svg";
+import { Card } from "component/card";
 import { Pagination } from "component/pagination";
 import { MOCK } from "../../mock/constants";
-import * as S from "./page.styles";
+import * as S from "./book.styles";
+import { ViewMode } from "./book.constants";
+import { BiView } from "component/biView";
 
 export const BookList = (): JSX.Element => {
+  const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Around);
   const [currentPage, setCurrentPage] = useState(1);
   const handleMovePage = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const changeViewMode = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const { value } = e.currentTarget;
+    setViewMode(value as ViewMode);
   };
 
   return (
@@ -47,12 +56,16 @@ export const BookList = (): JSX.Element => {
             size={SizeKey.MD}
             startIcon={<BigRoundIcon />}
             variant={VariantKey.Text}
+            value={ViewMode.Around}
+            onClick={changeViewMode}
           />
           <Button
             color={ColorKey.Secondary}
             size={SizeKey.MD}
-            startIcon={<ViewListIcon />}
+            startIcon={<BiViewListIcon />}
+            value={ViewMode.Bi}
             variant={VariantKey.Text}
+            onClick={changeViewMode}
           />
           <S.Status>Showing 1–16 of 32 results</S.Status>
           <S.Sort>
@@ -76,15 +89,28 @@ export const BookList = (): JSX.Element => {
             </S.SortItem>
           </S.Sort>
         </S.Filter>
-        <S.BookList>
-          {MOCK.bookList.map((item) => {
-            return (
-              <S.Item key={item.previewSrc}>
-                <BookCard item={item} />
-              </S.Item>
-            );
-          })}
-        </S.BookList>
+        {viewMode === ViewMode.Around && (
+          <S.CardView>
+            {MOCK.bookList.map((item) => {
+              return (
+                <S.Item key={item.previewSrc}>
+                  <Card item={item} />
+                </S.Item>
+              );
+            })}
+          </S.CardView>
+        )}
+        {viewMode === ViewMode.Bi && (
+          <S.BiView>
+            {MOCK.bookList.map((item) => {
+              return (
+                <S.Item key={item.previewSrc}>
+                  <BiView item={item} />
+                </S.Item>
+              );
+            })}
+          </S.BiView>
+        )}
         <S.Page>
           <Pagination
             currentPage={currentPage}

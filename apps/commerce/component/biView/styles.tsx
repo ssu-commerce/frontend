@@ -1,16 +1,23 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 285px;
+  height: 150px;
+  background: var(--Color-Light-BG, #f4f5f7);
+  & > a {
+    display: flex;
+  }
   border-radius: 8px;
   overflow: hidden;
 `;
 
 export const Info = styled.div`
-  background: var(--Color-Light-BG, #f4f5f7);
-  padding: 16px;
-  height: 145px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
+
+export const Name = styled.div``;
 
 export const Title = styled.h4`
   color: #000;
@@ -31,4 +38,6 @@ export const Price = styled.div`
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;
+  display: flex;
+  align-items: center;
 `;

@@ -55,9 +55,16 @@ export const SortLabel = styled.span`
   line-height: 24px;
 `;
 
-export const BookList = styled.ul`
+export const CardView = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 64px 100px;
+`;
+
+export const BiView = styled.ul`
+  display: flex;
+  flex-direction: column;
   gap: 40px;
   padding: 64px 100px;
 `;

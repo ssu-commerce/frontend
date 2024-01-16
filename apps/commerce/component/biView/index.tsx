@@ -3,7 +3,7 @@ import * as S from "./styles";
 import Image from "next/image";
 import { addComma } from "@sc/utils";
 
-export interface CardItem {
+interface BiViewItem {
   href: string;
   previewSrc: string;
   title: string;
@@ -11,7 +11,11 @@ export interface CardItem {
   price: number;
 }
 
-export const Card = ({ item }: { item: CardItem }) => {
+interface BiViewProps {
+  item: BiViewItem;
+}
+
+export const BiView = ({ item }: BiViewProps) => {
   const { href, previewSrc, title, subtitle, price } = item;
   return (
     <S.Wrapper>
@@ -21,12 +25,14 @@ export const Card = ({ item }: { item: CardItem }) => {
           alt="book-card"
           placeholder="empty"
           priority={true}
-          width={285}
-          height={300}
+          width={150}
+          height={150}
         />
         <S.Info>
-          <S.Title>{title}</S.Title>
-          <S.Subtitle>{subtitle}</S.Subtitle>
+          <S.Name>
+            <S.Title>{title}</S.Title>
+            <S.Subtitle>{subtitle}</S.Subtitle>
+          </S.Name>
           <S.Price>{addComma(price)}원</S.Price>
         </S.Info>
       </Link>
