@@ -2,15 +2,22 @@
 
 import Image from "next/image";
 import { Button, ColorKey, SizeKey, TextField, VariantKey } from "@sc/ui";
+import { useState } from "react";
 import Carousel from "component/carousel";
 import FilterIcon from "assets/svg/filter_icon.svg";
 import BigRoundIcon from "assets/svg/grid_big_round_icon.svg";
 import ViewListIcon from "assets/svg/view_list_icon.svg";
-import { BookCard } from "component/card/book";
+import { BookCard } from "component/card";
+import { Pagination } from "component/pagination";
 import { MOCK } from "../../mock/constants";
 import * as S from "./page.styles";
 
 export const BookList = (): JSX.Element => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const handleMovePage = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <>
       <S.SlideSection>
@@ -78,6 +85,13 @@ export const BookList = (): JSX.Element => {
             );
           })}
         </S.BookList>
+        <S.Page>
+          <Pagination
+            currentPage={currentPage}
+            lastPage={10}
+            onClick={handleMovePage}
+          />
+        </S.Page>
       </S.BookSection>
     </>
   );

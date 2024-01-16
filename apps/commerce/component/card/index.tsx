@@ -1,5 +1,5 @@
 import Link from "next/link";
-import * as S from "./style";
+import * as S from "./styles";
 import Image from "next/image";
 
 export interface BookCard {

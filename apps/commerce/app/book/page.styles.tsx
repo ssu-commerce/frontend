@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 
 export const SlideSection = styled.section``;
 
-export const BookSection = styled.section``;
+export const BookSection = styled.section`
+  padding-bottom: 32px;
+`;
 
 export const Filter = styled.div`
   display: flex;
@@ -64,4 +66,9 @@ export const Item = styled.li`
   & > div {
     margin: auto;
   }
+`;
+
+export const Page = styled.div`
+  display: flex;
+  justify-content: center;
 `;
