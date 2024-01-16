@@ -20,6 +20,7 @@ export const globalStyle = css`
     padding: 0;
     font-style: normal;
     font-weight: 400;
+    font-size: 0;
   }
 
   html::-webkit-scrollbar {

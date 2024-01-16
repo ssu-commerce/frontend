@@ -6,6 +6,7 @@ import type {
   ChangeEventHandler,
   ReactElement,
 } from "react";
+import type { Interpolation, Theme } from "@emotion/react";
 import type { Action } from "../types";
 import type { ColorKey, SizeKey } from "../constants";
 
@@ -25,6 +26,7 @@ export type RadioProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
     children: ReactNode;
     value: string | readonly string[] | number;
     selectedValue: string | readonly string[] | number;
+    css: Interpolation<Theme>;
   }>;
 
 export type RadioGroupProps = Omit<

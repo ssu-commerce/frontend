@@ -3,6 +3,7 @@ import type {
   ButtonHTMLAttributes,
   ReactNode,
 } from "react";
+import type { Interpolation, Theme } from "@emotion/react";
 import type { ColorKey, SizeKey, VariantKey } from "../constants";
 import type { Action } from "../types";
 
@@ -17,6 +18,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     startIcon: ReactNode;
     variant: VariantKey;
     testId: string;
+    css: Interpolation<Theme>;
   }>;
 
 export type ButtonStyleProps = keyof ButtonProps & Action;

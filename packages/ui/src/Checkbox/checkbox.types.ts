@@ -5,6 +5,7 @@ import type {
   ReactNode,
   ChangeEventHandler,
 } from "react";
+import type { Interpolation, Theme } from "@emotion/react";
 import type { ColorKey, SizeKey } from "../constants";
 import type { Action } from "../types";
 
@@ -23,6 +24,7 @@ export type CheckboxProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
     name: string;
     children: ReactNode;
     value: string | readonly string[] | number;
+    css: Interpolation<Theme>;
   }>;
 
 export type CheckboxStyleProps = keyof CheckboxProps & Action;

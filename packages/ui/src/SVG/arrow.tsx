@@ -70,7 +70,7 @@ const ArrowIcon = ({
         </svg>
       );
     case 28:
-    case LG:
+    case SizeKey.LG:
       return (
         <svg
           fill="none"
@@ -94,7 +94,7 @@ const ArrowIcon = ({
         </svg>
       );
     case 32:
-    case XL:
+    case SizeKey.XL:
       return (
         <svg
           fill="none"
