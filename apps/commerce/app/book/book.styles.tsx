@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
 
-export const SlideSection = styled.section``;
+export const SlideSection = styled.section`
+  height: 300px;
+  width: auto;
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+  height: 300px;
+`;
 
 export const BookSection = styled.section`
   padding-bottom: 32px;

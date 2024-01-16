@@ -31,14 +31,14 @@ export const BookList = (): JSX.Element => {
     <>
       <S.SlideSection>
         <Carousel>
-          <Image
-            alt="banner1"
-            height="316"
-            placeholder="empty"
-            priority
-            src="/assets/Banner.png"
-            width="100"
-          />
+          <S.ImageWrapper>
+            <Image
+              alt="banner1"
+              placeholder="empty"
+              src="/assets/Banner.png"
+              fill
+            />
+          </S.ImageWrapper>
         </Carousel>
       </S.SlideSection>
       <S.BookSection>
