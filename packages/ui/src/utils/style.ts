@@ -1,4 +1,4 @@
-import { REGEX } from "../constants/regex";
+import { REGEX } from "../constants";
 
 export const calcPixel = (pixel: string, num: number): string => {
   if (REGEX.PIXEL.test(pixel)) {
