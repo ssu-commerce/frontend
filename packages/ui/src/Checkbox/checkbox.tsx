@@ -2,9 +2,9 @@
 
 import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
-import { CheckedIcon, UnCheckedIcon } from "../SVG";
+import { CheckedIcon, UnCheckedIcon } from "../svg";
 import { Color, ColorKey, SizeKey } from "../constants";
-import * as C from "./checkbox.style";
+import * as C from "./checkbox.styles";
 import type { CheckboxProps } from "./checkbox.types";
 
 const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(

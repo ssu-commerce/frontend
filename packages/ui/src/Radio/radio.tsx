@@ -2,10 +2,10 @@
 
 import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
-import { RadioCheckedIcon, RadioUnCheckedIcon } from "../SVG";
+import { RadioCheckedIcon, RadioUnCheckedIcon } from "../svg";
 import { Color, ColorKey, SizeKey } from "../constants";
 import type { RadioProps } from "./radio.types";
-import * as C from "./radio.style";
+import * as C from "./radio.styles";
 
 const Radio = forwardRef<HTMLLabelElement, RadioProps>(function Radio(
   {

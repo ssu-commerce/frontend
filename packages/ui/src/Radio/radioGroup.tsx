@@ -1,7 +1,7 @@
 import type { ChangeEvent } from "react";
 import { Children, cloneElement } from "react";
 import type { RadioGroupProps } from "./radio.types";
-import { GroupWrapper } from "./radio.style";
+import { GroupWrapper } from "./radio.styles";
 
 const RadioGroup = ({
   children,

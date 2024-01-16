@@ -10,8 +10,7 @@
     ".": {
       "import": "./dist/index.mjs",
       "types": "./dist/indes.d.ts"
-    },
-    "./style.css": "./dist/index.css"
+    }
   },
   "scripts": {
     "build": "tsup",
