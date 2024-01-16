@@ -70,11 +70,18 @@ export const Size = {
     lg: "28px",
     xl: "30px",
   },
-  Padding: {
+  RecPadding: {
     xs: "4px 8px",
     sm: "4px 12px",
     md: "6px 16px",
     lg: "6px 20px",
     xl: "6px 24px",
+  },
+  Padding: {
+    xs: "4px",
+    sm: "6px",
+    md: "8px",
+    lg: "10px",
+    xl: "12px",
   },
 };

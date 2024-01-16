@@ -4,7 +4,7 @@ import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
 import { CheckedIcon, UnCheckedIcon } from "../svg";
 import { Color, ColorKey, SizeKey } from "../constants";
-import * as C from "./checkbox.styles";
+import * as S from "./checkbox.styles";
 import type { CheckboxProps } from "./checkbox.types";
 
 const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
@@ -29,8 +29,8 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
   ref: ForwardedRef<HTMLLabelElement>,
 ): ReactElement<CheckboxProps> {
   return (
-    <C.Label ref={ref} {...props} css={css} disabled={disabled} sizeType={size}>
-      <C.Input
+    <S.Label css={css} disabled={disabled} ref={ref} sizeType={size} {...props}>
+      <S.Input
         checked={checked}
         data-testid={testId}
         defaultChecked={defaultChecked}
@@ -49,8 +49,8 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
       ) : (
         <UnCheckedIcon color={Color.RGB[color]} size={size} />
       )}
-      {children}
-    </C.Label>
+      <S.Content sizeType={size}>{children}</S.Content>
+    </S.Label>
   );
 });
 

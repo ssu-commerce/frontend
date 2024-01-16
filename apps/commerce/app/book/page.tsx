@@ -2,17 +2,18 @@
 
 import Image from "next/image";
 import { Button, ColorKey, SizeKey, TextField, VariantKey } from "@sc/ui";
-import { MouseEvent, useState } from "react";
+import type { MouseEvent} from "react";
+import { useState } from "react";
 import Carousel from "component/carousel";
 import FilterIcon from "assets/svg/filter_icon.svg";
 import BigRoundIcon from "assets/svg/grid_big_round_icon.svg";
 import BiViewListIcon from "assets/svg/bi_view_list_icon.svg";
 import { Card } from "component/card";
 import { Pagination } from "component/pagination";
+import { BiView } from "component/biView";
 import { MOCK } from "../../mock/constants";
 import * as S from "./book.styles";
 import { ViewMode } from "./book.constants";
-import { BiView } from "component/biView";
 
 export const BookList = (): JSX.Element => {
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Around);
@@ -34,9 +35,9 @@ export const BookList = (): JSX.Element => {
           <S.ImageWrapper>
             <Image
               alt="banner1"
+              fill
               placeholder="empty"
               src="/assets/Banner.png"
-              fill
             />
           </S.ImageWrapper>
         </Carousel>
@@ -53,19 +54,19 @@ export const BookList = (): JSX.Element => {
           </Button>
           <Button
             color={ColorKey.Secondary}
+            onClick={changeViewMode}
             size={SizeKey.MD}
             startIcon={<BigRoundIcon />}
-            variant={VariantKey.Text}
             value={ViewMode.Around}
-            onClick={changeViewMode}
+            variant={VariantKey.Text}
           />
           <Button
             color={ColorKey.Secondary}
+            onClick={changeViewMode}
             size={SizeKey.MD}
             startIcon={<BiViewListIcon />}
             value={ViewMode.Bi}
             variant={VariantKey.Text}
-            onClick={changeViewMode}
           />
           <S.Status>Showing 1–16 of 32 results</S.Status>
           <S.Sort>
