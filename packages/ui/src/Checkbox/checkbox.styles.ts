@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import type { SizeKey } from "../constants";
 import { Size } from "../constants";
+import type { SizeKey  } from "../constants";
 
 export const Label = styled.label(
-  ({ sizeType, disabled }: { sizeType: SizeKey; disabled?: boolean }) => {
+  ({ disabled }: { sizeType: SizeKey; disabled?: boolean }) => {
     return css`
       display: inline-flex;
       text-align: center;
@@ -15,8 +15,6 @@ export const Label = styled.label(
       gap: 4px;
       border-radius: 4px;
       border: 0;
-      font-size: ${Size.FontSize[sizeType]};
-      line-height: ${Size.LineHeight[sizeType]};
 
       cursor: pointer;
       ${disabled && {
@@ -26,6 +24,13 @@ export const Label = styled.label(
     `;
   },
 );
+
+export const Content = styled.span(({ sizeType }: { sizeType: SizeKey }) => {
+  return css`
+    font-size: ${Size.FontSize[sizeType]};
+    line-height: ${Size.LineHeight[sizeType]};
+  `;
+});
 
 export const Input = styled.input`
   appearance: none;

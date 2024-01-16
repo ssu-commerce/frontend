@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import type { ForwardedRef, LegacyRef, ReactElement, ReactNode } from "react";
 import { ColorKey, SizeKey, VariantKey } from "../constants";
 import type { ButtonProps } from "./button.types";
-import * as C from "./button.style";
+import * as C from "./button.styles";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {

@@ -12,14 +12,6 @@ const MinWidth: Record<SizeKey, string> = {
   xl: "40px",
 };
 
-const Padding: Record<SizeKey, string> = {
-  xs: "4px",
-  sm: "6px",
-  md: "8px",
-  lg: "10px",
-  xl: "12px",
-};
-
 export const Button = styled.button(
   ({
     colorType,
@@ -34,13 +26,13 @@ export const Button = styled.button(
     disabled?: boolean;
     fullWidth?: boolean;
   }) => {
-    const [h, w] = Size.Padding[sizeType].split(" ");
+    const [h, w] = Size.RecPadding[sizeType].split(" ");
 
     let variantColor = {
       color: "#ffffff",
       backgroundColor: "transparent",
       border: "0",
-      padding: Size.Padding[sizeType],
+      padding: Size.RecPadding[sizeType],
     };
 
     switch (variantType) {
@@ -63,7 +55,7 @@ export const Button = styled.button(
         variantColor = {
           ...variantColor,
           color: Color.RGB[colorType],
-          padding: Padding[sizeType],
+          padding: Size.Padding[sizeType],
         };
         break;
       default:

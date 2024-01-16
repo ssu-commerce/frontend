@@ -78,7 +78,7 @@ export const TextInput = styled.input(
       border: 0;
       font-size: ${Size.FontSize[styleSize]};
       line-height: ${Size.LineHeight[styleSize]};
-      padding: ${Size.Padding[styleSize]};
+      padding: ${Size.RecPadding[styleSize]};
 
       background-color: transparent;
 

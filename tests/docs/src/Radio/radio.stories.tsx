@@ -3,12 +3,11 @@ import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import type { ReactElement } from "react";
 import { useState } from "react";
-import type { Size, Color } from "@sc/ui";
 import { ColorKey, SizeKey, Radio, RadioGroup } from "@sc/ui";
 
 const radioCompoundArgs = {
-  color: Object.values(ColorKey) as Color[],
-  size: Object.values(SizeKey) as Size[],
+  color: Object.values(ColorKey) as ColorKey[],
+  size: Object.values(SizeKey) as SizeKey[],
 };
 
 const meta = {

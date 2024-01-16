@@ -1,15 +1,17 @@
-export * from "./Button/button";
-export * from "./TextField/textfield";
-export * from "./Checkbox/checkbox";
-export * from "./Radio/radio";
-export * from "./Radio/radioGroup";
-export * from "./SVG";
+export * from "./button/button";
+export * from "./textfield/textfield";
+export * from "./checkbox/checkbox";
+export * from "./radio/radio";
+export * from "./radio/radioGroup";
+export * from "./switch/switch";
+export * from "./svg";
 
 export * from "./constants";
 
-export type * from "./Button/button.types";
-export type * from "./TextField/textfield.types";
-export type * from "./Checkbox/checkbox.types";
-export type * from "./Radio/radio.types";
-export type * from "./SVG";
+export type * from "./button/button.types";
+export type * from "./textfield/textfield.types";
+export type * from "./checkbox/checkbox.types";
+export type * from "./radio/radio.types";
+export type * from "./switch/switch.types";
+export type * from "./svg";
 export type * from "./types";

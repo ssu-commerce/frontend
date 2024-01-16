@@ -6,12 +6,12 @@
     "**/*.css"
   ],
   "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "types": "./dist/indes.d.ts"
-    },
-    "./style.css": "./dist/index.css"
+      "types": "./dist/index.d.ts"
+    }
   },
   "scripts": {
     "build": "tsup",
