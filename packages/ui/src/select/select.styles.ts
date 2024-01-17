@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { Color, ColorKey, Size, SizeKey } from "../constants";
+import type { ColorKey, SizeKey } from "../constants";
+import { Color, Size } from "../constants";
 import { hexToRgba } from "../utils";
 
 export const Wrapper = styled.div(() => {

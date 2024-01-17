@@ -8,6 +8,8 @@ export interface SelectItems {
   name: string;
 }
 
+export type SelectValue = string | readonly string[] | number;
+
 export type SelectProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
   Partial<{
     disabled: boolean;
@@ -15,22 +17,22 @@ export type SelectProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
     size: SizeKey;
     testId: string;
     placeholder: string;
-    onChange: (value: string | readonly string[] | number) => void;
+    onChange: (value: SelectValue) => void;
     required: boolean;
     name: string;
     children: ReactNode;
-    value: string | readonly string[] | number;
+    value: SelectValue;
     css: Interpolation<Theme>;
     items: SelectItems[];
   }>;
 
-export type SelectMenuProps = {
+export interface SelectMenuProps {
   items: SelectItems[];
   size: SizeKey;
   color: ColorKey;
-  onChange: (value: string | readonly string[] | number) => void;
+  onChange: (value: SelectValue) => void;
   close: () => void;
-  selectedItem: string | readonly string[] | number;
-};
+  selectedItem: SelectValue;
+}
 
 export type SelectStyleProps = keyof SelectProps & Action;

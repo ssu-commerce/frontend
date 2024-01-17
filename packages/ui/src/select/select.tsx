@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  ForwardedRef,
-  ReactElement,
-  forwardRef,
-  useRef,
-  useState,
-} from "react";
+import type { ForwardedRef, ReactElement } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { ColorKey, DirectionKey, SizeKey } from "../constants";
-import * as S from "./select.styles";
-import type { SelectMenuProps, SelectProps } from "./select.types";
 import { ArrowIcon } from "../svg";
+import * as S from "./select.styles";
+import type { SelectMenuProps, SelectProps, SelectValue } from "./select.types";
 
 export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
   {
@@ -30,11 +25,13 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
 ): ReactElement<SelectProps> {
   const [open, setOpen] = useState(false);
 
-  const [selectedItem, setSeletedItem] = useState<
-    string | readonly string[] | number
-  >(value);
+  const [selectedItem, setSeletedItem] = useState<SelectValue>(value);
 
-  const previewText = selectedItem ?? placeholder;
+  useEffect(() => {
+    if (value) setSeletedItem(value);
+  }, [value]);
+
+  const previewText = selectedItem === "" ? placeholder : selectedItem;
 
   const openMenu = () => {
     setOpen(true);
@@ -44,16 +41,14 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
     setOpen(false);
   };
 
-  const handleChangeSelectBox = (
-    value: string | readonly string[] | number,
-  ) => {
-    setSeletedItem(value);
-    onChange && onChange(value);
+  const handleChangeSelectBox = (selectedValue: SelectValue) => {
+    setSeletedItem(selectedValue);
+    if (typeof onChange === "function") onChange(selectedValue);
   };
 
   return (
     <S.Wrapper css={css}>
-      <S.Select colorKey={color} sizeKey={size} disabled={disabled}>
+      <S.Select colorKey={color} disabled={disabled} sizeKey={size}>
         <S.Preview sizeKey={size}>{previewText}</S.Preview>
         <S.Icon sizeKey={size}>
           <ArrowIcon
@@ -63,26 +58,26 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
         </S.Icon>
         <S.Input
           data-testid={testId}
+          defaultValue={selectedItem}
           disabled={disabled}
           name={name}
-          required={required}
-          defaultValue={selectedItem}
-          ref={ref}
           onClick={openMenu}
+          ref={ref}
+          required={required}
           type="text"
         />
       </S.Select>
 
-      {open && (
+      {open ? (
         <SelectMenu
-          items={items}
-          size={size}
-          color={color}
           close={closeMenu}
+          color={color}
+          items={items}
           onChange={handleChangeSelectBox}
           selectedItem={selectedItem}
+          size={size}
         />
-      )}
+      ) : null}
     </S.Wrapper>
   );
 });
@@ -97,7 +92,7 @@ export const SelectMenu = ({
 }: SelectMenuProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleClickItem = (value: string | readonly string[] | number) => {
+  const handleClickItem = (value: SelectValue) => {
     if (value !== selectedItem) onChange(value);
     close();
   };
@@ -114,11 +109,13 @@ export const SelectMenu = ({
           {items.map(({ value, name }) => {
             return (
               <S.ListItem
-                onClick={() => handleClickItem(value)}
-                key={value}
-                sizeKey={size}
-                colorKey={color}
                 active={value === selectedItem}
+                colorKey={color}
+                key={value}
+                onClick={() => {
+                  handleClickItem(value);
+                }}
+                sizeKey={size}
               >
                 {name}
               </S.ListItem>

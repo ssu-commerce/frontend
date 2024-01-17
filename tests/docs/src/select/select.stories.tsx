@@ -66,13 +66,15 @@ export const DefaultSelect: Story = {
     const $select = canvas.getByTestId("select");
     const $label = $select.closest("label");
     await expect($label).toBeInTheDocument();
-    await userEvent.click($label!);
-    if (selectCompoundArgs.items.length > 0) {
-      const item = selectCompoundArgs.items[0];
-      const $selectItem = canvas.getByText(item.name);
-      await expect($selectItem).toBeInTheDocument();
-      await userEvent.click($selectItem);
-      await expect($select).toHaveAttribute("value", item.value);
+    if ($label) {
+      await userEvent.click($label);
+      if (selectCompoundArgs.items.length > 0) {
+        const item = selectCompoundArgs.items[0];
+        const $selectItem = canvas.getByText(item.name);
+        await expect($selectItem).toBeInTheDocument();
+        await userEvent.click($selectItem);
+        await expect($select).toHaveAttribute("value", item.value);
+      }
     }
   },
   render: ({
@@ -85,9 +87,9 @@ export const DefaultSelect: Story = {
     return (
       <Select
         color={color}
+        items={selectCompoundArgs.items}
         size={size}
         testId="select"
-        items={selectCompoundArgs.items}
       />
     );
   },
@@ -140,9 +142,10 @@ export const StyleSelect: Story = {
                 </label>
                 <Select
                   color={color}
+                  disabled={disabled}
+                  items={selectCompoundArgs.items}
                   size={size}
                   testId="select"
-                  items={selectCompoundArgs.items}
                 />
               </li>
             ))}
@@ -165,27 +168,30 @@ export const MultiSelect: Story = {
   args: {
     color: ColorKey.Default,
     size: SizeKey.SM,
-    disabled: false,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
     const $hover = canvas.getByTestId("hover").closest("label");
     await expect($hover).toBeInTheDocument();
-    await userEvent.hover($hover!);
-    await expect($hover).toHaveStyle({ cursor: "pointer" });
+    if ($hover) {
+      await userEvent.hover($hover);
+      await expect($hover).toHaveStyle({ cursor: "pointer" });
+    }
 
     const $disabled = canvas.getByTestId("disabled").closest("label");
-    await expect($disabled).toBeInTheDocument();
-    await expect($disabled).toHaveStyle({
-      opacity: "0.3",
-      cursor: "not-allowed",
-    });
-    await userEvent.hover($disabled!);
-    await expect($disabled).toHaveStyle({
-      opacity: "0.3",
-      cursor: "not-allowed",
-    });
+    if ($disabled) {
+      await expect($disabled).toBeInTheDocument();
+      await expect($disabled).toHaveStyle({
+        opacity: "0.3",
+        cursor: "not-allowed",
+      });
+      await userEvent.hover($disabled);
+      await expect($disabled).toHaveStyle({
+        opacity: "0.3",
+        cursor: "not-allowed",
+      });
+    }
   },
   render: function Render({ color, size }): ReactElement {
     return (
@@ -193,18 +199,18 @@ export const MultiSelect: Story = {
         <li>
           <Select
             color={color}
+            items={selectCompoundArgs.items}
             size={size}
             testId="hover"
-            items={selectCompoundArgs.items}
           />
         </li>
         <li>
           <Select
             color={color}
+            disabled
+            items={selectCompoundArgs.items}
             size={size}
             testId="disabled"
-            items={selectCompoundArgs.items}
-            disabled
           />
         </li>
       </ul>

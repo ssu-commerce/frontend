@@ -41,5 +41,6 @@ module.exports = {
         some: ["nesting", "id"],
       },
     ],
+    "no-bitwise": ["error", { allow: ["~", "|", ">>", "<<", "&"] }],
   },
 };
