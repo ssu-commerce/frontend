@@ -1,29 +1,25 @@
 "use client";
 
-import { useState, type ReactElement } from "react";
+import { useState } from "react";
 import { ColorKey, SizeKey } from "../constants";
 import * as S from "./select.styles";
 import type { SelectProps } from "./select.types";
+import { Portal } from "../portal";
 
 export const Select = ({
-  checked = false,
-  defaultChecked,
   disabled = false,
   color = ColorKey.Default,
   size = SizeKey.SM,
-  inputProps,
   onChange,
   required,
   name,
-  id,
   testId,
   value,
-  children,
   css,
   placeholder,
-  item,
-  ...props
-}): ReactElement<SelectProps> => {
+  items = [],
+  portalId,
+}: SelectProps) => {
   const previewText = value ?? placeholder;
 
   const [open, setOpen] = useState(false);
@@ -32,30 +28,40 @@ export const Select = ({
     setOpen(!open);
   };
 
+  const handleChangeSelectBox = (value: string) => {
+    onChange && onChange(value);
+  };
+
   return (
-    <S.Wrapper css={css} disabled={disabled} {...props}>
-      <S.Select>
-        <S.Preview>{previewText}</S.Preview>
+    <S.Wrapper css={css} disabled={disabled}>
+      <S.Select onClick={handleClickSelectBox} colorKey={color} sizeKey={size}>
+        <S.Preview sizeKey={size}>{previewText}</S.Preview>
         <S.Input
           data-testid={testId}
-          defaultChecked={defaultChecked}
           disabled={disabled}
-          id={id}
           name={name}
-          onChange={onChange}
           required={required}
           value={value}
         />
       </S.Select>
 
       {open && (
-        <S.ListWrapper>
-          <S.ListBox>
-            {item.map(() => {
-              return <S.ListItem key={value}></S.ListItem>;
-            })}
-          </S.ListBox>
-        </S.ListWrapper>
+        <Portal selector={portalId}>
+          <S.ListWrapper>
+            <S.ListBox>
+              {items.map(({ value, name }) => {
+                return (
+                  <S.ListItem
+                    onClick={() => handleChangeSelectBox(value)}
+                    key={value}
+                  >
+                    {name}
+                  </S.ListItem>
+                );
+              })}
+            </S.ListBox>
+          </S.ListWrapper>
+        </Portal>
       )}
     </S.Wrapper>
   );

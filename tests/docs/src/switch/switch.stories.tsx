@@ -3,8 +3,8 @@ import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import type { ChangeEvent, ReactElement } from "react";
 import { Fragment, useState } from "react";
-import { ColorKey, SizeKey, Switch } from "@sc/ui";
 import { css } from "@emotion/react";
+import { ColorKey, SizeKey, Switch } from "@sc/ui";
 
 const switchCompoundArgs = {
   color: Object.values(ColorKey) as ColorKey[],
@@ -35,9 +35,6 @@ const meta = {
     size: {
       control: "switch",
       options: switchCompoundArgs.size,
-    },
-    placeholder: {
-      control: "text",
     },
   },
 } satisfies Meta<typeof Switch>;
