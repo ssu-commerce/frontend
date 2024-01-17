@@ -6,9 +6,9 @@ interface PortalProps {
   selector: string;
 }
 export const Portal = ({ children, selector }: PortalProps) => {
-  const element: HTMLElement | null = document.querySelector(selector);
+  const $element: HTMLElement | null = document.querySelector(selector);
 
-  return element && children
-    ? (createPortal(children, element) as ReactNode)
+  return $element && children
+    ? (createPortal(children, $element) as ReactNode)
     : null;
 };

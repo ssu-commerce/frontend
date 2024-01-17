@@ -6,6 +6,20 @@ import { ColorKey, SizeKey, Select } from "@sc/ui";
 const selectCompoundArgs = {
   color: Object.values(ColorKey) as ColorKey[],
   size: Object.values(SizeKey) as SizeKey[],
+  items: [
+    {
+      name: "item-1",
+      value: "item-1",
+    },
+    {
+      name: "item-2",
+      value: "item-2",
+    },
+    {
+      name: "item-3",
+      value: "item-3",
+    },
+  ],
 };
 
 const meta = {
@@ -33,22 +47,6 @@ const meta = {
     placeholder: {
       control: "text",
     },
-    items: {
-      values: [
-        {
-          name: "item-1",
-          value: "item-1",
-        },
-        {
-          name: "item-2",
-          value: "item-2",
-        },
-        {
-          name: "item-3",
-          value: "item-3",
-        },
-      ],
-    },
   },
 } satisfies Meta<typeof Select>;
 export default meta;
@@ -64,11 +62,21 @@ export const DefaultSelect: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const selectElement = canvas.getByTestId("select");
-    await userEvent.click(selectElement);
   },
-  render: ({ color, size }): ReactElement => {
+  render: ({
+    color,
+    size,
+  }: {
+    color: ColorKey;
+    size: SizeKey;
+  }): ReactElement => {
     return (
-      <Select portalId={"portal"} color={color} size={size} testId="select" />
+      <Select
+        color={color}
+        size={size}
+        testId="select"
+        items={selectCompoundArgs.items}
+      />
     );
   },
 };
