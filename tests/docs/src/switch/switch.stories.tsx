@@ -160,6 +160,7 @@ export const StyleSwitch: Story = {
                   disabled={disabled}
                   id={`${color}-${size}`}
                   size={size}
+                  onChange={() => {}}
                 >
                   switch
                 </Switch>
