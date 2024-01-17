@@ -1,4 +1,4 @@
-import { REGEX } from "../constants/regex";
+import { REGEX } from "../constants";
 
 export const calcPixel = (pixel: string, num: number): string => {
   if (REGEX.PIXEL.test(pixel)) {
@@ -6,4 +6,18 @@ export const calcPixel = (pixel: string, num: number): string => {
     return `${size + num}px`;
   }
   return pixel;
+};
+
+export const hexToRgba = (hex: string, opacity: number) => {
+  // Remove the hash if it exists
+  const hexValue = hex.replace(/^#/, "");
+
+  // Parse the hex values for red, green, and blue
+  const bigint = parseInt(hexValue, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+
+  // Return the RGBA string
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 };

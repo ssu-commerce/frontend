@@ -29,7 +29,7 @@ export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
 ): ReactElement<SwitchProps> {
   return (
     <S.Label css={css} disabled={disabled} ref={ref} {...props}>
-      <S.Switch sizeType={size}>
+      <S.Switch sizeKey={size}>
         <S.Input
           checked={checked}
           data-testid={testId}
@@ -44,10 +44,10 @@ export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
           value={value}
           {...inputProps}
         />
-        <S.Thumb checked={checked} colorType={color} sizeType={size} />
-        <S.Track checked={checked} colorType={color} sizeType={size} />
+        <S.Thumb checked={checked} colorKey={color} sizeKey={size} />
+        <S.Track checked={checked} colorKey={color} sizeKey={size} />
       </S.Switch>
-      {children ? <S.Content sizeType={size}>{children}</S.Content> : null}
+      {children ? <S.Content sizeKey={size}>{children}</S.Content> : null}
     </S.Label>
   );
 });

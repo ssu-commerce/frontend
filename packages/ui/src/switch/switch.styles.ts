@@ -16,24 +16,24 @@ export const Label = styled.label(({ disabled }: { disabled: boolean }) => {
   `;
 });
 
-export const Switch = styled.span(({ sizeType }: { sizeType: SizeKey }) => {
+export const Switch = styled.span(({ sizeKey }: { sizeKey: SizeKey }) => {
   return css`
     display: inline-flex;
     vertical-align: middle;
     overflow: hidden;
-    padding: ${Size.Padding[sizeType]};
+    padding: ${Size.Padding[sizeKey]};
     position: relative;
   `;
 });
 
 export const Thumb = styled.span(
   ({
-    sizeType,
-    colorType,
+    sizeKey,
+    colorKey,
     checked,
   }: {
-    sizeType: SizeKey;
-    colorType: ColorKey;
+    sizeKey: SizeKey;
+    colorKey: ColorKey;
     checked: boolean;
   }) => {
     return css`
@@ -43,9 +43,9 @@ export const Thumb = styled.span(
         0 2px 1px -1px rgba(0, 0, 0, 0.2),
         0 1px 1px 0 rgba(0, 0, 0, 0.14),
         0 1px 3px 0 rgba(0, 0, 0, 0.12);
-      width: ${Size.Pixel[sizeType]}px;
-      height: ${Size.Pixel[sizeType]}px;
-      background-color: ${checked ? Color.RGB[colorType] : "#ffffff"};
+      width: ${Size.Pixel[sizeKey]}px;
+      height: ${Size.Pixel[sizeKey]}px;
+      background-color: ${checked ? Color.Hex[colorKey] : "#ffffff"};
       position: absolute;
       top: 50%;
       left: ${checked ? 100 : 0}%;
@@ -59,28 +59,28 @@ export const Thumb = styled.span(
 
 export const Track = styled.span(
   ({
-    sizeType,
-    colorType,
+    sizeKey,
+    colorKey,
     checked,
   }: {
-    sizeType: SizeKey;
-    colorType: ColorKey;
+    sizeKey: SizeKey;
+    colorKey: ColorKey;
     checked: boolean;
   }) => {
     return css`
-      height: ${Size.Pixel[sizeType] - 6}px;
-      width: ${(Size.Pixel[sizeType] - 6) * 2.5}px;
-      background-color: ${checked ? Color.RGB[colorType] : "#000"};
+      height: ${Size.Pixel[sizeKey] - 6}px;
+      width: ${(Size.Pixel[sizeKey] - 6) * 2.5}px;
+      background-color: ${checked ? Color.Hex[colorKey] : "#000"};
       opacity: ${checked ? 0.5 : 0.38};
       border-radius: 100px;
     `;
   },
 );
 
-export const Content = styled.span(({ sizeType }: { sizeType: SizeKey }) => {
+export const Content = styled.span(({ sizeKey }: { sizeKey: SizeKey }) => {
   return css`
-    font-size: ${Size.FontSize[sizeType]};
-    line-height: ${Size.LineHeight[sizeType]};
+    font-size: ${Size.FontSize[sizeKey]};
+    line-height: ${Size.LineHeight[sizeKey]};
   `;
 });
 

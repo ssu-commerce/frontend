@@ -39,22 +39,22 @@ export const Button = styled.button(
       case VariantKey.Contained:
         variantColor = {
           ...variantColor,
-          backgroundColor: Color.RGB[colorType],
+          backgroundColor: Color.Hex[colorType],
         };
         break;
       case VariantKey.Outlined:
         variantColor = {
           ...variantColor,
           backgroundColor: "#ffffff",
-          color: Color.RGB[colorType],
-          border: `2px solid ${Color.RGB[colorType]}`,
+          color: Color.Hex[colorType],
+          border: `2px solid ${Color.Hex[colorType]}`,
           padding: `${calcPixel(h, -2)} ${calcPixel(w, -2)}`,
         };
         break;
       case VariantKey.Text:
         variantColor = {
           ...variantColor,
-          color: Color.RGB[colorType],
+          color: Color.Hex[colorType],
           padding: Size.Padding[sizeType],
         };
         break;
@@ -117,7 +117,7 @@ export const Icon = styled.span(
     height: ${Size.Pixel[sizeType]}px;
     & * {
       fill: ${
-        variantType === VariantKey.Contained ? "#ffffff" : Color.RGB[colorType]
+        variantType === VariantKey.Contained ? "#ffffff" : Color.Hex[colorType]
       }
     };
   `;

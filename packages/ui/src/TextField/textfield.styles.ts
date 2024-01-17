@@ -43,7 +43,7 @@ export const TextFieldWrapper = styled.div(
 
       &:focus-within {
         background-color: #ffffff;
-        border: 2px solid ${Color.RGB[color]};
+        border: 2px solid ${Color.Hex[color]};
       }
 
       &:has(input:disabled),

@@ -3,8 +3,8 @@ import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import type { ChangeEvent, ReactElement } from "react";
 import { Fragment, useState } from "react";
-import { ColorKey, SizeKey, Switch } from "@sc/ui";
 import { css } from "@emotion/react";
+import { ColorKey, SizeKey, Switch } from "@sc/ui";
 
 const switchCompoundArgs = {
   color: Object.values(ColorKey) as ColorKey[],
@@ -35,9 +35,6 @@ const meta = {
     size: {
       control: "switch",
       options: switchCompoundArgs.size,
-    },
-    placeholder: {
-      control: "text",
     },
   },
 } satisfies Meta<typeof Switch>;
@@ -116,63 +113,61 @@ export const StyleSwitch: Story = {
     disabled: false,
     checked: true,
   },
-  render: ({ disabled, checked }) => {
-    return (
-      <ul
-        css={css`
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          grid-column-gap: 8px;
-          grid-row-gap: 16px;
-          text-align: center;
-          align-items: center;
-          background-color: #fff;
-          background-image: linear-gradient(
-              90deg,
-              rgba(0, 0, 0, 0.03) 50%,
-              transparent 50%
-            ),
-            linear-gradient(rgba(0, 0, 0, 0.03) 50%, transparent 50%);
-          background-size: 10px 10px;
-          padding: 24px;
-        `}
-      >
-        {switchCompoundArgs.color.map((color) => (
-          <Fragment key={color}>
-            {switchCompoundArgs.size.map((size) => (
-              <li
+  render: ({ disabled, checked }) => (
+    <ul
+      css={css`
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 8px;
+        grid-row-gap: 16px;
+        text-align: center;
+        align-items: center;
+        background-color: #fff;
+        background-image: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.03) 50%,
+            transparent 50%
+          ),
+          linear-gradient(rgba(0, 0, 0, 0.03) 50%, transparent 50%);
+        background-size: 10px 10px;
+        padding: 24px;
+      `}
+    >
+      {switchCompoundArgs.color.map((color) => (
+        <Fragment key={color}>
+          {switchCompoundArgs.size.map((size) => (
+            <li
+              css={css`
+                display: flex;
+                gap: 4px;
+                flex-direction: column;
+              `}
+              key={color + size}
+            >
+              <label
                 css={css`
-                  display: flex;
-                  gap: 4px;
-                  flex-direction: column;
+                  font-size: 12px;
+                  display: block;
                 `}
-                key={color + size}
+                htmlFor={`${color}-${size}`}
               >
-                <label
-                  css={css`
-                    font-size: 12px;
-                    display: block;
-                  `}
-                  htmlFor={`${color}-${size}`}
-                >
-                  [{color} / {size}]
-                </label>
-                <Switch
-                  checked={checked}
-                  color={color}
-                  disabled={disabled}
-                  id={`${color}-${size}`}
-                  size={size}
-                >
-                  switch
-                </Switch>
-              </li>
-            ))}
-          </Fragment>
-        ))}
-      </ul>
-    );
-  },
+                [{color} / {size}]
+              </label>
+              <Switch
+                checked={checked}
+                color={color}
+                disabled={disabled}
+                id={`${color}-${size}`}
+                size={size}
+              >
+                switch
+              </Switch>
+            </li>
+          ))}
+        </Fragment>
+      ))}
+    </ul>
+  ),
   argTypes: {
     color: {
       control: false,
