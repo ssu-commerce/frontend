@@ -7,9 +7,10 @@ import {
   useRef,
   useState,
 } from "react";
-import { ColorKey, SizeKey } from "../constants";
+import { ColorKey, DirectionKey, SizeKey } from "../constants";
 import * as S from "./select.styles";
 import type { SelectMenuProps, SelectProps } from "./select.types";
+import { ArrowIcon } from "../svg";
 
 export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
   {
@@ -20,7 +21,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
     required,
     name,
     testId,
-    value,
+    value = "",
     css,
     placeholder,
     items = [],
@@ -29,11 +30,11 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
 ): ReactElement<SelectProps> {
   const [open, setOpen] = useState(false);
 
-  const [selected, setSeleted] = useState<
-    string | readonly string[] | number | undefined
+  const [selectedItem, setSeletedItem] = useState<
+    string | readonly string[] | number
   >(value);
 
-  const previewText = selected ?? placeholder;
+  const previewText = selectedItem ?? placeholder;
 
   const openMenu = () => {
     setOpen(true);
@@ -46,22 +47,29 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
   const handleChangeSelectBox = (
     value: string | readonly string[] | number,
   ) => {
+    setSeletedItem(value);
     onChange && onChange(value);
-    setSeleted(value);
   };
 
   return (
-    <S.Wrapper css={css} disabled={disabled}>
-      <S.Select colorKey={color} sizeKey={size}>
+    <S.Wrapper css={css}>
+      <S.Select colorKey={color} sizeKey={size} disabled={disabled}>
         <S.Preview sizeKey={size}>{previewText}</S.Preview>
+        <S.Icon sizeKey={size}>
+          <ArrowIcon
+            direction={open ? DirectionKey.Top : DirectionKey.Bottom}
+            size={size}
+          />
+        </S.Icon>
         <S.Input
           data-testid={testId}
           disabled={disabled}
           name={name}
           required={required}
-          value={value}
+          defaultValue={selectedItem}
           ref={ref}
           onClick={openMenu}
+          type="text"
         />
       </S.Select>
 
@@ -69,8 +77,10 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
         <SelectMenu
           items={items}
           size={size}
+          color={color}
           close={closeMenu}
-          onClick={handleChangeSelectBox}
+          onChange={handleChangeSelectBox}
+          selectedItem={selectedItem}
         />
       )}
     </S.Wrapper>
@@ -80,13 +90,15 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
 export const SelectMenu = ({
   items = [],
   size,
-  onClick,
+  color,
+  onChange,
   close,
+  selectedItem,
 }: SelectMenuProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const handleClickItem = (value: string | readonly string[] | number) => {
-    onClick(value);
+    if (value !== selectedItem) onChange(value);
     close();
   };
 
@@ -105,6 +117,8 @@ export const SelectMenu = ({
                 onClick={() => handleClickItem(value)}
                 key={value}
                 sizeKey={size}
+                colorKey={color}
+                active={value === selectedItem}
               >
                 {name}
               </S.ListItem>

@@ -45,9 +45,9 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
         {...inputProps}
       />
       {checked ? (
-        <CheckedIcon color={Color.RGB[color]} size={size} />
+        <CheckedIcon color={Color.Hex[color]} size={size} />
       ) : (
-        <UnCheckedIcon color={Color.RGB[color]} size={size} />
+        <UnCheckedIcon color={Color.Hex[color]} size={size} />
       )}
       <S.Content sizeType={size}>{children}</S.Content>
     </S.Label>

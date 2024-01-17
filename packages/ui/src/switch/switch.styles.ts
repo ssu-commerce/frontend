@@ -45,7 +45,7 @@ export const Thumb = styled.span(
         0 1px 3px 0 rgba(0, 0, 0, 0.12);
       width: ${Size.Pixel[sizeKey]}px;
       height: ${Size.Pixel[sizeKey]}px;
-      background-color: ${checked ? Color.RGB[colorKey] : "#ffffff"};
+      background-color: ${checked ? Color.Hex[colorKey] : "#ffffff"};
       position: absolute;
       top: 50%;
       left: ${checked ? 100 : 0}%;
@@ -70,7 +70,7 @@ export const Track = styled.span(
     return css`
       height: ${Size.Pixel[sizeKey] - 6}px;
       width: ${(Size.Pixel[sizeKey] - 6) * 2.5}px;
-      background-color: ${checked ? Color.RGB[colorKey] : "#000"};
+      background-color: ${checked ? Color.Hex[colorKey] : "#000"};
       opacity: ${checked ? 0.5 : 0.38};
       border-radius: 100px;
     `;

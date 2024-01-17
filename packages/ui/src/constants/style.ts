@@ -37,7 +37,7 @@ export const DirectionDegree: Record<DirectionKey, number> = {
 };
 
 export const Color = {
-  RGB: {
+  Hex: {
     default: "#ff6b01",
     primary: "#959a9d",
     secondary: "#24282b",

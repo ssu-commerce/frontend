@@ -27,8 +27,10 @@ export type SelectProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
 export type SelectMenuProps = {
   items: SelectItems[];
   size: SizeKey;
-  onClick: (value: string | readonly string[] | number) => void;
+  color: ColorKey;
+  onChange: (value: string | readonly string[] | number) => void;
   close: () => void;
+  selectedItem: string | readonly string[] | number;
 };
 
 export type SelectStyleProps = keyof SelectProps & Action;

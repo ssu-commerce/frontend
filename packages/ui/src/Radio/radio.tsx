@@ -47,9 +47,9 @@ const Radio = forwardRef<HTMLLabelElement, RadioProps>(function Radio(
         {...inputProps}
       />
       {isChecked ? (
-        <RadioCheckedIcon color={Color.RGB[color]} size={size} />
+        <RadioCheckedIcon color={Color.Hex[color]} size={size} />
       ) : (
-        <RadioUnCheckedIcon color={Color.RGB[color]} size={size} />
+        <RadioUnCheckedIcon color={Color.Hex[color]} size={size} />
       )}
 
       {children}
