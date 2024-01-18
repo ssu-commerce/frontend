@@ -14,48 +14,48 @@ const MinWidth: Record<SizeKey, string> = {
 
 export const Button = styled.button(
   ({
-    colorType,
-    sizeType,
-    variantType,
+    colorKey,
+    sizeKey,
+    variantKey,
     disabled,
     fullWidth,
   }: {
-    colorType: ColorKey;
-    sizeType: SizeKey;
-    variantType: VariantKey;
+    colorKey: ColorKey;
+    sizeKey: SizeKey;
+    variantKey: VariantKey;
     disabled?: boolean;
     fullWidth?: boolean;
   }) => {
-    const [h, w] = Size.RecPadding[sizeType].split(" ");
+    const [h, w] = Size.RecPadding[sizeKey].split(" ");
 
     let variantColor = {
       color: "#ffffff",
       backgroundColor: "transparent",
       border: "0",
-      padding: Size.RecPadding[sizeType],
+      padding: Size.RecPadding[sizeKey],
     };
 
-    switch (variantType) {
+    switch (variantKey) {
       case VariantKey.Contained:
         variantColor = {
           ...variantColor,
-          backgroundColor: Color.Hex[colorType],
+          backgroundColor: Color.Hex[colorKey],
         };
         break;
       case VariantKey.Outlined:
         variantColor = {
           ...variantColor,
           backgroundColor: "#ffffff",
-          color: Color.Hex[colorType],
-          border: `2px solid ${Color.Hex[colorType]}`,
+          color: Color.Hex[colorKey],
+          border: `2px solid ${Color.Hex[colorKey]}`,
           padding: `${calcPixel(h, -2)} ${calcPixel(w, -2)}`,
         };
         break;
       case VariantKey.Text:
         variantColor = {
           ...variantColor,
-          color: Color.Hex[colorType],
-          padding: Size.Padding[sizeType],
+          color: Color.Hex[colorKey],
+          padding: Size.Padding[sizeKey],
         };
         break;
       default:
@@ -70,9 +70,9 @@ export const Button = styled.button(
 
       gap: 8px;
       border-radius: 4px;
-      font-size: ${Size.FontSize[sizeType]};
-      line-height: ${Size.LineHeight[sizeType]};
-      min-width: ${MinWidth[sizeType]};
+      font-size: ${Size.FontSize[sizeKey]};
+      line-height: ${Size.LineHeight[sizeKey]};
+      min-width: ${MinWidth[sizeKey]};
       ${fullWidth && {
         width: "100%",
       }}
@@ -100,24 +100,24 @@ export const Anchor = Button.withComponent("a");
 
 export const Icon = styled.span(
   ({
-    colorType,
-    sizeType,
-    variantType,
+    colorKey,
+    sizeKey,
+    variantKey,
   }: {
-    colorType: ColorKey;
-    sizeType: SizeKey;
-    variantType: VariantKey;
+    colorKey: ColorKey;
+    sizeKey: SizeKey;
+    variantKey: VariantKey;
   }) => {
     return `
     display: flex;
     justify-content: center;
     alignitems: center;
-    background-colorType: transparent;
-    width: ${Size.Pixel[sizeType]}px;
-    height: ${Size.Pixel[sizeType]}px;
+    background-colorKey: transparent;
+    width: ${Size.Pixel[sizeKey]}px;
+    height: ${Size.Pixel[sizeKey]}px;
     & * {
       fill: ${
-        variantType === VariantKey.Contained ? "#ffffff" : Color.Hex[colorType]
+        variantKey === VariantKey.Contained ? "#ffffff" : Color.Hex[colorKey]
       }
     };
   `;

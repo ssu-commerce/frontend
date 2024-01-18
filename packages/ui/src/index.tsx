@@ -5,6 +5,7 @@ export * from "./radio";
 export * from "./select";
 export * from "./switch";
 export * from "./svg";
+export * from "./toggle";
 export * from "./constants";
 
 export type * from "./svg";

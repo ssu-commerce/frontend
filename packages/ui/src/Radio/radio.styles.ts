@@ -4,7 +4,7 @@ import type { SizeKey } from "../constants";
 import { Size } from "../constants";
 
 export const Label = styled.label(
-  ({ sizeType, disabled }: { sizeType: SizeKey; disabled?: boolean }) => {
+  ({ sizeKey, disabled }: { sizeKey: SizeKey; disabled?: boolean }) => {
     return css`
       display: inline-flex;
       text-align: center;
@@ -15,8 +15,8 @@ export const Label = styled.label(
       gap: 4px;
       border-radius: 4px;
       border: 0;
-      font-size: ${Size.FontSize[sizeType]};
-      line-height: ${Size.LineHeight[sizeType]};
+      font-size: ${Size.FontSize[sizeKey]};
+      line-height: ${Size.LineHeight[sizeKey]};
 
       cursor: pointer;
       ${disabled && {
@@ -32,7 +32,7 @@ export const Input = styled.input`
   position: absolute;
 `;
 
-export const GroupWrapper = styled.div`
+export const Group = styled.div`
   display: flex;
   gap: 8px;
 `;

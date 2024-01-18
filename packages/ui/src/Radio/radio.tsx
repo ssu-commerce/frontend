@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 import { RadioCheckedIcon, RadioUnCheckedIcon } from "../svg";
 import { Color, ColorKey, SizeKey } from "../constants";
 import type { RadioProps } from "./radio.types";
-import * as C from "./radio.styles";
+import * as S from "./radio.styles";
 
 const Radio = forwardRef<HTMLLabelElement, RadioProps>(function Radio(
   {
@@ -31,8 +31,8 @@ const Radio = forwardRef<HTMLLabelElement, RadioProps>(function Radio(
 ): ReactElement<RadioProps> {
   const isChecked = checked || selectedValue === value;
   return (
-    <C.Label css={css} disabled={disabled} ref={ref} sizeType={size} {...props}>
-      <C.Input
+    <S.Label css={css} disabled={disabled} ref={ref} sizeKey={size} {...props}>
+      <S.Input
         checked={isChecked}
         data-testid={testId}
         defaultChecked={defaultChecked}
@@ -53,7 +53,7 @@ const Radio = forwardRef<HTMLLabelElement, RadioProps>(function Radio(
       )}
 
       {children}
-    </C.Label>
+    </S.Label>
   );
 });
 
