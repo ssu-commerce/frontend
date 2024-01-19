@@ -27,13 +27,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   const childrenNode = (): ReactNode => (
     <>
       {startIcon ? (
-        <C.Icon colorType={color} sizeType={size} variantType={variant}>
+        <C.Icon colorKey={color} sizeKey={size} variantKey={variant}>
           {startIcon}
         </C.Icon>
       ) : null}
       {children}
       {endIcon ? (
-        <C.Icon colorType={color} sizeType={size} variantType={variant}>
+        <C.Icon colorKey={color} sizeKey={size} variantKey={variant}>
           {endIcon}
         </C.Icon>
       ) : null}
@@ -44,15 +44,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     return (
       <C.Anchor
         as="a"
-        colorType={color}
+        colorKey={color}
         css={css}
         data-testid={testId}
         fullWidth={fullWidth}
         href={href}
         ref={ref as LegacyRef<HTMLAnchorElement>}
-        sizeType={size}
+        sizeKey={size}
         target={target}
-        variantType={variant}
+        variantKey={variant}
         {...props}
       >
         {childrenNode()}
@@ -62,14 +62,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
 
   return (
     <C.Button
-      colorType={color}
+      colorKey={color}
       css={css}
       data-testid={testId}
       fullWidth={fullWidth}
       ref={ref}
-      sizeType={size}
+      sizeKey={size}
       type={type}
-      variantType={variant}
+      variantKey={variant}
       {...props}
     >
       {childrenNode()}

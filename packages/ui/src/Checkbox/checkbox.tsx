@@ -29,7 +29,7 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
   ref: ForwardedRef<HTMLLabelElement>,
 ): ReactElement<CheckboxProps> {
   return (
-    <S.Label css={css} disabled={disabled} ref={ref} sizeType={size} {...props}>
+    <S.Label css={css} disabled={disabled} ref={ref} sizeKey={size} {...props}>
       <S.Input
         checked={checked}
         data-testid={testId}
@@ -49,7 +49,7 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
       ) : (
         <UnCheckedIcon color={Color.Hex[color]} size={size} />
       )}
-      <S.Content sizeType={size}>{children}</S.Content>
+      <S.Content sizeKey={size}>{children}</S.Content>
     </S.Label>
   );
 });
