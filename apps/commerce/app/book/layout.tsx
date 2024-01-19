@@ -1,3 +1,5 @@
+"use client";
+
 import { Layout } from "component/common/layout";
 import { Metadata } from "next";
 import { ReactNode } from "react";

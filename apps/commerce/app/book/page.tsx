@@ -20,9 +20,9 @@ export const BookList = (): JSX.Element => {
     setCurrentPage(page);
   };
 
-  const changeViewMode = (e: MouseEvent<HTMLButtonElement>) => {
+  const changeViewMode = (e: MouseEvent) => {
     e.preventDefault();
-    const { value } = e.currentTarget;
+    const { value } = e.currentTarget as HTMLButtonElement;
     setViewMode(value as ViewMode);
   };
 
