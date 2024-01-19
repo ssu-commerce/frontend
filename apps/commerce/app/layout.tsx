@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Layout from "component/layout";
 import StyledJsxProvider from "./emotion";
 import { ThemeProvider } from "./theme";
 import styled from "./root.module.css";
@@ -19,9 +18,7 @@ export const RootLayout = ({
       <head />
       <body className={styled.body} suppressHydrationWarning>
         <StyledJsxProvider>
-          <ThemeProvider>
-            <Layout>{children}</Layout>
-          </ThemeProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </StyledJsxProvider>
         <div id="portal" />
       </body>

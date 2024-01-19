@@ -45,3 +45,13 @@ export const Item = styled.li`
 export const Main = styled.main``;
 
 export const Footer = styled.footer``;
+
+export const SlideSection = styled.section`
+  height: 300px;
+  width: auto;
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+  height: 300px;
+`;
