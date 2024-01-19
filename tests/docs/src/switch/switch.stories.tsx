@@ -23,7 +23,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     color: {
-      control: "switch",
+      control: "radio",
       options: switchCompoundArgs.color,
     },
     disabled: {
@@ -33,7 +33,7 @@ const meta = {
       control: "boolean",
     },
     size: {
-      control: "switch",
+      control: "radio",
       options: switchCompoundArgs.size,
     },
   },

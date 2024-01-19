@@ -1,6 +1,6 @@
 import { ToggleButtonProps } from "./toggle.types";
-import * as S from "./toggle.styles";
 import { ColorKey, SizeKey } from "../constants";
+import * as S from "./toggle.styles";
 
 export const ToggleButton = ({
   css,
