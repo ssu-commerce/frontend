@@ -1,12 +1,17 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Color, ColorKey, Size, SizeKey } from "../constants";
+import type { ColorKey, SizeKey } from "../constants";
+import { Color, Size } from "../constants";
 import { hexToRgba } from "../utils";
+
+export const ActiveOpacity = 0.08;
 
 export const Group = styled.div`
   display: inline-flex;
   gap: 1px;
   border-radius: 4px;
+  background-color: #ffffff;
+  width: fit-content;
 `;
 
 export const Button = styled.button(
@@ -21,7 +26,7 @@ export const Button = styled.button(
     colorKey: ColorKey;
     sizeKey: SizeKey;
   }) => {
-    const activeOpacity = active ? 0.08 : 0;
+    const activeOpacity = active ? ActiveOpacity : 0;
     return css`
       display: inline-flex;
       justify-content: center;

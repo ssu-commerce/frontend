@@ -1,10 +1,10 @@
-import { RadioGroup } from "../radio";
-import { ToggleValue, ToggleGroupProps } from "./toggle.types";
-import * as S from "./toggle.styles";
-import { ColorKey, SizeKey } from "../constants";
+import type { FC } from "react";
 import { Children, cloneElement, useState } from "react";
+import { ColorKey, SizeKey } from "../constants";
+import type { ToggleValue, ToggleGroupProps } from "./toggle.types";
+import * as S from "./toggle.styles";
 
-export const ToggleGroup = ({
+export const ToggleGroup: FC<ToggleGroupProps> = ({
   css,
   onChange,
   size = SizeKey.MD,
@@ -12,8 +12,7 @@ export const ToggleGroup = ({
   children = [],
   exclusive,
   value = [],
-  ...args
-}: ToggleGroupProps) => {
+}) => {
   const [toggleItems, setToggleItems] = useState<ToggleValue[]>(value);
 
   const handleClickItem = (selectedValue: string | readonly string[]) => {
@@ -42,7 +41,6 @@ export const ToggleGroup = ({
           itemList: toggleItems,
           size,
           color,
-          ...args,
         }),
       )}
     </S.Group>

@@ -31,7 +31,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
     if (value) setSeletedItem(value);
   }, [value]);
 
-  const previewText = selectedItem === "" ? placeholder : selectedItem;
+  const previewText = !selectedItem ? placeholder : selectedItem;
 
   const openMenu = () => {
     setOpen(true);
