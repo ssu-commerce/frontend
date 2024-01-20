@@ -42,7 +42,10 @@ export const Item = styled.li`
   line-height: 24px;
 `;
 
-export const Main = styled.main``;
+export const Main = styled.main`
+  height: 100%;
+  padding: 32px;
+`;
 
 export const Footer = styled.footer``;
 

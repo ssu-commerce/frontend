@@ -3,7 +3,7 @@
 import { Layout } from "component/common/layout";
 import { ReactNode } from "react";
 
-export const BookLayout = ({ children }: { children: ReactNode }) => {
+export const SignInLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Layout.Header />
@@ -14,4 +14,4 @@ export const BookLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default BookLayout;
+export default SignInLayout;

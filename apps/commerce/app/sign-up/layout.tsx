@@ -1,10 +1,9 @@
 "use client";
 
 import { Layout } from "component/common/layout";
-import { Metadata } from "next";
 import { ReactNode } from "react";
 
-export const LoginLayout = ({ children }: { children: ReactNode }) => {
+export const SignUpLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Layout.Header />
@@ -15,4 +14,4 @@ export const LoginLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default LoginLayout;
+export default SignUpLayout;
