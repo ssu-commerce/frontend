@@ -28,17 +28,12 @@ export const Title = styled.h3`
   line-height: normal;
 `;
 
-export const SignUpForm = styled.form`
-  display: block;
-  width: fit-content;
-  margin-top: 24px;
-`;
-
 export const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 300px;
   gap: 16px;
+  margin-top: 24px;
 `;
 
 export const Label = styled.label`
@@ -50,6 +45,13 @@ export const Label = styled.label`
   font-family: Poppins;
   font-size: 18px;
   font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+`;
+
+export const AlertText = styled.p`
+  color: #dc2626;
+  font-size: 20px;
   font-weight: 600;
   line-height: 24px;
 `;

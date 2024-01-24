@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import StyledJsxProvider from "./emotion";
-import { ThemeProvider } from "./theme";
+import StyledJsxProvider from "provider/emotion";
+import { ThemeProvider } from "provider/theme";
 import styled from "./root.module.css";
+import { ReactQueryProvider } from "provider/reactQuery";
 
 export const metadata: Metadata = {
   title: "Create Turborepo",
@@ -17,10 +18,14 @@ export const RootLayout = ({
     <html lang="ko">
       <head />
       <body className={styled.body} suppressHydrationWarning>
-        <StyledJsxProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </StyledJsxProvider>
-        <div id="portal" />
+        <ReactQueryProvider>
+          <StyledJsxProvider>
+            <ThemeProvider>
+              {children}
+              <div id="portal" />
+            </ThemeProvider>
+          </StyledJsxProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
