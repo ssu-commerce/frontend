@@ -3,38 +3,74 @@
 import { Button, Checkbox, SizeKey, TextField, VariantKey } from "@sc/ui";
 import * as S from "./signIn.styles";
 import { css } from "@emotion/react";
-import { FormEvent } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useSignInMutation } from "api/sign/signIn";
 
 export const SignInPage = () => {
+  const [remember, setRemember] = useState(false);
+  const [account, setAccount] = useState({
+    id: "",
+    password: "",
+  });
+
+  const { mutate: postSignIn } = useSignInMutation();
+
   const handleSubmitSignIn = (e: FormEvent) => {
     e.preventDefault();
+    if (!!account.id && !!account.password) {
+      postSignIn({
+        id: account.id,
+        password: account.password,
+      });
+    }
+  };
+
+  const handleClickRemember = (e: ChangeEvent<HTMLInputElement>) => {
+    setRemember(!remember);
+  };
+
+  const handleChangeAccount = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setAccount({
+      ...account,
+      [name]: value,
+    });
   };
 
   return (
     <S.Container>
       <S.SignInBox>
         <S.Title>Sign In</S.Title>
-        <S.SignInForm onSubmit={handleSubmitSignIn}>
+        <S.SignInForm>
           <S.TextBox>
             <TextField
-              type="id"
+              type="email"
+              name="id"
               placeholder="ID"
               size={SizeKey.MD}
               required
               inputProps={{
-                autoComplete: "username",
+                autoComplete: "none",
               }}
+              onChange={handleChangeAccount}
             />
             <TextField
               type="password"
+              name="password"
               placeholder="PASSWORD"
               size={SizeKey.MD}
               required
-              inputProps={{ autoComplete: "new-password" }}
+              inputProps={{
+                autoComplete: "none",
+              }}
+              onChange={handleChangeAccount}
             />
           </S.TextBox>
           <S.AddonBox>
-            <Checkbox>remember</Checkbox>
+            <Checkbox checked={remember} onChange={handleClickRemember}>
+              remember
+            </Checkbox>
             <Button
               href="/sign-find"
               variant={VariantKey.Text}
@@ -52,20 +88,21 @@ export const SignInPage = () => {
               margin-top: 16px;
             `}
             size={SizeKey.LG}
+            onClick={handleSubmitSignIn}
           >
             Sign In
           </Button>
         </S.SignInForm>
-        <Button
-          href="/sign-up"
-          variant={VariantKey.Text}
-          fullWidth
-          css={css`
-            margin-top: 16px;
-          `}
-        >
-          Sign Up
-        </Button>
+        <S.SubmitBox>
+          <Button
+            href="/sign-up"
+            variant={VariantKey.Text}
+            fullWidth
+            onClick={handleSubmitSignIn}
+          >
+            Sign Up
+          </Button>
+        </S.SubmitBox>
       </S.SignInBox>
     </S.Container>
   );

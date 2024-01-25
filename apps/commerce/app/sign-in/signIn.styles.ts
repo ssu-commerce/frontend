@@ -38,3 +38,7 @@ export const AddonBox = styled.div`
   justify-content: space-between;
   margin-top: 8px;
 `;
+
+export const SubmitBox = styled.div`
+  margin-top: 16px;
+`;

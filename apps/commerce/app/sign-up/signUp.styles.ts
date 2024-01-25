@@ -13,7 +13,7 @@ export const CompanyName = styled.h2`
   line-height: normal;
 `;
 
-export const SignUpBox = styled.div`
+export const SignUpBox = styled.form`
   margin: auto;
   width: fit-content;
   align-items: center;
@@ -51,7 +51,12 @@ export const Label = styled.label`
 
 export const AlertText = styled.p`
   color: #dc2626;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 20px;
+  height: 20px;
+`;
+
+export const SubmitBox = styled.div`
+  margin-top: 16px;
 `;

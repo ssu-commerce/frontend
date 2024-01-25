@@ -1,10 +1,9 @@
 "use client";
 
-import { Button, SizeKey, TextField, VariantKey } from "@sc/ui";
+import { Button, SizeKey, TextField } from "@sc/ui";
 import * as S from "./signUp.styles";
-import { css } from "@emotion/react";
-import { ChangeEvent, useState } from "react";
-import { useSignInMutation } from "api/signUp";
+import { useSignUpMutation } from "api/sign/signUp";
+import { useState, ChangeEvent } from "react";
 
 interface SignInAccount {
   id: string;
@@ -18,7 +17,7 @@ export const SignUpPage = () => {
     password: "",
     rePassword: "",
   });
-  const { mutate } = useSignInMutation();
+  const { mutate: postSignUp } = useSignUpMutation();
 
   const alertCondition = {
     rePassword:
@@ -26,7 +25,6 @@ export const SignUpPage = () => {
       account.rePassword !== "" &&
       account.password !== account.rePassword,
   };
-
   const handleChangeAccount = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -36,14 +34,13 @@ export const SignUpPage = () => {
     });
   };
 
-  const handleSubmitSignUp = async () => {
+  const handleSubmitSignUp = () => {
     if (
       account.password === account.rePassword &&
       !!account.id &&
       !!account.password
     ) {
-      console.log("mute");
-      await mutate({
+      postSignUp({
         id: account.id,
         password: account.password,
       });
@@ -58,12 +55,12 @@ export const SignUpPage = () => {
           <S.Label>
             ID
             <TextField
-              type="id"
+              type="email"
               name="id"
               placeholder="ID"
               size={SizeKey.MD}
               required
-              inputProps={{ autoComplete: "none" }}
+              inputProps={{ autoComplete: "username" }}
               onChange={handleChangeAccount}
             />
           </S.Label>
@@ -76,7 +73,7 @@ export const SignUpPage = () => {
               size={SizeKey.MD}
               required
               inputProps={{
-                autoComplete: "none",
+                autoComplete: "new-password",
               }}
               onChange={handleChangeAccount}
             />
@@ -90,25 +87,20 @@ export const SignUpPage = () => {
               size={SizeKey.MD}
               required
               inputProps={{
-                autoComplete: "none",
+                autoComplete: "new-password",
               }}
               onChange={handleChangeAccount}
             />
           </S.Label>
-          {alertCondition.rePassword && (
-            <S.AlertText>비밀번호가 일치하지 않습니다.</S.AlertText>
-          )}
+          <S.AlertText>
+            {alertCondition.rePassword ? "비밀번호가 일치하지 않습니다." : ""}
+          </S.AlertText>
         </S.TextBox>
-        <Button
-          css={css`
-            margin-top: 16px;
-          `}
-          fullWidth
-          size={SizeKey.LG}
-          onClick={handleSubmitSignUp}
-        >
-          SignUp
-        </Button>
+        <S.SubmitBox>
+          <Button fullWidth size={SizeKey.LG} onClick={handleSubmitSignUp}>
+            Sign Up
+          </Button>
+        </S.SubmitBox>
       </S.SignUpBox>
     </S.Container>
   );
