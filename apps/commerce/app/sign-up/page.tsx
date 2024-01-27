@@ -1,9 +1,10 @@
 "use client";
 
 import { Button, SizeKey, TextField } from "@sc/ui";
-import * as S from "./signUp.styles";
+import type { ChangeEvent } from "react";
+import { useState } from "react";
 import { useSignUpMutation } from "api/sign/signUp";
-import { useState, ChangeEvent } from "react";
+import * as S from "./signUp.styles";
 
 interface SignInAccount {
   id: string;
@@ -37,8 +38,8 @@ export const SignUpPage = () => {
   const handleSubmitSignUp = () => {
     if (
       account.password === account.rePassword &&
-      !!account.id &&
-      !!account.password
+      Boolean(account.id) &&
+      Boolean(account.password)
     ) {
       postSignUp({
         id: account.id,
@@ -55,41 +56,41 @@ export const SignUpPage = () => {
           <S.Label>
             ID
             <TextField
-              type="email"
-              name="id"
-              placeholder="ID"
-              size={SizeKey.MD}
-              required
               inputProps={{ autoComplete: "username" }}
+              name="id"
               onChange={handleChangeAccount}
+              placeholder="ID"
+              required
+              size={SizeKey.MD}
+              type="email"
             />
           </S.Label>
           <S.Label>
             Password
             <TextField
-              type="password"
-              name="password"
-              placeholder="PASSWORD"
-              size={SizeKey.MD}
-              required
               inputProps={{
                 autoComplete: "new-password",
               }}
+              name="password"
               onChange={handleChangeAccount}
+              placeholder="PASSWORD"
+              required
+              size={SizeKey.MD}
+              type="password"
             />
           </S.Label>
           <S.Label>
             Confirm
             <TextField
-              type="password"
-              name="rePassword"
-              placeholder="CONFIRM PASSWORD"
-              size={SizeKey.MD}
-              required
               inputProps={{
                 autoComplete: "new-password",
               }}
+              name="rePassword"
               onChange={handleChangeAccount}
+              placeholder="CONFIRM PASSWORD"
+              required
+              size={SizeKey.MD}
+              type="password"
             />
           </S.Label>
           <S.AlertText>
@@ -97,7 +98,7 @@ export const SignUpPage = () => {
           </S.AlertText>
         </S.TextBox>
         <S.SubmitBox>
-          <Button fullWidth size={SizeKey.LG} onClick={handleSubmitSignUp}>
+          <Button fullWidth onClick={handleSubmitSignUp} size={SizeKey.LG}>
             Sign Up
           </Button>
         </S.SubmitBox>

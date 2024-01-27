@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import StyledJsxProvider from "provider/emotion";
 import { ThemeProvider } from "provider/theme";
-import styled from "./root.module.css";
 import { ReactQueryProvider } from "provider/reactQuery";
+import styled from "./root.module.css";
 
 export const metadata: Metadata = {
   title: "Create Turborepo",
