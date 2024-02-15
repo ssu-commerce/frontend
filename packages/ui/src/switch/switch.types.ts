@@ -24,6 +24,7 @@ export type SwitchProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
     name: string;
     children: ReactNode;
     value: string | readonly string[] | number;
+    loading: boolean;
     css: Interpolation<Theme>;
   }>;
 

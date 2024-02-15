@@ -41,5 +41,15 @@ module.exports = {
   rules: {
     "import/no-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        cases: {
+          camelCase: true,
+          pascalCase: true,
+          kebabCase: true,
+        },
+      },
+    ],
   },
 };

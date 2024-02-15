@@ -1,6 +1,3 @@
-"use client";
-
-import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
 import { CheckedIcon, UnCheckedIcon } from "../svg";
 import { Color, ColorKey, SizeKey } from "../constants";
@@ -11,7 +8,7 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
   {
     checked,
     defaultChecked,
-    disabled,
+    disabled = false,
     color = ColorKey.Default,
     size = SizeKey.SM,
     inputRef,
@@ -24,10 +21,16 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
     value,
     children,
     css,
+    loading = false,
     ...props
   },
-  ref: ForwardedRef<HTMLLabelElement>,
-): ReactElement<CheckboxProps> {
+  ref,
+) {
+  if (loading)
+    return (
+      <S.Loading data-testid={testId} disabled={disabled} sizeKey={size} />
+    );
+
   return (
     <S.Label css={css} disabled={disabled} ref={ref} sizeKey={size} {...props}>
       <S.Input
@@ -44,12 +47,14 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
         value={value}
         {...inputProps}
       />
-      {checked ? (
-        <CheckedIcon color={Color.Hex[color]} size={size} />
-      ) : (
-        <UnCheckedIcon color={Color.Hex[color]} size={size} />
-      )}
-      <S.Content sizeKey={size}>{children}</S.Content>
+      <>
+        {checked ? (
+          <CheckedIcon color={Color.Hex[color]} size={size} />
+        ) : (
+          <UnCheckedIcon color={Color.Hex[color]} size={size} />
+        )}
+        <S.Content sizeKey={size}>{children}</S.Content>
+      </>
     </S.Label>
   );
 });

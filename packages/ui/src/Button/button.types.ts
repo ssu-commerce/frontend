@@ -19,6 +19,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     variant: VariantKey;
     testId: string;
     css: Interpolation<Theme>;
+    loading: boolean;
   }>;
 
 export type ButtonStyleProps = keyof ButtonProps & Action;

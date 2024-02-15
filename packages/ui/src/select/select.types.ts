@@ -24,6 +24,7 @@ export type SelectProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
     value: SelectValue;
     css: Interpolation<Theme>;
     items: SelectItems[];
+    loading: boolean;
   }>;
 
 export interface SelectMenuProps {

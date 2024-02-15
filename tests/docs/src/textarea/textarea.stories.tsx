@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { ColorKey, VariantKey, SizeKey, TextArea } from "@sc/ui";
 import { css } from "@emotion/react";
 
-const textFieldCompoundArgs = {
+const TextAreaCompoundArgs = {
   color: Object.values(ColorKey) as ColorKey[],
   variant: Object.values(VariantKey) as VariantKey[],
   size: Object.values(SizeKey) as SizeKey[],
@@ -24,14 +24,14 @@ const meta = {
   argTypes: {
     color: {
       control: "radio",
-      options: textFieldCompoundArgs.color,
+      options: TextAreaCompoundArgs.color,
     },
     disabled: {
       control: "boolean",
     },
     size: {
       control: "radio",
-      options: textFieldCompoundArgs.size,
+      options: TextAreaCompoundArgs.size,
     },
     placeholder: {
       control: "text",
@@ -52,12 +52,11 @@ export const DefaultTextArea: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const textField = canvas.getByPlaceholderText("placeholder");
-    // await waitFor(async () => {
-    await userEvent.type(textField, "input text");
-    await expect(textField.tagName).toBe("TEXTAREA");
-    await expect(textField).toHaveValue("input text");
-    // });
+
+    const $textarea = canvas.getByPlaceholderText("placeholder");
+    await userEvent.type($textarea, "input text");
+    await expect($textarea.tagName).toBe("TEXTAREA");
+    await expect($textarea).toHaveValue("input text");
   },
   render: (args) => {
     return <TextArea {...args} />;
@@ -86,9 +85,9 @@ export const StyleTextArea: Story = {
           padding: 24px;
         `}
       >
-        {textFieldCompoundArgs.color.map((color) => (
+        {TextAreaCompoundArgs.color.map((color) => (
           <Fragment key={color}>
-            {textFieldCompoundArgs.size.map((size) => (
+            {TextAreaCompoundArgs.size.map((size) => (
               <li key={color + size}>
                 <label
                   css={css`
@@ -115,7 +114,7 @@ export const StyleTextArea: Story = {
   },
 };
 
-export const ActionTextArea: Story = {
+export const MultiTextArea: Story = {
   args: {
     color: ColorKey.Default,
     size: SizeKey.SM,
@@ -124,28 +123,29 @@ export const ActionTextArea: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // hover
-    const hover = canvas.getByPlaceholderText("hover");
-    await userEvent.hover(hover);
-    await expect(hover).toBeInTheDocument();
-    await expect(hover).toHaveStyle({ cursor: "text" });
+    const $loading = canvas.getByTestId("loading");
+    await expect($loading).toBeInTheDocument();
+    await expect($loading).toHaveStyle({ backgroundColor: ColorKey.Loading });
 
-    // disabled
-    const disabled = canvas.getByPlaceholderText("disabled");
-    await expect(disabled).toBeInTheDocument();
-    await expect(disabled.closest("div")).toHaveStyle({
+    const $hover = canvas.getByPlaceholderText("hover");
+    await userEvent.hover($hover);
+    await expect($hover).toBeInTheDocument();
+    await expect($hover).toHaveStyle({ cursor: "text" });
+
+    const $disabled = canvas.getByPlaceholderText("disabled");
+    await expect($disabled).toBeInTheDocument();
+    await expect($disabled.closest("div")).toHaveStyle({
       opacity: "0.3",
       cursor: "not-allowed",
     });
     await waitFor(async () => {
-      await userEvent.type(disabled, "input text");
-      await expect(disabled).toHaveValue("");
+      await userEvent.type($disabled, "input text");
+      await expect($disabled).toHaveValue("");
     });
 
-    // fullWidth
-    const fullWidth = canvas.getByPlaceholderText("fullWidth");
-    await expect(fullWidth).toBeInTheDocument();
-    await expect(fullWidth.closest("div")).toHaveStyle({ width: "200px" });
+    const $fullWidth = canvas.getByPlaceholderText("fullWidth");
+    await expect($fullWidth).toBeInTheDocument();
+    await expect($fullWidth.closest("div")).toHaveStyle({ width: "200px" });
   },
   render: ({ color, size }) => {
     return (
@@ -162,6 +162,9 @@ export const ActionTextArea: Story = {
           }
         `}
       >
+        <li>
+          <TextArea loading multiline placeholder="loading" testId="loading" />
+        </li>
         <li>
           <TextArea color={color} placeholder="hover" size={size} />
         </li>

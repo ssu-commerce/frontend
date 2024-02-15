@@ -52,11 +52,11 @@ export const DefaultTextField: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const textField = canvas.getByPlaceholderText("placeholder");
+    const $textField = canvas.getByPlaceholderText("placeholder");
     await waitFor(async () => {
-      await userEvent.type(textField, "input text");
-      await expect(textField.tagName).toBe("INPUT");
-      await expect(textField).toHaveValue("input text");
+      await userEvent.type($textField, "input text");
+      await expect($textField.tagName).toBe("INPUT");
+      await expect($textField).toHaveValue("input text");
     });
   },
   render: (args) => {
@@ -115,7 +115,7 @@ export const StyleTextField: Story = {
   },
 };
 
-export const ActionTextField: Story = {
+export const MultiTextField: Story = {
   args: {
     color: ColorKey.Default,
     size: SizeKey.SM,
@@ -124,28 +124,29 @@ export const ActionTextField: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // hover
-    const hover = canvas.getByPlaceholderText("hover");
-    await userEvent.hover(hover);
-    await expect(hover).toBeInTheDocument();
-    await expect(hover).toHaveStyle({ cursor: "text" });
+    const $loading = canvas.getByTestId("loading");
+    await expect($loading).toBeInTheDocument();
+    await expect($loading).toHaveStyle({ backgroundColor: ColorKey.Loading });
 
-    // disabled
-    const disabled = canvas.getByPlaceholderText("disabled");
-    await expect(disabled).toBeInTheDocument();
-    await expect(disabled.closest("div")).toHaveStyle({
+    const $hover = canvas.getByPlaceholderText("hover");
+    await userEvent.hover($hover);
+    await expect($hover).toBeInTheDocument();
+    await expect($hover).toHaveStyle({ cursor: "text" });
+
+    const $disabled = canvas.getByPlaceholderText("disabled");
+    await expect($disabled).toBeInTheDocument();
+    await expect($disabled.closest("div")).toHaveStyle({
       opacity: "0.3",
       cursor: "not-allowed",
     });
     await waitFor(async () => {
-      await userEvent.type(disabled, "input text");
-      await expect(disabled).toHaveValue("");
+      await userEvent.type($disabled, "input text");
+      await expect($disabled).toHaveValue("");
     });
 
-    // fullWidth
-    const fullWidth = canvas.getByPlaceholderText("fullWidth");
-    await expect(fullWidth).toBeInTheDocument();
-    await expect(fullWidth.closest("div")).toHaveStyle({ width: "200px" });
+    const $fullWidth = canvas.getByPlaceholderText("fullWidth");
+    await expect($fullWidth).toBeInTheDocument();
+    await expect($fullWidth.closest("div")).toHaveStyle({ width: "200px" });
   },
   render: ({ color, size }) => {
     return (
@@ -162,6 +163,9 @@ export const ActionTextField: Story = {
           }
         `}
       >
+        <li>
+          <TextField loading placeholder="loading" testId="loading" />
+        </li>
         <li>
           <TextField color={color} placeholder="hover" size={size} />
         </li>

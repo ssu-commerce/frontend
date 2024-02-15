@@ -25,4 +25,5 @@ export type ToggleGroupProps = Partial<{
   css: Interpolation<Theme>;
   exclusive: boolean;
   value: ToggleValue[];
+  loading: boolean;
 }>;

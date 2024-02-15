@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import type { ColorKey, SizeKey } from "../constants";
-import { Color, Size } from "../constants";
+import { Color, CustomKeyframe, Size } from "../constants";
 import { hexToRgba } from "../utils";
 
 export const Wrapper = styled.div(() => {
@@ -153,3 +153,14 @@ export const Dimmed = styled.div`
   width: 100vw;
   height: 100vh;
 `;
+
+export const Loading = styled(Wrapper)(({ sizeKey }: { sizeKey: SizeKey }) => {
+  return css`
+    width: 100%;
+    min-height: ${Size.RecHeight[sizeKey]};
+    background-color: ${Color.Hex.Loading};
+    animation: ${CustomKeyframe.Loading} 2s ease-in-out 0.5s infinite;
+    cursor: auto;
+    border-radius: 4px;
+  `;
+});

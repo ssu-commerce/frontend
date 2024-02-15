@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
-import type { ChangeEvent, ReactElement } from "react";
-import { Fragment, useState } from "react";
+import type { ReactElement } from "react";
+import { Fragment } from "react";
 import { css } from "@emotion/react";
 import { ColorKey, SizeKey, Switch } from "@sc/ui";
+import * as C from "./switch";
 
 const switchCompoundArgs = {
   color: Object.values(ColorKey) as ColorKey[],
@@ -42,21 +43,6 @@ export default meta;
 
 type Story = StoryObj<typeof Switch>;
 
-const DefaultSwitchWrapper = ({ children, ...args }): ReactElement => {
-  const [checked, setChecked] = useState(false);
-  return (
-    <Switch
-      checked={checked}
-      onChange={() => {
-        setChecked(!checked);
-      }}
-      {...args}
-    >
-      {children}
-    </Switch>
-  );
-};
-
 export const DefaultSwitch: Story = {
   args: {
     color: ColorKey.Default,
@@ -66,46 +52,14 @@ export const DefaultSwitch: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const switchElement = canvas.getByRole<HTMLInputElement>("checkbox");
-    await userEvent.click(switchElement);
-    await expect(switchElement.checked).toBe(true);
+
+    const $switch = canvas.getByRole<HTMLInputElement>("checkbox");
+    await userEvent.click($switch);
+    await expect($switch.checked).toBe(true);
   },
   render: ({ children, ...args }): ReactElement => {
-    return <DefaultSwitchWrapper {...args}>{children}</DefaultSwitchWrapper>;
+    return <C.DefaultSwitch {...args}>{children}</C.DefaultSwitch>;
   },
-};
-
-const MultiSwitchWrapper = (args): ReactElement => {
-  const [checked, setChecked] = useState<string[]>([]);
-  const switchList = ["switch-1", "switch-2", "disabled"];
-
-  const handleChangeCheck = (e: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = e.target;
-    if (checked.includes(value))
-      setChecked(checked.filter((checkValue) => checkValue !== value));
-    else setChecked([...checked, value]);
-  };
-
-  return (
-    <ul>
-      {switchList.map((value) => {
-        return (
-          <li key={value}>
-            <Switch
-              {...args}
-              checked={checked.includes(value)}
-              disabled={value === "disabled"}
-              onChange={handleChangeCheck}
-              testId={value}
-              value={value}
-            >
-              {value}
-            </Switch>
-          </li>
-        );
-      })}
-    </ul>
-  );
 };
 
 export const StyleSwitch: Story = {
@@ -187,19 +141,24 @@ export const MultiSwitch: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const switch1 = canvas.getByTestId<HTMLInputElement>("switch-1");
-    const switch2 = canvas.getByTestId<HTMLInputElement>("switch-2");
-    const disabled = canvas.getByTestId<HTMLInputElement>("disabled");
 
-    await userEvent.click(switch1);
-    await userEvent.click(switch2);
-    await userEvent.click(disabled);
+    const $loading = canvas.getByTestId("loading");
+    await expect($loading).toBeInTheDocument();
+    await expect($loading).toHaveStyle({ backgroundColor: ColorKey.Loading });
 
-    await expect(switch1.checked).toBe(true);
-    await expect(switch2.checked).toBe(true);
-    await expect(disabled.checked).toBe(false);
+    const $switch1 = canvas.getByTestId<HTMLInputElement>("switch-1");
+    await userEvent.click($switch1);
+    await expect($switch1.checked).toBe(true);
+
+    const $switch2 = canvas.getByTestId<HTMLInputElement>("switch-2");
+    await userEvent.click($switch2);
+    await expect($switch2.checked).toBe(true);
+
+    const $disabled = canvas.getByTestId<HTMLInputElement>("disabled");
+    await userEvent.click($disabled);
+    await expect($disabled.checked).toBe(false);
   },
   render: function Render(args): ReactElement {
-    return <MultiSwitchWrapper {...args} />;
+    return <C.MultiSwitch {...args} />;
   },
 };

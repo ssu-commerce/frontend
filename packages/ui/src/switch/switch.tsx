@@ -22,11 +22,17 @@ export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
     testId,
     value,
     children,
+    loading,
     css,
     ...props
   },
   ref: ForwardedRef<HTMLLabelElement>,
 ): ReactElement<SwitchProps> {
+  if (loading)
+    return (
+      <S.Loading data-testid={testId} disabled={disabled} sizeKey={size} />
+    );
+
   return (
     <S.Label css={css} disabled={disabled} ref={ref} {...props}>
       <S.Switch sizeKey={size}>
@@ -38,6 +44,7 @@ export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
           id={id}
           name={name}
           onChange={onChange}
+          readOnly={!onChange}
           ref={inputRef}
           required={required}
           type="checkbox"

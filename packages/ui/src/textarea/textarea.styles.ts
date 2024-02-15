@@ -1,7 +1,9 @@
+"use client";
+
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import type { ColorKey, SizeKey } from "../constants";
-import { Color, Size } from "../constants";
+import { Color, CustomKeyframe, Size } from "../constants";
 
 const MinWidth: Record<SizeKey, string> = {
   xs: "24px",
@@ -13,12 +15,12 @@ const MinWidth: Record<SizeKey, string> = {
 
 export const TextAreaWrapper = styled.div(
   ({
-    color,
-    size,
+    colorKey,
+    sizeKey,
     fullWidth,
   }: {
-    color: ColorKey;
-    size: SizeKey;
+    colorKey: ColorKey;
+    sizeKey: SizeKey;
     disabled?: boolean;
     fullWidth?: boolean;
   }) => {
@@ -33,7 +35,7 @@ export const TextAreaWrapper = styled.div(
       border-radius: 4px;
       border: 2px solid #e2e8f9;
       height: fit-content;
-      min-width: ${MinWidth[size]};
+      min-width: ${MinWidth[sizeKey]};
       cursor: pointer;
 
       background-color: #f1f5f9;
@@ -43,7 +45,7 @@ export const TextAreaWrapper = styled.div(
 
       &:focus-within {
         background-color: #ffffff;
-        border: 2px solid ${Color.Hex[color]};
+        border: 2px solid ${Color.Hex[colorKey]};
       }
 
       &:has(input:disabled),
@@ -69,25 +71,23 @@ export const TextareaWrapper = styled(TextAreaWrapper)(() => {
   `;
 });
 
-export const TextArea = styled.textarea(
-  ({ styleSize }: { styleSize: SizeKey }) => {
-    return css`
-      width: 100%;
-      outline: none;
-      resize: none;
-      border: 0;
-      font-size: ${Size.FontSize[styleSize]};
-      line-height: ${Size.LineHeight[styleSize]};
-      padding: ${Size.RecPadding[styleSize]};
+export const TextArea = styled.textarea(({ sizeKey }: { sizeKey: SizeKey }) => {
+  return css`
+    width: 100%;
+    outline: none;
+    resize: none;
+    border: 0;
+    font-size: ${Size.FontSize[sizeKey]};
+    line-height: ${Size.LineHeight[sizeKey]};
+    padding: ${Size.RecPadding[sizeKey]};
 
-      background-color: transparent;
+    background-color: transparent;
 
-      &:disabled {
-        cursor: not-allowed;
-      }
-    `;
-  },
-);
+    &:disabled {
+      cursor: not-allowed;
+    }
+  `;
+});
 
 export const HiddenTextarea = styled.textarea(() => {
   return css`
@@ -95,5 +95,23 @@ export const HiddenTextarea = styled.textarea(() => {
     height: fit-content;
     position: absolute;
     inset: 0;
+  `;
+});
+
+export const Loading = styled(TextAreaWrapper)(({
+  sizeKey,
+}: {
+  sizeKey: SizeKey;
+}) => {
+  return css`
+    width: 100%;
+    min-height: ${Size.RecHeight[sizeKey]};
+    background-color: ${Color.Hex.Loading};
+    animation: ${CustomKeyframe.Loading} 2s ease-in-out 0.5s infinite;
+    cursor: auto;
+    border: 0;
+    &:hover {
+      background-color: ${Color.Hex.Loading};
+    }
   `;
 });

@@ -3,6 +3,6 @@
   "include": [".", "styles.d.ts"],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
-    "jsxImportSource": "@emotion/react"
-  }
+    "jsxImportSource": "@emotion/react",
+  },
 }

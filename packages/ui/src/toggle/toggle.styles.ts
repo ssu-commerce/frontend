@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import type { ColorKey, SizeKey } from "../constants";
-import { Color, Size } from "../constants";
+import { Color, CustomKeyframe, Size } from "../constants";
 import { hexToRgba } from "../utils";
 
 export const ActiveOpacity = 0.08;
@@ -79,3 +79,13 @@ export const Button = styled.button(
     `;
   },
 );
+
+export const Loading = styled(Group)(({ sizeKey }: { sizeKey: SizeKey }) => {
+  return css`
+    width: 100%;
+    min-height: ${Size.RecHeight[sizeKey]};
+    background-color: ${Color.Hex.Loading};
+    animation: ${CustomKeyframe.Loading} 2s ease-in-out 0.5s infinite;
+    cursor: auto;
+  `;
+});

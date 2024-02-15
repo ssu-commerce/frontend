@@ -27,6 +27,7 @@ export type TextFieldProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> &
     value: string | readonly string[] | number;
     testId: string;
     id: string;
+    loading: boolean;
     css: Interpolation<Theme>;
   }>;
 

@@ -12,6 +12,8 @@ export const ToggleGroup: FC<ToggleGroupProps> = ({
   children = [],
   exclusive,
   value = [],
+  loading,
+  testId,
 }) => {
   const [toggleItems, setToggleItems] = useState<ToggleValue[]>(value);
 
@@ -32,6 +34,8 @@ export const ToggleGroup: FC<ToggleGroupProps> = ({
       }
     }
   };
+
+  if (loading) return <S.Loading data-testid={testId} sizeKey={size} />;
 
   return (
     <S.Group css={css}>

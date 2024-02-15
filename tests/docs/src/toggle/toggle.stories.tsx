@@ -4,7 +4,7 @@ import { expect } from "@storybook/jest";
 import { Fragment, type ReactElement } from "react";
 import { ActiveOpacity, Color, ColorKey, SizeKey, hexToRgba } from "@sc/ui";
 import { css } from "@emotion/react";
-import { BaseToggle } from "./toggle";
+import * as C from "./toggle";
 
 const toggleCompoundArgs = {
   color: Object.values(ColorKey) as ColorKey[],
@@ -30,7 +30,7 @@ const toggleCompoundArgs = {
 
 const meta = {
   title: "UI/Toggle",
-  component: BaseToggle,
+  component: C.BaseToggle,
   parameters: {
     layout: "centered",
     variants: {
@@ -51,12 +51,12 @@ const meta = {
       control: "boolean",
     },
   },
-} satisfies Meta<typeof BaseToggle>;
+} satisfies Meta<typeof C.BaseToggle>;
 export default meta;
 
-type Story = StoryObj<typeof BaseToggle>;
+type Story = StoryObj<typeof C.BaseToggle>;
 
-export const DefaultToggle: Story = {
+export const BaseToggle: Story = {
   args: {
     color: ColorKey.Default,
     size: SizeKey.SM,
@@ -64,9 +64,10 @@ export const DefaultToggle: Story = {
   },
   play: async ({ canvasElement, initialArgs }) => {
     const canvas = within(canvasElement);
-    const toggleElement = canvas.getByText<HTMLButtonElement>("item-1");
-    await userEvent.click(toggleElement);
-    await expect(toggleElement).toHaveStyle({
+
+    const $toggle = canvas.getByText<HTMLButtonElement>("item-1");
+    await userEvent.click($toggle);
+    await expect($toggle).toHaveStyle({
       "background-color": hexToRgba(
         Color.Hex[initialArgs.color],
         ActiveOpacity,
@@ -75,7 +76,7 @@ export const DefaultToggle: Story = {
   },
   render: ({ color, size, disabled }): ReactElement => {
     return (
-      <BaseToggle
+      <C.BaseToggle
         color={color}
         disabled={disabled}
         items={toggleCompoundArgs.items}
@@ -129,7 +130,7 @@ export const StyleToggle: Story = {
               >
                 [{color} / {size}]
               </label>
-              <BaseToggle
+              <C.BaseToggle
                 color={color}
                 disabled={disabled}
                 items={toggleCompoundArgs.items}
@@ -151,7 +152,7 @@ export const StyleToggle: Story = {
   },
 };
 
-export const ActiveToggle: Story = {
+export const MultiToggle: Story = {
   args: {
     color: ColorKey.Default,
     size: SizeKey.SM,
@@ -159,32 +160,60 @@ export const ActiveToggle: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const $toggleHover = canvas.getByText<HTMLButtonElement>("item-1");
-    const $toggleDisabled = canvas.getByText<HTMLButtonElement>("item-4");
 
-    await userEvent.click($toggleDisabled);
-    await expect($toggleDisabled).toHaveStyle({
+    const $loading = canvas.getByTestId("loading");
+    await expect($loading).toBeInTheDocument();
+    await expect($loading).toHaveStyle({ backgroundColor: ColorKey.Loading });
+
+    const $hover = canvas.getByText<HTMLButtonElement>("item-1");
+    await userEvent.hover($hover);
+    await expect($hover).toHaveStyle({ cursor: "pointer" });
+
+    const $disabled = canvas.getByText<HTMLButtonElement>("item-4");
+    await userEvent.click($disabled);
+    await expect($disabled).toHaveStyle({
       opacity: "0.3",
     });
-
-    await userEvent.hover($toggleHover);
-    await expect($toggleHover).toHaveStyle({ cursor: "pointer" });
   },
   render: function Render({ color, size, disabled }): ReactElement {
     return (
-      <BaseToggle
-        color={color}
-        disabled={disabled}
-        items={[
-          ...toggleCompoundArgs.items,
-          {
-            name: "item-4",
-            value: "item-4",
-            disabled: true,
-          },
-        ]}
-        size={size}
-      />
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        `}
+      >
+        <C.BaseToggle
+          color={color}
+          disabled={disabled}
+          items={[
+            ...toggleCompoundArgs.items,
+            {
+              name: "item-4",
+              value: "item-4",
+              disabled: true,
+            },
+          ]}
+          loading
+          size={size}
+          testId="loading"
+        />
+        <C.BaseToggle
+          color={color}
+          disabled={disabled}
+          items={[
+            ...toggleCompoundArgs.items,
+            {
+              name: "item-4",
+              value: "item-4",
+              disabled: true,
+            },
+          ]}
+          size={size}
+          testId="loading"
+        />
+      </div>
     );
   },
 };

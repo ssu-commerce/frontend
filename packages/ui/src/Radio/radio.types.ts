@@ -26,6 +26,7 @@ export type RadioProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
     children: ReactNode;
     value: string | readonly string[] | number;
     selectedValue: string | readonly string[] | number;
+    loading: boolean;
     css: Interpolation<Theme>;
   }>;
 
