@@ -1,5 +1,3 @@
-"use client";
-
 import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { ColorKey, DirectionKey, SizeKey } from "../constants";
@@ -31,8 +29,6 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
     if (value) setSeletedItem(value);
   }, [value]);
 
-  const previewText = !selectedItem ? placeholder : selectedItem;
-
   const openMenu = () => {
     setOpen(true);
   };
@@ -49,7 +45,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
   return (
     <S.Wrapper css={css}>
       <S.Select colorKey={color} disabled={disabled} sizeKey={size}>
-        <S.Preview sizeKey={size}>{previewText}</S.Preview>
+        <S.Preview sizeKey={size}>{selectedItem || placeholder}</S.Preview>
         <S.Icon sizeKey={size}>
           <ArrowIcon
             direction={open ? DirectionKey.Top : DirectionKey.Bottom}

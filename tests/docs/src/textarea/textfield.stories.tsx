@@ -2,7 +2,7 @@ import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { Fragment } from "react";
-import { ColorKey, VariantKey, SizeKey, TextArea } from "@sc/ui";
+import { ColorKey, VariantKey, SizeKey, TextField } from "@sc/ui";
 import { css } from "@emotion/react";
 
 const textFieldCompoundArgs = {
@@ -12,8 +12,8 @@ const textFieldCompoundArgs = {
 };
 
 const meta = {
-  title: "UI/TextArea",
-  component: TextArea,
+  title: "UI/TextField",
+  component: TextField,
   parameters: {
     layout: "centered",
     variants: {
@@ -37,13 +37,13 @@ const meta = {
       control: "text",
     },
   },
-} satisfies Meta<typeof TextArea>;
+} satisfies Meta<typeof TextField>;
 
 export default meta;
 
-type Story = StoryObj<typeof TextArea>;
+type Story = StoryObj<typeof TextField>;
 
-export const DefaultTextArea: Story = {
+export const DefaultTextField: Story = {
   args: {
     color: ColorKey.Default,
     size: SizeKey.SM,
@@ -53,18 +53,18 @@ export const DefaultTextArea: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const textField = canvas.getByPlaceholderText("placeholder");
-    // await waitFor(async () => {
-    await userEvent.type(textField, "input text");
-    await expect(textField.tagName).toBe("TEXTAREA");
-    await expect(textField).toHaveValue("input text");
-    // });
+    await waitFor(async () => {
+      await userEvent.type(textField, "input text");
+      await expect(textField.tagName).toBe("INPUT");
+      await expect(textField).toHaveValue("input text");
+    });
   },
   render: (args) => {
-    return <TextArea {...args} />;
+    return <TextField {...args} />;
   },
 };
 
-export const StyleTextArea: Story = {
+export const StyleTextField: Story = {
   render: ({ disabled }) => {
     return (
       <ul
@@ -99,7 +99,7 @@ export const StyleTextArea: Story = {
                 >
                   [{color} / {size}]
                 </label>
-                <TextArea
+                <TextField
                   color={color}
                   disabled={disabled}
                   id={`${color}-${size}`}
@@ -115,7 +115,7 @@ export const StyleTextArea: Story = {
   },
 };
 
-export const ActionTextArea: Story = {
+export const ActionTextField: Story = {
   args: {
     color: ColorKey.Default,
     size: SizeKey.SM,
@@ -163,112 +163,22 @@ export const ActionTextArea: Story = {
         `}
       >
         <li>
-          <TextArea color={color} placeholder="hover" size={size} />
+          <TextField color={color} placeholder="hover" size={size} />
         </li>
         <li>
-          <TextArea color={color} disabled placeholder="disabled" size={size} />
+          <TextField
+            color={color}
+            disabled
+            placeholder="disabled"
+            size={size}
+          />
         </li>
         <li>
-          <TextArea
+          <TextField
             color={color}
             fullWidth
             placeholder="fullWidth"
             size={size}
-          />
-        </li>
-      </ul>
-    );
-  },
-};
-
-export const MultilineTextArea: Story = {
-  args: {
-    color: ColorKey.Default,
-    size: SizeKey.SM,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // multiline;
-    const multiline = canvas.getByPlaceholderText("multiline");
-    await waitFor(async () => {
-      await userEvent.type(multiline, "textarea");
-      await expect(multiline.tagName).toBe("TEXTAREA");
-      await expect(multiline).toHaveValue("textarea");
-    });
-
-    // disabled
-    const disabled = canvas.getByPlaceholderText("disabled");
-    await expect(disabled).toBeInTheDocument();
-    await expect(disabled.closest("div")).toHaveStyle({
-      opacity: "0.3",
-      cursor: "not-allowed",
-    });
-    await waitFor(async () => {
-      await userEvent.type(disabled, "input text");
-      await expect(disabled).toHaveValue("");
-    });
-
-    // rows
-    const rows = canvas.getByPlaceholderText("rows");
-    await userEvent.type(rows, "textarea");
-    await expect(rows).toHaveAttribute("rows");
-
-    // max-min-rows
-    const maxMinRows = canvas.getByPlaceholderText("max-min-rows");
-    await expect(maxMinRows).toHaveStyle({ height: "68px" });
-    /**
-     * TODO: waitFor 안에 type을 넣어야만 onChange 속 함수들이 정상적으로 동작합니다 why?
-     *
-     * TODO: waitFor 속 type; expect를 조합 시 type의 타이핑이 중복으로 되는 현상이 있습니다.
-     *
-     * @example
-     * ```typescript
-     *    await waitFor(async () =>  {
-     *      await userEvent.type(maxMinRows, "maxRowsMinRows ");
-     *      await expect(maxMinRows).toHaveStyle("height: 56px");
-     *    })
-     * ```
-     */
-    await waitFor(async () => {
-      await userEvent.type(
-        maxMinRows,
-        "maxRows-minRows\nmaxRows-minRows\nmaxRows-minRows\nmaxRows-minRows\nmaxRows-minRows\nmaxRows-minRows\nmaxRows-minRows",
-      );
-      await expect(maxMinRows).toHaveStyle("height: 108px");
-    });
-  },
-  render: (args) => {
-    return (
-      <ul
-        css={css`
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-          width: 200px;
-          & li {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-          }
-        `}
-      >
-        <li>
-          <TextArea multiline placeholder="multiline" {...args} />
-        </li>
-        <li>
-          <TextArea disabled placeholder="disabled" {...args} />
-        </li>
-        <li>
-          <TextArea multiline placeholder="rows" rows={3} {...args} />
-        </li>
-        <li>
-          <TextArea
-            maxRows={5}
-            minRows={3}
-            multiline
-            placeholder="max-min-rows"
-            {...args}
           />
         </li>
       </ul>

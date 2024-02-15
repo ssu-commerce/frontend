@@ -1,33 +1,36 @@
 import type {
   ChangeEvent,
   HTMLAttributes,
-  HTMLInputTypeAttribute,
-  InputHTMLAttributes,
   RefObject,
+  TextareaHTMLAttributes,
 } from "react";
 import type { Interpolation, Theme } from "@emotion/react";
 import type { Action } from "../types";
 import type { ColorKey, SizeKey } from "../constants";
 
-export type TextFieldProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> &
+export type TextAreaProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> &
   Partial<{
+    autoFocus: boolean;
     color: ColorKey;
     defaultValue: string | readonly string[] | number;
     disabled: boolean;
     error: boolean;
     fullWidth: boolean;
-    inputProps: InputHTMLAttributes<HTMLInputElement>;
-    inputRef: RefObject<HTMLInputElement>;
+    inputProps: TextareaHTMLAttributes<HTMLTextAreaElement>;
+    inputRef: RefObject<HTMLTextAreaElement>;
+    maxRows: number;
+    minRows: number;
+    multiline: boolean;
     name: string;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
     placeholder: string;
     required: boolean;
+    rows: number;
     size: SizeKey;
-    type: HTMLInputTypeAttribute;
     value: string | readonly string[] | number;
     testId: string;
     id: string;
     css: Interpolation<Theme>;
   }>;
 
-export type TextFieldStyleProps = keyof TextFieldProps & Action;
+export type TextAreaStyleProps = keyof TextAreaProps & Action;

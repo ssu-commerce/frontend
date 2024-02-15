@@ -6,15 +6,16 @@
       "app/*": ["./app/*"],
       "component/*": ["./component/*"],
       "api/*": ["./api/*"],
-      "assets/*": ["./public/assets/*"]
-    }
+      "provider/*": ["./provider/*"],
+      "assets/*": ["./public/assets/*"],
+    },
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "global.d.ts"
+    "global.d.ts",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

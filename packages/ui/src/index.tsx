@@ -1,5 +1,6 @@
 export * from "./button";
 export * from "./textfield";
+export * from "./textarea";
 export * from "./checkbox";
 export * from "./radio";
 export * from "./select";
