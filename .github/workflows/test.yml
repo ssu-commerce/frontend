@@ -1,0 +1,16 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - main
+      - "!releases/**"
+    types: [opened, reopened]
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm test

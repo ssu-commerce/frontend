@@ -15,9 +15,9 @@ chore: about build or deploy(not changes code)
 
 ## Detailed Description
 
-
 ## mention
-@always0ne
+
+@osydoo @HamInKyou
 
 Resolves: #
 See also: #
