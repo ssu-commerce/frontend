@@ -1,4 +1,3 @@
-import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { ColorKey, DirectionKey, SizeKey } from "../constants";
 import { ArrowIcon } from "../svg";
@@ -18,9 +17,10 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
     css,
     placeholder,
     items = [],
-  }: SelectProps,
-  ref: ForwardedRef<HTMLInputElement>,
-): ReactElement<SelectProps> {
+    loading,
+  },
+  ref,
+) {
   const [open, setOpen] = useState(false);
 
   const [selectedItem, setSeletedItem] = useState<SelectValue>(value);
@@ -41,6 +41,8 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
     setSeletedItem(selectedValue);
     if (typeof onChange === "function") onChange(selectedValue);
   };
+
+  if (loading) return <S.Loading data-testid={testId} sizeKey={size} />;
 
   return (
     <S.Wrapper css={css}>

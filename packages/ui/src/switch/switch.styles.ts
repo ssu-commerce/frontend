@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import type { ColorKey, SizeKey } from "../constants";
-import { Color, Size } from "../constants";
+import { Color, CustomKeyframe, Size } from "../constants";
 
 export const Label = styled.label(({ disabled }: { disabled: boolean }) => {
   return css`
@@ -92,3 +92,14 @@ export const Input = styled.input`
   bottom: 0;
   appearance: none;
 `;
+
+export const Loading = styled(Label)(({ sizeKey }: { sizeKey: SizeKey }) => {
+  return css`
+    border-radius: 4px;
+    width: 100%;
+    min-height: ${Size.RecHeight[sizeKey]};
+    background-color: ${Color.Hex.Loading};
+    animation: ${CustomKeyframe.Loading} 2s ease-in-out 0.5s infinite;
+    cursor: auto;
+  `;
+});

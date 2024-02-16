@@ -1,4 +1,4 @@
-import type { ColorKey, SizeKey} from "@sc/ui";
+import type { ColorKey, SizeKey } from "@sc/ui";
 import { Toggle } from "@sc/ui";
 import { useState } from "react";
 
@@ -7,11 +7,15 @@ export const BaseToggle = ({
   color,
   size,
   disabled,
+  testId,
+  loading,
 }: {
   items: { name: string; value: string; disabled: boolean }[];
   color: ColorKey;
   size: SizeKey;
   disabled: boolean;
+  testId?: string;
+  loading?: boolean;
 }) => {
   const [selectValue, setSelectValue] = useState<string[]>([items[1].value]);
   const handleChange = (value: string[]) => {
@@ -20,8 +24,10 @@ export const BaseToggle = ({
   return (
     <Toggle.Group
       color={color}
+      loading={loading}
       onChange={handleChange}
       size={size}
+      testId={testId}
       value={selectValue}
     >
       {items.map(({ name, value, disabled: disabledItem }) => {

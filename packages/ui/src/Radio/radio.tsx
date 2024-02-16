@@ -1,6 +1,3 @@
-"use client";
-
-import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
 import { RadioCheckedIcon, RadioUnCheckedIcon } from "../svg";
 import { Color, ColorKey, SizeKey } from "../constants";
@@ -24,14 +21,18 @@ const Radio = forwardRef<HTMLLabelElement, RadioProps>(function Radio(
     children,
     selectedValue,
     value,
-    css,
+    loading,
     ...props
   },
-  ref: ForwardedRef<HTMLLabelElement>,
-): ReactElement<RadioProps> {
+  ref,
+) {
   const isChecked = checked || selectedValue === value;
+
+  if (loading)
+    return <S.Loading data-testid={testId} sizeKey={size} {...props} />;
+
   return (
-    <S.Label css={css} disabled={disabled} ref={ref} sizeKey={size} {...props}>
+    <S.Label disabled={disabled} ref={ref} sizeKey={size} {...props}>
       <S.Input
         checked={isChecked}
         data-testid={testId}

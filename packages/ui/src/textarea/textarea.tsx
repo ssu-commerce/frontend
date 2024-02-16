@@ -1,8 +1,10 @@
+"use client";
+
 import type { ChangeEvent, ForwardedRef, ReactElement } from "react";
 import { forwardRef, useEffect, useRef } from "react";
 import { ColorKey, SizeKey } from "../constants";
 import type { TextAreaProps } from "./textarea.types";
-import * as C from "./textarea.styles";
+import * as S from "./textarea.styles";
 
 const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(function TextArea(
   {
@@ -25,6 +27,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(function TextArea(
     value,
     testId,
     id,
+    loading,
     css,
     ...props
   }: TextAreaProps,
@@ -63,16 +66,26 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(function TextArea(
     }
   }, [autoFocus, inputRef]);
 
+  if (loading)
+    return (
+      <S.Loading
+        colorKey={color}
+        data-testid={testId}
+        disabled={disabled}
+        sizeKey={size}
+      />
+    );
+
   return (
-    <C.TextareaWrapper
-      color={color}
+    <S.TextareaWrapper
+      colorKey={color}
       css={css}
       fullWidth={fullWidth}
       ref={ref}
-      size={size}
+      sizeKey={size}
       {...props}
     >
-      <C.TextArea
+      <S.TextArea
         css={{
           height: "auto",
         }}
@@ -86,11 +99,11 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(function TextArea(
         ref={inputRef ?? inputControllRef}
         required={required}
         rows={rows ?? minRows}
-        styleSize={size}
+        sizeKey={size}
         value={value}
         {...inputProps}
       />
-      <C.HiddenTextarea
+      <S.HiddenTextarea
         aria-hidden="true"
         defaultValue={defaultValue}
         ref={hiddenTextAreaRef}
@@ -98,7 +111,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(function TextArea(
         tabIndex={-1}
         value={value}
       />
-    </C.TextareaWrapper>
+    </S.TextareaWrapper>
   );
 });
 

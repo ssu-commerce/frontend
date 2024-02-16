@@ -1,3 +1,5 @@
+import { keyframes } from "@emotion/react";
+
 export enum VariantKey {
   Contained = "contained",
   Outlined = "outlined",
@@ -13,13 +15,14 @@ export enum SizeKey {
 }
 
 export enum ColorKey {
-  Default = "default",
-  Primary = "primary",
-  Secondary = "secondary",
-  Error = "error",
-  Info = "info",
-  Success = "success",
-  Warning = "warning",
+  Default = "Default",
+  Primary = "Primary",
+  Secondary = "Secondary",
+  Error = "Error",
+  Info = "Info",
+  Success = "Success",
+  Warning = "Warning",
+  Loading = "Loading",
 }
 
 export enum DirectionKey {
@@ -38,13 +41,14 @@ export const DirectionDegree: Record<DirectionKey, number> = {
 
 export const Color = {
   Hex: {
-    default: "#ff6b01",
-    primary: "#959a9d",
-    secondary: "#24282b",
-    error: "#dc2626",
-    info: "#d1d5db",
-    success: "#16a34a",
-    warning: "#fde047",
+    [ColorKey.Default]: "#ff6b01",
+    [ColorKey.Primary]: "#959a9d",
+    [ColorKey.Secondary]: "#24282b",
+    [ColorKey.Error]: "#dc2626",
+    [ColorKey.Info]: "#d1d5db",
+    [ColorKey.Success]: "#16a34a",
+    [ColorKey.Warning]: "#fde047",
+    [ColorKey.Loading]: "#efefef",
   },
 };
 
@@ -68,7 +72,7 @@ export const Size = {
     sm: "20px",
     md: "24px",
     lg: "28px",
-    xl: "30px",
+    xl: "32px",
   },
   RecPadding: {
     xs: "4px 8px",
@@ -84,4 +88,22 @@ export const Size = {
     lg: "10px",
     xl: "12px",
   },
+  RecHeight: {
+    xs: "28px",
+    sm: "32px",
+    md: "36px",
+    lg: "40px",
+    xl: "44px",
+  },
+};
+
+export const CustomKeyframe = {
+  Loading: keyframes`
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  `,
 };

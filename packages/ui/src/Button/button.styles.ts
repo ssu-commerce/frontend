@@ -1,7 +1,9 @@
+"use client";
+
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import type { ColorKey, SizeKey } from "../constants";
-import { Color, Size, VariantKey } from "../constants";
+import { Color, CustomKeyframe, Size, VariantKey } from "../constants";
 import { calcPixel } from "../utils/style";
 
 const MinWidth: Record<SizeKey, string> = {
@@ -78,6 +80,8 @@ export const Button = styled.button(
       }}
 
       cursor: pointer;
+      ${variantColor}
+
       ${disabled
         ? {
             cursor: "not-allowed",
@@ -91,7 +95,6 @@ export const Button = styled.button(
               opacity: 0.7,
             },
           }}
-      ${variantColor}
     `;
   },
 );
@@ -123,3 +126,13 @@ export const Icon = styled.span(
   `;
   },
 );
+
+export const Loading = styled(Button)(({ sizeKey }) => {
+  return css`
+    width: 100%;
+    min-height: ${Size.RecHeight[sizeKey]};
+    background-color: ${Color.Hex.Loading};
+    animation: ${CustomKeyframe.Loading} 2s ease-in-out 0.5s infinite;
+    cursor: auto;
+  `;
+});

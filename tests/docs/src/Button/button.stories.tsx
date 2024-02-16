@@ -57,8 +57,9 @@ export const DefaultButton: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByText("Button");
-    await expect(button.tagName).toBe("BUTTON");
+
+    const $button = canvas.getByText("Button");
+    await expect($button.tagName).toBe("BUTTON");
   },
   render: ({ size = SizeKey.SM, endIcon, ...args }) => (
     <Button
@@ -83,10 +84,10 @@ export const LinkButton: Story = {
   play: async ({ canvasElement }) => {
     const currentURL = window.location.href;
     const canvas = within(canvasElement);
-    const anchor = canvas.getByText("Anchor");
-    await expect(anchor.tagName).toBe("A");
 
-    await userEvent.click(anchor);
+    const $anchor = canvas.getByText("Anchor");
+    await expect($anchor.tagName).toBe("A");
+    await userEvent.click($anchor);
     const moveURL = window.location.href;
     await expect(moveURL).toBe(`${currentURL}#`);
   },
@@ -185,21 +186,25 @@ export const ActionButton: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const hover = canvas.getByText("hover");
-    await userEvent.hover(hover);
-    await expect(hover).toBeInTheDocument();
-    await expect(hover).toHaveStyle({ cursor: "pointer" });
+    const $loading = canvas.getByTestId("loading");
+    await expect($loading).toBeInTheDocument();
+    await expect($loading).toHaveStyle({ backgroundColor: ColorKey.Loading });
 
-    const disabled = canvas.getByText("disabled");
-    await expect(disabled).toBeInTheDocument();
-    await expect(disabled).toHaveStyle({
+    const $hover = canvas.getByText("hover");
+    await userEvent.hover($hover);
+    await expect($hover).toBeInTheDocument();
+    await expect($hover).toHaveStyle({ cursor: "pointer" });
+
+    const $disabled = canvas.getByText("disabled");
+    await expect($disabled).toBeInTheDocument();
+    await expect($disabled).toHaveStyle({
       opacity: "0.3",
       cursor: "not-allowed",
     });
 
-    const fullWidth = canvas.getByText("fullWidth");
-    await expect(fullWidth).toBeInTheDocument();
-    await expect(fullWidth).toHaveStyle({ width: "200px" });
+    const $fullWidth = canvas.getByText("fullWidth");
+    await expect($fullWidth).toBeInTheDocument();
+    await expect($fullWidth).toHaveStyle({ width: "200px" });
   },
   render: ({ color, size, variant }) => {
     return (
@@ -207,7 +212,7 @@ export const ActionButton: Story = {
         css={css`
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 4px;
           width: 200px;
           & li {
             display: flex;
@@ -216,6 +221,17 @@ export const ActionButton: Story = {
           }
         `}
       >
+        <li>
+          <Button
+            color={color}
+            loading
+            size={size}
+            testId="loading"
+            variant={variant}
+          >
+            loading
+          </Button>
+        </li>
         <li>
           <Button color={color} size={size} variant={variant}>
             hover

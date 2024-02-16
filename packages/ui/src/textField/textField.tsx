@@ -1,8 +1,7 @@
-import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef } from "react";
 import { ColorKey, SizeKey } from "../constants";
-import type { TextFieldProps } from "./textfield.types";
-import * as C from "./textfield.styles";
+import type { TextFieldProps } from "./textField.types";
+import * as S from "./textfield.styles";
 
 const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
   {
@@ -21,21 +20,32 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
     value,
     testId,
     id,
+    loading,
     css,
     ...props
-  }: TextFieldProps,
-  ref: ForwardedRef<HTMLDivElement>,
-): ReactElement<TextFieldProps> {
+  },
+  ref,
+) {
+  if (loading)
+    return (
+      <S.Loading
+        colorKey={color}
+        data-testid={testId}
+        disabled={disabled}
+        sizeKey={size}
+      />
+    );
+
   return (
-    <C.TextFieldWrapper
-      color={color}
+    <S.TextFieldWrapper
+      colorKey={color}
       css={css}
       fullWidth={fullWidth}
       ref={ref}
-      size={size}
+      sizeKey={size}
       {...props}
     >
-      <C.TextInput
+      <S.TextInput
         data-testid={testId}
         defaultValue={defaultValue}
         disabled={disabled}
@@ -45,12 +55,12 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
         placeholder={placeholder}
         ref={inputRef}
         required={required}
-        styleSize={size}
+        sizeKey={size}
         type={type}
         value={value}
         {...inputProps}
       />
-    </C.TextFieldWrapper>
+    </S.TextFieldWrapper>
   );
 });
 

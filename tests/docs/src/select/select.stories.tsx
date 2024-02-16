@@ -63,6 +63,7 @@ export const DefaultSelect: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
     const $select = canvas.getByTestId("select");
     const $label = $select.closest("label");
     await expect($label).toBeInTheDocument();
@@ -172,6 +173,10 @@ export const MultiSelect: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
+    const $loading = canvas.getByTestId("loading");
+    await expect($loading).toBeInTheDocument();
+    await expect($loading).toHaveStyle({ backgroundColor: ColorKey.Loading });
+
     const $hover = canvas.getByTestId("hover").closest("label");
     await expect($hover).toBeInTheDocument();
     if ($hover) {
@@ -195,7 +200,28 @@ export const MultiSelect: Story = {
   },
   render: function Render({ color, size }): ReactElement {
     return (
-      <ul>
+      <ul
+        css={css`
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          width: 200px;
+          & li {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+          }
+        `}
+      >
+        <li>
+          <Select
+            color={color}
+            items={selectCompoundArgs.items}
+            loading
+            size={size}
+            testId="loading"
+          />
+        </li>
         <li>
           <Select
             color={color}
