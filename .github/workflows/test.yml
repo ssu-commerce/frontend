@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - "!releases/**"
-    types: [opened, reopened, edited]
+    types: [opened, reopened, synchronize]
 jobs:
   test:
     name: test
