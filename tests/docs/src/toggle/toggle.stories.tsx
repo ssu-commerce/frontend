@@ -7,8 +7,8 @@ import { css } from "@emotion/react";
 import * as C from "./toggle";
 
 const toggleCompoundArgs = {
-  color: Object.values(ColorKey) as ColorKey[],
-  size: Object.values(SizeKey) as SizeKey[],
+  color: Object.values(ColorKey),
+  size: Object.values(SizeKey),
   items: [
     {
       name: "item-1",

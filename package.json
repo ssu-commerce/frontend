@@ -23,7 +23,8 @@
     "backoffice": "pnpm -F @sc/backoffice dev",
     "commerce": "pnpm -F @sc/commerce dev",
     "sb": "pnpm -F @sc/docs dev",
-    "ui": "pnpm -F @sc/ui dev"
+    "ui": "pnpm -F @sc/ui dev",
+    "build:ui": "cd packages/ui && pnpm build"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

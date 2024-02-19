@@ -6,8 +6,8 @@ import { ColorKey, SizeKey, Radio } from "@sc/ui";
 import * as C from "./radio";
 
 const radioCompoundArgs = {
-  color: Object.values(ColorKey) as ColorKey[],
-  size: Object.values(SizeKey) as SizeKey[],
+  color: Object.values(ColorKey),
+  size: Object.values(SizeKey),
 };
 
 const meta = {
