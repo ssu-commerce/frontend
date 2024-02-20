@@ -22,6 +22,7 @@ export type SelectProps = Omit<HTMLAttributes<HTMLLabelElement>, "onChange"> &
     name: string;
     children: ReactNode;
     value: SelectValue;
+    defaultValue: SelectValue;
     css: Interpolation<Theme>;
     items: SelectItems[];
     loading: boolean;
