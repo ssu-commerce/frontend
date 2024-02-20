@@ -5,6 +5,8 @@
 # cannot use lint-staged - 임시
 # npx lint-staged
 
-# pnpm lint
-# pnpm test
-# pnpm format
+pnpm lint
+
+pnpm test
+
+pnpm format
