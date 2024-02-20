@@ -1,4 +1,4 @@
-import type { ChangeEvent} from "react";
+import type { ChangeEvent } from "react";
 import { Children, cloneElement, useState } from "react";
 import type { RadioGroupProps } from "./radio.types";
 

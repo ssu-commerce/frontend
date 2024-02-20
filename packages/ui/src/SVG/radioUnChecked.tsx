@@ -96,6 +96,6 @@ const RadioUnCheckedIcon = ({
         </svg>
       );
   }
-}
+};
 
 export { RadioUnCheckedIcon };
