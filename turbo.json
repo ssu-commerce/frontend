@@ -11,22 +11,24 @@
         "dist/**"
       ]
     },
-    "lint": {},
+    "lint": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
     "lint:fix": {},
-    "format": {},
+    "format": {
+      "cache": false
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
-    "typecheck": {
-      "dependsOn": ["^build"]
-    },
     "clean": {
       "cache": false
     },
     "test": {
-      "dependsOn": [],
+      "cache": false,
       "inputs": ["tests/**/src/**/*.tsx", "tests/**/src/**/*.ts"]
     },
     "test:watch": {

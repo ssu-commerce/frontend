@@ -15,13 +15,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: ls -al
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: "package.json"
 
-      - run: ls -al
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
@@ -42,8 +40,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - run: ls -al
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - run: ls -al
 
       - name: Lint
         run: pnpm lint

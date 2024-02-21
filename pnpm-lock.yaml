@@ -247,16 +247,26 @@ importers:
   packages/tsconfig: {}
 
   packages/ui:
-    devDependencies:
-      '@emotion/eslint-plugin':
-        specifier: ^11.11.0
-        version: 11.11.0(eslint@8.56.0)
+    dependencies:
       '@emotion/react':
         specifier: ^11.11.3
         version: 11.11.3(@types/react@18.2.48)(react@18.2.0)
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.48)(react@18.2.0)
+      emotion-reset:
+        specifier: ^3.0.1
+        version: 3.0.1(@emotion/react@11.11.3)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+    devDependencies:
+      '@emotion/eslint-plugin':
+        specifier: ^11.11.0
+        version: 11.11.0(eslint@8.56.0)
       '@sc-config/emotion':
         specifier: workspace:*
         version: link:../emotion-config
@@ -275,18 +285,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.0
         version: 18.2.18
-      emotion-reset:
-        specifier: ^3.0.1
-        version: 3.0.1(@emotion/react@11.11.3)
       eslint-config-sc:
         specifier: workspace:*
         version: link:../eslint-config
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
       tsconfig-sc:
         specifier: workspace:*
         version: link:../tsconfig
@@ -7739,6 +7740,7 @@ packages:
       '@emotion/react': '>=11'
     dependencies:
       '@emotion/react': 11.11.3(@types/react@18.2.48)(react@18.2.0)
+    dev: false
 
   /encodeurl@1.0.2:
     resolution: {integrity: sha512-TPJXq8JqFaVYm2CWmPvnP2Iyo4ZSM7/QKcSmuMLDObfpH5fi7RUGmd/rTDf+rut/saiDiQEeVTNgAmJEdAOx0w==}
