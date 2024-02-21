@@ -10,7 +10,6 @@ export default defineConfig((options: Options) => ({
   minify: true,
   clean: true,
   external: ["react"],
-  entry: ["src/index.tsx"],
-
+  entry: ["src/index.ts"],
   ...options,
 }));
