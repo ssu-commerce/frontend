@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useSignInMutation } from "api/sign/signIn";
 import * as S from "./signIn.styles";
 
-export const SignInPage = () => {
+const SignInPage = () => {
   const [remember, setRemember] = useState(false);
   const [account, setAccount] = useState({
     id: "",

@@ -13,7 +13,7 @@ import { MOCK } from "../../mock/constants";
 import * as S from "./book.styles";
 import { ViewMode } from "./book.constants";
 
-export const BookList = (): JSX.Element => {
+const BookList = (): JSX.Element => {
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Around);
   const [currentPage, setCurrentPage] = useState(1);
   const handleMovePage = (page: number) => {

@@ -11,7 +11,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
     "lint:styled": "stylelint './**/*.styles.ts' --fix",
-    "clean": "turbo run clean && rm -rf node_modules",
+    "clean": "turbo run clean && rm -rf node_modules && rm -rf .turbo",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",

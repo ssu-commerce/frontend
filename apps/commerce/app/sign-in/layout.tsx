@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { Layout } from "component/common/layout";
 
-export const SignInLayout = ({ children }: { children: ReactNode }) => {
+const SignInLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Layout.Header />

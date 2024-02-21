@@ -1,9 +1,7 @@
-"use client";
-
 import type { ReactNode } from "react";
 import { Layout } from "component/common/layout";
 
-export const BookLayout = ({ children }: { children: ReactNode }) => {
+const BookLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Layout.Header />
