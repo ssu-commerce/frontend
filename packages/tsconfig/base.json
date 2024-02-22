@@ -11,6 +11,7 @@
     "inlineSources": false,
     "isolatedModules": true,
     "moduleResolution": "NodeNext",
+    "module": "esnext",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,

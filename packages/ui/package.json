@@ -5,6 +5,8 @@
   "sideEffects": [
     "**/*.css"
   ],
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": "./src/index.ts"
   },
