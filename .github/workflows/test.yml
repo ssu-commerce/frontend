@@ -46,6 +46,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - run: ls -al
+      - run: ls packages/ui/src -a
+      - run: node -v
+      - run: pnpm -v
 
       - name: Lint
         run: pnpm lint
