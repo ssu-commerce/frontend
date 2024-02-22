@@ -20,16 +20,16 @@
       "cache": false
     },
     "dev": {
-      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
     "clean": {
       "cache": false
     },
+    "prepare-test": {},
     "test": {
-      "cache": false,
-      "inputs": ["tests/**/src/**/*.tsx", "tests/**/src/**/*.ts"]
+      "dependsOn": ["^build"],
+      "cache": false
     },
     "test:watch": {
       "cache": false

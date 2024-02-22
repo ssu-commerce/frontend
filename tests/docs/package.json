@@ -11,7 +11,8 @@
     "lint": "eslint src/ --fix",
     "test": "test-storybook -- --passWithNoTests",
     "test:watch": "test-storybook --watch",
-    "chromatic": "npx chromatic --project-token=chpt_bcfcb25b665220e"
+    "chromatic": "npx chromatic",
+    "prepare-test": "npx http-server storybook-static --port 6006 --slient"
   },
   "dependencies": {
     "@sc/shared": "workspace:*",

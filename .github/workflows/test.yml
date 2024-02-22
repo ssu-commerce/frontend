@@ -26,7 +26,6 @@ jobs:
           version: 8
           run_install: false
 
-      # 환경 변수 연결
       - name: Get pnpm store directory
         shell: bash
         run: |
@@ -40,8 +39,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - run: ls -al
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -49,6 +46,9 @@ jobs:
       - run: ls packages/ui/src -a
       - run: node -v
       - run: pnpm -v
+
+      - name: Build
+        run: pnpm build
 
       - name: Lint
         run: pnpm lint
