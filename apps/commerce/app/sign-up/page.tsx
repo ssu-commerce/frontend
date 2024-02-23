@@ -12,7 +12,7 @@ interface SignInAccount {
   rePassword: string;
 }
 
-export const SignUpPage = () => {
+const SignUpPage = () => {
   const [account, setAccount] = useState<SignInAccount>({
     id: "",
     password: "",

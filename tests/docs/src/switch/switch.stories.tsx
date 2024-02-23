@@ -8,8 +8,8 @@ import { ColorKey, SizeKey, Switch } from "@sc/ui";
 import * as C from "./switch";
 
 const switchCompoundArgs = {
-  color: Object.values(ColorKey) as ColorKey[],
-  size: Object.values(SizeKey) as SizeKey[],
+  color: Object.values(ColorKey),
+  size: Object.values(SizeKey),
 };
 
 const meta = {

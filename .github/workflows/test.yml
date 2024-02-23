@@ -15,20 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: ls -al
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: "package.json"
 
-      - run: ls -al
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
           version: 8
           run_install: false
 
-      # 환경 변수 연결
       - name: Get pnpm store directory
         shell: bash
         run: |
@@ -43,10 +40,18 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - run: ls -al
+      - run: ls packages/ui/src -a
+      - run: node -v
+      - run: pnpm -v
 
       - name: Lint
         run: pnpm lint
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
 
       - name: Test
         run: pnpm test

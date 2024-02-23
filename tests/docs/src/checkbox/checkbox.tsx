@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { Checkbox } from "@sc/ui";
-import type { ChangeEventHandler, ReactElement} from "react";
+import type { ChangeEventHandler, ReactElement } from "react";
 import { useState } from "react";
 
 export const DefaultCheckbox = ({ children, ...args }): ReactElement => {

@@ -1,4 +1,1 @@
-
-export const bookList = () => {
-    
-}
+export const bookList = () => {};

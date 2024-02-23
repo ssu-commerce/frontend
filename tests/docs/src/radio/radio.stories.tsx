@@ -6,8 +6,8 @@ import { ColorKey, SizeKey, Radio } from "@sc/ui";
 import * as C from "./radio";
 
 const radioCompoundArgs = {
-  color: Object.values(ColorKey) as ColorKey[],
-  size: Object.values(SizeKey) as SizeKey[],
+  color: Object.values(ColorKey),
+  size: Object.values(SizeKey),
 };
 
 const meta = {
@@ -67,17 +67,16 @@ export const MultiRadio: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const $loading = canvas.getByTestId("loading");
+    const $loading = canvas.getByTestId<HTMLInputElement>("loading");
     await expect($loading).toBeInTheDocument();
     await expect($loading).toHaveStyle({ backgroundColor: ColorKey.Loading });
 
     const $radio1 = canvas.getByTestId<HTMLInputElement>("radio-1");
     await userEvent.click($radio1);
-    await expect($radio1.checked).toBe(false);
+    await expect($radio1.checked).toBe(true);
 
     const $radio2 = canvas.getByTestId<HTMLInputElement>("radio-2");
-    await userEvent.click($radio2);
-    await expect($radio2.checked).toBe(true);
+    await expect($radio2.checked).toBe(false);
 
     const $disabled = canvas.getByTestId<HTMLInputElement>("disabled");
     await userEvent.click($disabled);

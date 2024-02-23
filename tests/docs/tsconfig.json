@@ -8,14 +8,11 @@
     "src/**/tests/**/*",
     "src/**/__tests__/**/*",
     "src/**/*.mockdata.*",
-    "src/**/__testfixtures__/**",
+    "src/**/__testfixtures__/**"
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "types": ["vite-plugin-svgr/client"],
-    "jsxImportSource": "@emotion/react",
-    "paths": {
-      "@sc/ui": ["../../packages/ui/dist"],
-    },
-  },
+    "jsxImportSource": "@emotion/react"
+  }
 }

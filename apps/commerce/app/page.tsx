@@ -1,6 +1,6 @@
 "use client";
 
-export const Page = (): JSX.Element => {
+const Page = (): JSX.Element => {
   return <div>main</div>;
 };
 

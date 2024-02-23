@@ -1,3 +1,4 @@
+import type { ChangeEventHandler } from "react";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { ColorKey, DirectionKey, SizeKey } from "../constants";
 import { ArrowIcon } from "../svg";
@@ -22,11 +23,10 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
   ref,
 ) {
   const [open, setOpen] = useState(false);
-
-  const [selectedItem, setSeletedItem] = useState<SelectValue>(value);
+  const [select, setSelect] = useState<SelectValue>(value);
 
   useEffect(() => {
-    if (value) setSeletedItem(value);
+    if (value) setSelect(value);
   }, [value]);
 
   const openMenu = () => {
@@ -38,16 +38,25 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
   };
 
   const handleChangeSelectBox = (selectedValue: SelectValue) => {
-    setSeletedItem(selectedValue);
+    setSelect(selectedValue);
     if (typeof onChange === "function") onChange(selectedValue);
+  };
+
+  const handleChangeInput: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setSelect(e.target.value);
   };
 
   if (loading) return <S.Loading data-testid={testId} sizeKey={size} />;
 
   return (
     <S.Wrapper css={css}>
-      <S.Select colorKey={color} disabled={disabled} sizeKey={size}>
-        <S.Preview sizeKey={size}>{selectedItem || placeholder}</S.Preview>
+      <S.Select
+        colorKey={color}
+        disabled={disabled}
+        onClick={openMenu}
+        sizeKey={size}
+      >
+        <S.Preview sizeKey={size}>{select || placeholder}</S.Preview>
         <S.Icon sizeKey={size}>
           <ArrowIcon
             direction={open ? DirectionKey.Top : DirectionKey.Bottom}
@@ -56,23 +65,22 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function Select(
         </S.Icon>
         <S.Input
           data-testid={testId}
-          defaultValue={selectedItem}
           disabled={disabled}
           name={name}
-          onClick={openMenu}
+          onChange={handleChangeInput}
           ref={ref}
           required={required}
           type="text"
+          value={select}
         />
       </S.Select>
-
       {open ? (
         <SelectMenu
           close={closeMenu}
           color={color}
           items={items}
           onChange={handleChangeSelectBox}
-          selectedItem={selectedItem}
+          selectedItem={value}
           size={size}
         />
       ) : null}

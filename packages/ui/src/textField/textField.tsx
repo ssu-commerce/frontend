@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { ColorKey, SizeKey } from "../constants";
 import type { TextFieldProps } from "./textField.types";
-import * as S from "./textfield.styles";
+import * as S from "./textField.styles";
 
 const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
   {

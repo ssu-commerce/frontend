@@ -6,9 +6,9 @@ import { Fragment } from "react";
 import { css } from "@emotion/react";
 
 const buttonCompoundArgs = {
-  color: Object.values(ColorKey) as ColorKey[],
-  variant: Object.values(VariantKey) as VariantKey[],
-  size: Object.values(SizeKey) as SizeKey[],
+  color: Object.values(ColorKey),
+  variant: Object.values(VariantKey),
+  size: Object.values(SizeKey),
 };
 
 const meta = {

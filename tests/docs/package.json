@@ -5,13 +5,12 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build --docs",
-    "build-storybook": "storybook build --docs",
     "preview-storybook": "serve storybook-static",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf storybook-static",
     "lint": "eslint src/ --fix",
-    "test": "test-storybook -- --passWithNoTests",
+    "test": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"npx http-server storybook-static --port 6006 --silent\" \"npx wait-on tcp:6006 && pnpm test-storybook\"",
     "test:watch": "test-storybook --watch",
-    "chromatic": "npx chromatic --project-token=chpt_bcfcb25b665220e"
+    "chromatic": "npx chromatic"
   },
   "dependencies": {
     "@sc/shared": "workspace:*",
@@ -44,6 +43,7 @@
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react-swc": "^3.4.0",
     "chromatic": "^9.0.0",
+    "concurrently": "^8.2.2",
     "eslint-config-sc": "workspace:*",
     "serve": "^13.0.4",
     "storybook": "^7.5.3",

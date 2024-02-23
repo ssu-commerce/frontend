@@ -2,7 +2,7 @@
 
 import { css } from "@emotion/react";
 import { Radio, RadioGroup } from "@sc/ui";
-import type { ReactElement} from "react";
+import type { ReactElement } from "react";
 import { useState } from "react";
 
 export const DefaultRadio = ({ children, ...args }): ReactElement => {
