@@ -16,7 +16,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "global.d.ts",
-    "styles.d.ts"
+    "styles.d.ts",
+    "jest.config.js",
+    "jest.setup.js"
   ],
   "exclude": ["node_modules"]
 }

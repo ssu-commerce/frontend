@@ -114,12 +114,21 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^13.4.19
         version: 13.5.6
+      '@sc-config/jest':
+        specifier: workspace:*
+        version: link:../../packages/jest-config
       '@svgr/webpack':
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.3.3)
       '@tanstack/eslint-plugin-query':
         specifier: ^5.17.7
         version: 5.17.7(eslint@8.56.0)(typescript@5.3.3)
+      '@testing-library/jest-dom':
+        specifier: ^6.1.4
+        version: 6.2.0(@types/jest@29.5.12)(jest@29.7.0)
+      '@testing-library/react':
+        specifier: ^14.0.0
+        version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
       '@types/node':
         specifier: ^18.17.0
         version: 18.19.8
@@ -132,6 +141,12 @@ importers:
       eslint-config-sc:
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@18.19.8)
+      jest-environment-jsdom:
+        specifier: ^29.6.4
+        version: 29.7.0
       tsconfig-sc:
         specifier: workspace:*
         version: link:../../packages/tsconfig
