@@ -17,6 +17,6 @@
     ".next/types/**/*.ts",
     "global.d.ts",
     "styles.d.ts"
-  ],
+, "__tests__/mock.test.jsx", "jest.config.js", "jest.setup.js"  ],
   "exclude": ["node_modules"]
 }
