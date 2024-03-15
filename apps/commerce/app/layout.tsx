@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import StyledJsxProvider from "provider/emotion";
-import { ThemeProvider } from "provider/theme";
-import { ReactQueryProvider } from "provider/reactQuery";
+import Providers from "../providers";
 import styled from "./root.module.css";
 
 export const metadata: Metadata = {
@@ -18,14 +16,7 @@ const RootLayout = ({
     <html lang="ko">
       <head />
       <body className={styled.body} suppressHydrationWarning>
-        <ReactQueryProvider>
-          <StyledJsxProvider>
-            <ThemeProvider>
-              {children}
-              <div id="portal" />
-            </ThemeProvider>
-          </StyledJsxProvider>
-        </ReactQueryProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
