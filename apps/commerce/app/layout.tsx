@@ -16,7 +16,10 @@ const RootLayout = ({
     <html lang="ko">
       <head />
       <body className={styled.body} suppressHydrationWarning>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <div id="portal" />
+        </Providers>
       </body>
     </html>
   );

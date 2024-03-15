@@ -7,10 +7,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <ReactQueryProvider>
       <StyledJsxProvider>
-        <ThemeProvider>
-          {children}
-          <div id="portal" />
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </StyledJsxProvider>
     </ReactQueryProvider>
   );
