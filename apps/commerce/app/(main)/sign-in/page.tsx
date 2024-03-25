@@ -56,6 +56,7 @@ const SignInPage = () => {
               required
               size={SizeKey.MD}
               type="email"
+              testId="id"
             />
             <TextField
               inputProps={{
