@@ -16,9 +16,7 @@ describe("1. 로그인 페이지", () => {
     const idInput = await screen.findByPlaceholderText<HTMLInputElement>("ID");
     const passwordInput =
       await screen.findByPlaceholderText<HTMLInputElement>("ID");
-    const findLink =
-      await screen.findByPlaceholderText<HTMLInputElement>("ID");
-
+    const findLink = await screen.findByPlaceholderText<HTMLInputElement>("ID");
 
     expect(idInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
