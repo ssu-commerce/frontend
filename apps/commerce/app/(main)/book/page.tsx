@@ -9,7 +9,7 @@ import BiViewListIcon from "assets/svg/bi_view_list_icon.svg";
 import { Card } from "component/common/card";
 import { Pagination } from "component/common/pagination";
 import { BiView } from "component/common/biView";
-import { MOCK } from "../../../mock/constants";
+import { MOCK } from "../../../mocks/json/constants";
 import * as S from "./book.styles";
 import { ViewMode } from "./book.constants";
 
