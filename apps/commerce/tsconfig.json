@@ -1,14 +1,16 @@
 {
   "extends": "tsconfig-sc/nextjs.json",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
     "paths": {
       "app/*": ["./app/*"],
       "component/*": ["./component/*"],
       "api/*": ["./api/*"],
       "provider/*": ["./provider/*"],
+      "mocks/*": ["./mocks/*"],
       "assets/*": ["./public/assets/*"]
-    }
+    },
+    "types": ["@testing-library/jest-dom"],
+    "baseUrl": "."
   },
   "include": [
     "next-env.d.ts",
@@ -17,8 +19,13 @@
     ".next/types/**/*.ts",
     "global.d.ts",
     "styles.d.ts",
-    "jest.config.js",
-    "jest.setup.js"
+    "jest.config.ts",
+    "jest.setup.ts",
+    "mocks/server.js",
+    "mocks/browser.js",
+    "mocks/handlers/index.ts",
+    "mocks/handlers/sign.ts",
+    "component/common/errorboundary/errorboundary.jsx"
   ],
   "exclude": ["node_modules"]
 }

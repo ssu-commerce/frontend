@@ -9,6 +9,12 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testEnvironment: "jsdom",
+  preset: "ts-jest",
+  // Cannot find module 'msw/node' from 'mocks/server.js'
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
+  setupFiles: ["./jest.polyfills.js"],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

@@ -70,16 +70,10 @@ const SignInPage = () => {
             />
           </S.TextBox>
           <S.AddonBox>
-            <Checkbox checked={remember} onChange={handleClickRemember}>
+            {/* <Checkbox checked={remember} onChange={handleClickRemember}>
               remember
-            </Checkbox>
-            <Button
-              css={css`
-                width: fit-content;
-              `}
-              href="/sign-find"
-              variant={VariantKey.Text}
-            >
+            </Checkbox> */}
+            <Button href="/sign-find" variant={VariantKey.Text}>
               find ID/Password
             </Button>
           </S.AddonBox>
@@ -91,6 +85,8 @@ const SignInPage = () => {
             onClick={handleSubmitSignIn}
             size={SizeKey.LG}
             type="submit"
+            testId="signIn"
+            disabled={account.id === "" && account.password === ""}
           >
             Sign In
           </Button>
@@ -101,6 +97,7 @@ const SignInPage = () => {
             href="/sign-up"
             onClick={handleSubmitSignIn}
             variant={VariantKey.Text}
+            testId="signUp"
           >
             Sign Up
           </Button>
