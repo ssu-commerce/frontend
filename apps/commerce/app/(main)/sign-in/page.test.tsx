@@ -1,16 +1,31 @@
 import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
-import Page from "./page";
+import { userEvent } from "@testing-library/user-event";
+import { AppRouterContextProviderMock } from "providers/mockRouter";
 import Providers from "../../../providers";
-import userEvent from "@testing-library/user-event";
 import { server } from "../../../mocks/server";
+import Page from "./page";
+
+beforeAll(() => {
+  server.listen();
+});
+afterEach(() => {
+  server.resetHandlers();
+});
+afterAll(() => {
+  server.close();
+});
 
 describe("로그인 페이지", () => {
   it("1. 잘 그려졌는지 테스트합니다.", async () => {
+    const push = jest.fn();
+
     render(
-      <Providers>
-        <Page />
-      </Providers>,
+      <AppRouterContextProviderMock router={{ push }}>
+        <Providers>
+          <Page />
+        </Providers>
+      </AppRouterContextProviderMock>,
     );
 
     const id = await screen.findByPlaceholderText("ID");
@@ -27,10 +42,14 @@ describe("로그인 페이지", () => {
   });
 
   it("2. 로그인의 정상 동작을 테스트합 니다.", async () => {
+    const push = jest.fn();
+
     render(
-      <Providers>
-        <Page />
-      </Providers>,
+      <AppRouterContextProviderMock router={{ push }}>
+        <Providers>
+          <Page />
+        </Providers>
+      </AppRouterContextProviderMock>,
     );
 
     const id = await screen.findByPlaceholderText("ID");
@@ -41,13 +60,9 @@ describe("로그인 페이지", () => {
     await userEvent.type(password, "1234");
     await userEvent.click(signIn);
 
-    // API 호출 및 응답 대기
     await waitFor(() => {
-      console.log(server.handlers);
-      expect(server.handlers).toHaveLength(1); // API 호출 확인
+      // 새로운 페이지로의 리다이렉션 확인
+      expect(push).toHaveBeenCalledTimes(1);
     });
-
-    // 새로운 페이지로의 리다이렉션 확인
-    expect(window.location.pathname).toBe("/dashboard");
   });
 });

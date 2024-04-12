@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, Checkbox, SizeKey, TextField, VariantKey } from "@sc/ui";
+import { useRouter } from "next/navigation";
+import { Button, SizeKey, TextField, VariantKey } from "@sc/ui";
 import { css } from "@emotion/react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
@@ -8,11 +9,12 @@ import { useSignInMutation } from "api/sign/signIn";
 import * as S from "./signIn.styles";
 
 const SignInPage = () => {
-  const [remember, setRemember] = useState(false);
+  // const [remember, setRemember] = useState(false);
   const [account, setAccount] = useState({
     id: "",
     password: "",
   });
+  const router = useRouter();
 
   const { mutate: postSignIn } = useSignInMutation();
 
@@ -23,13 +25,14 @@ const SignInPage = () => {
         id: account.id,
         password: account.password,
       });
+      router.push("/");
     }
   };
 
-  const handleClickRemember = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setRemember(!remember);
-  };
+  // const handleClickRemember = (e: ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   setRemember(!remember);
+  // };
 
   const handleChangeAccount = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -82,11 +85,11 @@ const SignInPage = () => {
               width: 300px;
               margin-top: 16px;
             `}
+            disabled={account.id === "" && account.password === ""}
             onClick={handleSubmitSignIn}
             size={SizeKey.LG}
-            type="submit"
             testId="signIn"
-            disabled={account.id === "" && account.password === ""}
+            type="submit"
           >
             Sign In
           </Button>
@@ -96,8 +99,8 @@ const SignInPage = () => {
             fullWidth
             href="/sign-up"
             onClick={handleSubmitSignIn}
-            variant={VariantKey.Text}
             testId="signUp"
+            variant={VariantKey.Text}
           >
             Sign Up
           </Button>
