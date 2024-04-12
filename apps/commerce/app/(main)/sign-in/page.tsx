@@ -9,14 +9,30 @@ import { useSignInMutation } from "api/sign/signIn";
 import * as S from "./signIn.styles";
 
 const SignInPage = () => {
-  // const [remember, setRemember] = useState(false);
   const [account, setAccount] = useState({
     id: "",
     password: "",
   });
+  const [alert, setAlert] = useState("");
   const router = useRouter();
 
-  const { mutate: postSignIn } = useSignInMutation();
+  const { mutate: postSignIn } = useSignInMutation({
+    onError: (error) => {
+      const status = error.response?.status;
+      switch (status) {
+        case 401: {
+          setAlert("id or password error");
+        }
+        default: {
+          setAlert("");
+        }
+      }
+    },
+    onSuccess: (data) => {
+      sessionStorage.setItem("accessToken", data.accessToken);
+      router.push("/");
+    },
+  });
 
   const handleSubmitSignIn = (e: FormEvent) => {
     e.preventDefault();
@@ -25,14 +41,8 @@ const SignInPage = () => {
         id: account.id,
         password: account.password,
       });
-      router.push("/");
     }
   };
-
-  // const handleClickRemember = (e: ChangeEvent<HTMLInputElement>) => {
-  //   e.preventDefault();
-  //   setRemember(!remember);
-  // };
 
   const handleChangeAccount = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -72,10 +82,8 @@ const SignInPage = () => {
               type="password"
             />
           </S.TextBox>
+          <S.AlertText data-testid="failLogin">{alert}</S.AlertText>
           <S.AddonBox>
-            {/* <Checkbox checked={remember} onChange={handleClickRemember}>
-              remember
-            </Checkbox> */}
             <Button href="/sign-find" variant={VariantKey.Text}>
               find ID/Password
             </Button>

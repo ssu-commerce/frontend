@@ -2,8 +2,8 @@ import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { AppRouterContextProviderMock } from "providers/mockRouter";
-import Providers from "../../../providers";
-import { server } from "../../../mocks/server";
+import Providers from "providers/provider";
+import { server } from "mocks/server";
 import Page from "./page";
 
 beforeAll(() => {
@@ -41,7 +41,7 @@ describe("로그인 페이지", () => {
     expect(signIn).toBeDisabled();
   });
 
-  it("2. 로그인의 정상 동작을 테스트합 니다.", async () => {
+  it("2. 로그인의 정상 동작을 테스트합니다.", async () => {
     const push = jest.fn();
 
     render(
@@ -63,6 +63,32 @@ describe("로그인 페이지", () => {
     await waitFor(() => {
       // 새로운 페이지로의 리다이렉션 확인
       expect(push).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it("3. 로그인의 실패 동작을 테스트합니다.", async () => {
+    const push = jest.fn();
+
+    render(
+      <AppRouterContextProviderMock router={{ push }}>
+        <Providers>
+          <Page />
+        </Providers>
+      </AppRouterContextProviderMock>,
+    );
+
+    const id = await screen.findByPlaceholderText("ID");
+    const password = await screen.findByPlaceholderText("PASSWORD");
+    const signIn = await screen.findByTestId("signIn");
+    const failLogin = await screen.findByTestId("failLogin");
+
+    await userEvent.type(id, "test");
+    await userEvent.type(password, "123");
+    await userEvent.click(signIn);
+
+    await waitFor(() => {
+      // 새로운 페이지로의 리다이렉션 확인
+      expect(failLogin).toHaveTextContent("id or password error");
     });
   });
 });

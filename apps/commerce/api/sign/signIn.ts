@@ -1,11 +1,27 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import {
+  DefaultError,
+  UseMutationOptions,
+  useMutation,
+} from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
 
-export const useSignInMutation = () => {
+interface SignInRq {
+  id: string;
+  password: string;
+}
+
+interface SignInRs {
+  accessToken: string;
+}
+
+export const useSignInMutation = (
+  options: UseMutationOptions<SignInRs, AxiosError, SignInRq, unknown>,
+) => {
   return useMutation({
-    mutationFn: ({ id, password }: { id: string; password: string }) =>
+    ...options,
+    mutationFn: ({ id, password }) =>
       axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-in`, {
         id,
         password,
