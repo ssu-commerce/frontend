@@ -16,7 +16,7 @@ afterAll(() => {
   server.close();
 });
 
-describe("로그인 페이지", () => {
+describe("회원가입 페이지", () => {
   it("1. 잘 그려졌는지 테스트합니다.", async () => {
     const push = jest.fn();
 
@@ -28,20 +28,20 @@ describe("로그인 페이지", () => {
       </AppRouterContextProviderMock>,
     );
 
+    const $name = await screen.findByPlaceholderText("NAME");
     const $id = await screen.findByPlaceholderText("ID");
     const $password = await screen.findByPlaceholderText("PASSWORD");
-    const $findAccount = await screen.findByText("find ID/Password");
-    const $signIn = await screen.findByTestId("signIn");
+    const $confirm = await screen.findByPlaceholderText("CONFIRM PASSWORD");
     const $signUp = await screen.findByTestId("signUp");
 
+    expect($name).toBeInTheDocument();
     expect($id).toBeInTheDocument();
     expect($password).toBeInTheDocument();
-    expect($findAccount).toBeInTheDocument();
-    expect($signUp).toBeInTheDocument();
-    expect($signIn).toBeDisabled();
+    expect($confirm).toBeInTheDocument();
+    expect($signUp).toBeDisabled();
   });
 
-  it("2. 로그인의 정상 동작을 테스트합니다.", async () => {
+  it("2. 회원가입의 정상 동작을 테스트합니다.", async () => {
     const push = jest.fn();
 
     render(
@@ -52,13 +52,17 @@ describe("로그인 페이지", () => {
       </AppRouterContextProviderMock>,
     );
 
+    const $name = await screen.findByPlaceholderText("NAME");
     const $id = await screen.findByPlaceholderText("ID");
     const $password = await screen.findByPlaceholderText("PASSWORD");
-    const $signIn = await screen.findByTestId("signIn");
+    const $confirm = await screen.findByPlaceholderText("CONFIRM PASSWORD");
+    const $signUp = await screen.findByTestId("signUp");
 
-    await userEvent.type($id, "test");
+    await userEvent.type($name, "name");
+    await userEvent.type($id, "id");
     await userEvent.type($password, "1234");
-    await userEvent.click($signIn);
+    await userEvent.type($confirm, "1234");
+    await userEvent.click($signUp);
 
     await waitFor(() => {
       // 새로운 페이지로의 리다이렉션 확인
@@ -66,7 +70,7 @@ describe("로그인 페이지", () => {
     });
   });
 
-  it("3. 로그인의 실패 동작을 테스트합니다.", async () => {
+  it("3. 회원가입의 실패 동작을 테스트합니다.", async () => {
     const push = jest.fn();
 
     render(
@@ -77,18 +81,32 @@ describe("로그인 페이지", () => {
       </AppRouterContextProviderMock>,
     );
 
+    const $name = await screen.findByPlaceholderText("NAME");
     const $id = await screen.findByPlaceholderText("ID");
     const $password = await screen.findByPlaceholderText("PASSWORD");
-    const $signIn = await screen.findByTestId("signIn");
-    const $failSignIn = await screen.findByTestId("failSignIn");
+    const $confirm = await screen.findByPlaceholderText("CONFIRM PASSWORD");
+    const $signUp = await screen.findByTestId("signUp");
+    const $failSignUp = await screen.findByTestId("failSignUp");
 
-    await userEvent.type($id, "test");
-    await userEvent.type($password, "123");
-    await userEvent.click($signIn);
+    expect($failSignUp).toHaveTextContent("");
+
+    await userEvent.type($name, "name");
+    await userEvent.type($id, "duplicate");
+    await userEvent.type($password, "1234");
+    await userEvent.type($confirm, "123");
+    await userEvent.click($signUp);
 
     await waitFor(() => {
       // 새로운 페이지로의 리다이렉션 확인
-      expect($failSignIn).toHaveTextContent("id or password error");
+      expect($failSignUp).toHaveTextContent("duplicate name");
+    });
+
+    await userEvent.type($id, "notDuplicate");
+    await userEvent.click($signUp);
+
+    await waitFor(() => {
+      // 새로운 페이지로의 리다이렉션 확인
+      expect($failSignUp).toHaveTextContent("not match password");
     });
   });
 });

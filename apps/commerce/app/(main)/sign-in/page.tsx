@@ -5,6 +5,7 @@ import { Button, SizeKey, TextField, VariantKey } from "@sc/ui";
 import { css } from "@emotion/react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
+import Link from "next/link";
 import { useSignInMutation } from "api/sign/signIn";
 import * as S from "./signIn.styles";
 
@@ -84,7 +85,7 @@ const SignInPage = () => {
               type="password"
             />
           </S.TextBox>
-          <S.AlertText data-testid="failLogin">{alert}</S.AlertText>
+          <S.AlertText data-testid="failSignIn">{alert}</S.AlertText>
           <S.AddonBox>
             <Button href="/sign-find" variant={VariantKey.Text}>
               find ID/Password
@@ -105,15 +106,11 @@ const SignInPage = () => {
           </Button>
         </S.SignInForm>
         <S.SubmitBox>
-          <Button
-            fullWidth
-            href="/sign-up"
-            onClick={handleSubmitSignIn}
-            testId="signUp"
-            variant={VariantKey.Text}
-          >
-            Sign Up
-          </Button>
+          <Link href="/sign-up">
+            <Button fullWidth testId="signUp" variant={VariantKey.Text}>
+              Sign Up
+            </Button>
+          </Link>
         </S.SubmitBox>
       </S.SignInBox>
     </S.Container>

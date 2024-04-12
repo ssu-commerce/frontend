@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
-interface SignInRq {
+export interface SignInRq {
   id: string;
   password: string;
 }
@@ -21,10 +21,7 @@ export const useSignInMutation = (
 ) => {
   return useMutation({
     ...options,
-    mutationFn: ({ id, password }) =>
-      axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-in`, {
-        id,
-        password,
-      }),
+    mutationFn: (rq) =>
+      axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-in`, rq),
   });
 };

@@ -3,29 +3,34 @@
 import { Button, SizeKey, TextField } from "@sc/ui";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import type { SignUpRq} from "api/sign/signUp";
 import { useSignUpMutation } from "api/sign/signUp";
 import * as S from "./signUp.styles";
 
-interface SignInAccount {
-  id: string;
-  password: string;
-  rePassword: string;
-}
+type SignInAccount = SignUpRq;
 
 const SignUpPage = () => {
+  const router = useRouter();
+  const [alertText, setAlertText] = useState("");
   const [account, setAccount] = useState<SignInAccount>({
+    name: "",
     id: "",
     password: "",
-    rePassword: "",
+    confirmPassword: "",
   });
-  const { mutate: postSignUp } = useSignUpMutation();
+  const { mutate: postSignUp } = useSignUpMutation({
+    onSuccess: () => {
+      router.push("/sign-in");
+    },
+    onError: (error) => {
+      const message = error.response?.data;
+      if (message) {
+        setAlertText(message);
+      }
+    },
+  });
 
-  const alertCondition = {
-    rePassword:
-      account.password !== "" &&
-      account.rePassword !== "" &&
-      account.password !== account.rePassword,
-  };
   const handleChangeAccount = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -36,16 +41,7 @@ const SignUpPage = () => {
   };
 
   const handleSubmitSignUp = () => {
-    if (
-      account.password === account.rePassword &&
-      Boolean(account.id) &&
-      Boolean(account.password)
-    ) {
-      postSignUp({
-        id: account.id,
-        password: account.password,
-      });
-    }
+    postSignUp(account);
   };
 
   return (
@@ -53,6 +49,18 @@ const SignUpPage = () => {
       <S.SignUpBox>
         <S.Title>Sign Up</S.Title>
         <S.TextBox>
+          <S.Label>
+            name
+            <TextField
+              inputProps={{ autoComplete: "name" }}
+              name="name"
+              onChange={handleChangeAccount}
+              placeholder="NAME"
+              required
+              size={SizeKey.MD}
+              type="name"
+            />
+          </S.Label>
           <S.Label>
             ID
             <TextField
@@ -85,7 +93,7 @@ const SignUpPage = () => {
               inputProps={{
                 autoComplete: "new-password",
               }}
-              name="rePassword"
+              name="confirmPassword"
               onChange={handleChangeAccount}
               placeholder="CONFIRM PASSWORD"
               required
@@ -93,12 +101,16 @@ const SignUpPage = () => {
               type="password"
             />
           </S.Label>
-          <S.AlertText>
-            {alertCondition.rePassword ? "비밀번호가 일치하지 않습니다." : ""}
-          </S.AlertText>
+          <S.AlertText data-testid="failSignUp">{alertText}</S.AlertText>
         </S.TextBox>
         <S.SubmitBox>
-          <Button fullWidth onClick={handleSubmitSignUp} size={SizeKey.LG}>
+          <Button
+            disabled={Object.values(account).every((item) => !item)}
+            fullWidth
+            onClick={handleSubmitSignUp}
+            size={SizeKey.LG}
+            testId="signUp"
+          >
             Sign Up
           </Button>
         </S.SubmitBox>
