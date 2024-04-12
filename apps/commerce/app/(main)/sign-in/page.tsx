@@ -22,9 +22,11 @@ const SignInPage = () => {
       switch (status) {
         case 401: {
           setAlert("id or password error");
+          break;
         }
         default: {
           setAlert("");
+          break;
         }
       }
     },
