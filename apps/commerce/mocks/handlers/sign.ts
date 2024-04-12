@@ -1,7 +1,12 @@
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse, PathParams } from "msw";
+
+interface SignInDto {
+  id: string;
+  password: string;
+}
 
 const signIn = [
-  http.post(
+  http.post<PathParams, SignInDto>(
     `${process.env.NEXT_PUBLIC_API_KEY}/sign-in`,
     async ({ request }) => {
       const { id, password } = await request.json();

@@ -14,7 +14,10 @@ export function MockProvider({
 }>) {
   useEffect(() => {
     (async () => {
-      if (typeof window !== "undefined" && process.env.NEXT_MOCK_SERVER) {
+      if (
+        typeof window !== "undefined" &&
+        process.env.NEXT_PUBLIC_MOCK_SERVER
+      ) {
         const { worker } = await import("../mocks/browser");
         await worker.start();
       }
