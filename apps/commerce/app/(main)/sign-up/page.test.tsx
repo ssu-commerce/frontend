@@ -16,23 +16,33 @@ afterAll(() => {
   server.close();
 });
 
-describe("회원가입 페이지", () => {
-  it("1. 잘 그려졌는지 테스트합니다.", async () => {
-    const push = jest.fn();
+describe("회원가입 페이지", async () => {
+  const push = jest.fn();
 
-    render(
-      <AppRouterContextProviderMock router={{ push }}>
-        <Providers>
-          <Page />
-        </Providers>
-      </AppRouterContextProviderMock>,
-    );
+  render(
+    <AppRouterContextProviderMock router={{ push }}>
+      <Providers>
+        <Page />
+      </Providers>
+    </AppRouterContextProviderMock>,
+  );
 
-    const $name = await screen.findByPlaceholderText("NAME");
-    const $id = await screen.findByPlaceholderText("ID");
-    const $password = await screen.findByPlaceholderText("PASSWORD");
-    const $confirm = await screen.findByPlaceholderText("CONFIRM PASSWORD");
-    const $signUp = await screen.findByTestId("signUp");
+  const $name = await screen.findByPlaceholderText("NAME");
+  const $id = await screen.findByPlaceholderText("ID");
+  const $password = await screen.findByPlaceholderText("PASSWORD");
+  const $confirm = await screen.findByPlaceholderText("CONFIRM PASSWORD");
+  const $signUp = await screen.findByTestId("signUp");
+  const $failSignUp = await screen.findByTestId("failSignUp");
+
+  const reset = () => {
+    userEvent.clear($name);
+    userEvent.clear($id);
+    userEvent.clear($password);
+    userEvent.clear($confirm);
+  };
+
+  it("1. 잘 그려졌는지 테스트합니다.", () => {
+    reset();
 
     expect($name).toBeInTheDocument();
     expect($id).toBeInTheDocument();
@@ -42,21 +52,7 @@ describe("회원가입 페이지", () => {
   });
 
   it("2. 회원가입의 정상 동작을 테스트합니다.", async () => {
-    const push = jest.fn();
-
-    render(
-      <AppRouterContextProviderMock router={{ push }}>
-        <Providers>
-          <Page />
-        </Providers>
-      </AppRouterContextProviderMock>,
-    );
-
-    const $name = await screen.findByPlaceholderText("NAME");
-    const $id = await screen.findByPlaceholderText("ID");
-    const $password = await screen.findByPlaceholderText("PASSWORD");
-    const $confirm = await screen.findByPlaceholderText("CONFIRM PASSWORD");
-    const $signUp = await screen.findByTestId("signUp");
+    reset();
 
     await userEvent.type($name, "name");
     await userEvent.type($id, "id");
@@ -71,22 +67,7 @@ describe("회원가입 페이지", () => {
   });
 
   it("3. 회원가입의 실패 동작을 테스트합니다.", async () => {
-    const push = jest.fn();
-
-    render(
-      <AppRouterContextProviderMock router={{ push }}>
-        <Providers>
-          <Page />
-        </Providers>
-      </AppRouterContextProviderMock>,
-    );
-
-    const $name = await screen.findByPlaceholderText("NAME");
-    const $id = await screen.findByPlaceholderText("ID");
-    const $password = await screen.findByPlaceholderText("PASSWORD");
-    const $confirm = await screen.findByPlaceholderText("CONFIRM PASSWORD");
-    const $signUp = await screen.findByTestId("signUp");
-    const $failSignUp = await screen.findByTestId("failSignUp");
+    reset();
 
     expect($failSignUp).toHaveTextContent("");
 
