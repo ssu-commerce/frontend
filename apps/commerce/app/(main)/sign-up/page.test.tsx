@@ -15,18 +15,17 @@ afterEach(() => {
 afterAll(() => {
   server.close();
 });
-
-describe("회원가입 페이지", async () => {
-  const push = jest.fn();
-
+beforeEach(async () => {
   render(
-    <AppRouterContextProviderMock router={{ push }}>
+    <AppRouterContextProviderMock router={{ push: jest.fn() }}>
       <Providers>
         <Page />
       </Providers>
     </AppRouterContextProviderMock>,
   );
+});
 
+const init = async () => {
   const $name = await screen.findByPlaceholderText("NAME");
   const $id = await screen.findByPlaceholderText("ID");
   const $password = await screen.findByPlaceholderText("PASSWORD");
@@ -34,15 +33,24 @@ describe("회원가입 페이지", async () => {
   const $signUp = await screen.findByTestId("signUp");
   const $failSignUp = await screen.findByTestId("failSignUp");
 
-  const reset = () => {
-    userEvent.clear($name);
-    userEvent.clear($id);
-    userEvent.clear($password);
-    userEvent.clear($confirm);
-  };
+  userEvent.clear($name);
+  userEvent.clear($id);
+  userEvent.clear($password);
+  userEvent.clear($confirm);
 
-  it("1. 잘 그려졌는지 테스트합니다.", () => {
-    reset();
+  return {
+    $name,
+    $id,
+    $password,
+    $confirm,
+    $signUp,
+    $failSignUp,
+  };
+};
+
+describe("회원가입 페이지", async () => {
+  it("1. 잘 그려졌는지 테스트합니다.", async () => {
+    const { $name, $id, $password, $confirm, $signUp } = await init();
 
     expect($name).toBeInTheDocument();
     expect($id).toBeInTheDocument();
@@ -52,7 +60,7 @@ describe("회원가입 페이지", async () => {
   });
 
   it("2. 회원가입의 정상 동작을 테스트합니다.", async () => {
-    reset();
+    const { $name, $id, $password, $confirm, $signUp } = await init();
 
     await userEvent.type($name, "name");
     await userEvent.type($id, "id");
@@ -62,12 +70,13 @@ describe("회원가입 페이지", async () => {
 
     await waitFor(() => {
       // 새로운 페이지로의 리다이렉션 확인
-      expect(push).toHaveBeenCalledTimes(1);
+      expect(jest.fn()).toHaveBeenCalledTimes(1);
     });
   });
 
   it("3. 회원가입의 실패 동작을 테스트합니다.", async () => {
-    reset();
+    const { $name, $id, $password, $confirm, $signUp, $failSignUp } =
+      await init();
 
     expect($failSignUp).toHaveTextContent("");
 

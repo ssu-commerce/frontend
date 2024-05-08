@@ -16,15 +16,16 @@ afterAll(() => {
   server.close();
 });
 beforeEach(async () => {
-  const push = jest.fn();
   render(
-    <AppRouterContextProviderMock router={{ push }}>
+    <AppRouterContextProviderMock router={{ push: jest.fn() }}>
       <Providers>
         <Page />
       </Providers>
     </AppRouterContextProviderMock>,
   );
+});
 
+const init = async () => {
   const $id = await screen.findByPlaceholderText("ID");
   const $password = await screen.findByPlaceholderText("PASSWORD");
   const $findAccount = await screen.findByText("find ID/Password");
@@ -32,15 +33,22 @@ beforeEach(async () => {
   const $signUp = await screen.findByTestId("signUp");
   const $failSignIn = await screen.findByTestId("failSignIn");
 
-  const reset = async () => {
-    await userEvent.clear($id);
-    await userEvent.clear($password);
+  await userEvent.clear($id);
+  await userEvent.clear($password);
+
+  return {
+    $id,
+    $password,
+    $findAccount,
+    $signIn,
+    $signUp,
+    $failSignIn,
   };
-});
+};
 
 describe("로그인 페이지", () => {
   it("1. 잘 그려졌는지 테스트합니다.", async () => {
-    await reset();
+    const { $id, $password, $findAccount, $signIn, $signUp } = await init();
 
     expect($id).toBeInTheDocument();
     expect($password).toBeInTheDocument();
@@ -50,7 +58,7 @@ describe("로그인 페이지", () => {
   });
 
   it("2. 로그인의 정상 동작을 테스트합니다.", async () => {
-    await reset();
+    const { $id, $password, $signIn } = await init();
 
     await userEvent.type($id, "test");
     await userEvent.type($password, "1234");
@@ -58,12 +66,12 @@ describe("로그인 페이지", () => {
 
     await waitFor(() => {
       // 새로운 페이지로의 리다이렉션 확인
-      expect(push).toHaveBeenCalledTimes(1);
+      expect(jest.fn()).toHaveBeenCalledTimes(1);
     });
   });
 
   it("3. 로그인의 실패 동작을 테스트합니다.", async () => {
-    await reset();
+    const { $id, $password, $signIn, $failSignIn } = await init();
 
     await userEvent.type($id, "test");
     await userEvent.type($password, "123");
