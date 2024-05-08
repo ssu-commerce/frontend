@@ -6,6 +6,8 @@ import Providers from "providers/provider";
 import { server } from "mocks/server";
 import Page from "./page";
 
+const push = jest.fn();
+
 beforeAll(() => {
   server.listen();
 });
@@ -15,9 +17,9 @@ afterEach(() => {
 afterAll(() => {
   server.close();
 });
-beforeEach(async () => {
+beforeEach(() => {
   render(
-    <AppRouterContextProviderMock router={{ push: jest.fn() }}>
+    <AppRouterContextProviderMock router={{ push }}>
       <Providers>
         <Page />
       </Providers>
@@ -66,7 +68,7 @@ describe("로그인 페이지", () => {
 
     await waitFor(() => {
       // 새로운 페이지로의 리다이렉션 확인
-      expect(jest.fn()).toHaveBeenCalledTimes(1);
+      expect(push).toHaveBeenCalledTimes(1);
     });
   });
 

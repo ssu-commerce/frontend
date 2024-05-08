@@ -6,6 +6,8 @@ import Providers from "providers/provider";
 import { server } from "mocks/server";
 import Page from "./page";
 
+const push = jest.fn();
+
 beforeAll(() => {
   server.listen();
 });
@@ -15,9 +17,9 @@ afterEach(() => {
 afterAll(() => {
   server.close();
 });
-beforeEach(async () => {
+beforeEach(() => {
   render(
-    <AppRouterContextProviderMock router={{ push: jest.fn() }}>
+    <AppRouterContextProviderMock router={{ push }}>
       <Providers>
         <Page />
       </Providers>
@@ -33,10 +35,10 @@ const init = async () => {
   const $signUp = await screen.findByTestId("signUp");
   const $failSignUp = await screen.findByTestId("failSignUp");
 
-  userEvent.clear($name);
-  userEvent.clear($id);
-  userEvent.clear($password);
-  userEvent.clear($confirm);
+  await userEvent.clear($name);
+  await userEvent.clear($id);
+  await userEvent.clear($password);
+  await userEvent.clear($confirm);
 
   return {
     $name,
@@ -48,7 +50,7 @@ const init = async () => {
   };
 };
 
-describe("회원가입 페이지", async () => {
+describe("회원가입 페이지", () => {
   it("1. 잘 그려졌는지 테스트합니다.", async () => {
     const { $name, $id, $password, $confirm, $signUp } = await init();
 
@@ -70,7 +72,7 @@ describe("회원가입 페이지", async () => {
 
     await waitFor(() => {
       // 새로운 페이지로의 리다이렉션 확인
-      expect(jest.fn()).toHaveBeenCalledTimes(1);
+      expect(push).toHaveBeenCalledTimes(1);
     });
   });
 
