@@ -8,6 +8,8 @@ import Page from "./page";
 
 const push = jest.fn();
 
+const context = describe;
+
 beforeAll(() => {
   server.listen();
 });
@@ -51,54 +53,58 @@ const init = async () => {
 };
 
 describe("회원가입 페이지", () => {
-  it("1. 잘 그려졌는지 테스트합니다.", async () => {
-    const { $name, $id, $password, $confirm, $signUp } = await init();
+  context("렌더링", () => {
+    it("1. 컴포넌트 확인", async () => {
+      const { $name, $id, $password, $confirm, $signUp } = await init();
 
-    expect($name).toBeInTheDocument();
-    expect($id).toBeInTheDocument();
-    expect($password).toBeInTheDocument();
-    expect($confirm).toBeInTheDocument();
-    expect($signUp).toBeDisabled();
-  });
-
-  it("2. 회원가입의 정상 동작을 테스트합니다.", async () => {
-    const { $name, $id, $password, $confirm, $signUp } = await init();
-
-    await userEvent.type($name, "name");
-    await userEvent.type($id, "id");
-    await userEvent.type($password, "1234");
-    await userEvent.type($confirm, "1234");
-    await userEvent.click($signUp);
-
-    await waitFor(() => {
-      // 새로운 페이지로의 리다이렉션 확인
-      expect(push).toHaveBeenCalledTimes(1);
+      expect($name).toBeInTheDocument();
+      expect($id).toBeInTheDocument();
+      expect($password).toBeInTheDocument();
+      expect($confirm).toBeInTheDocument();
+      expect($signUp).toBeDisabled();
     });
   });
 
-  it("3. 회원가입의 실패 동작을 테스트합니다.", async () => {
-    const { $name, $id, $password, $confirm, $signUp, $failSignUp } =
-      await init();
+  context("계정 입력", () => {
+    it("2. 정상 입력", async () => {
+      const { $name, $id, $password, $confirm, $signUp } = await init();
 
-    expect($failSignUp).toHaveTextContent("");
+      await userEvent.type($name, "name");
+      await userEvent.type($id, "id");
+      await userEvent.type($password, "1234");
+      await userEvent.type($confirm, "1234");
+      await userEvent.click($signUp);
 
-    await userEvent.type($name, "name");
-    await userEvent.type($id, "duplicate");
-    await userEvent.type($password, "1234");
-    await userEvent.type($confirm, "123");
-    await userEvent.click($signUp);
-
-    await waitFor(() => {
-      // 새로운 페이지로의 리다이렉션 확인
-      expect($failSignUp).toHaveTextContent("duplicate name");
+      await waitFor(() => {
+        // 새로운 페이지로의 리다이렉션 확인
+        expect(push).toHaveBeenCalledTimes(1);
+      });
     });
 
-    await userEvent.type($id, "notDuplicate");
-    await userEvent.click($signUp);
+    it("3. 중복 계정 입력", async () => {
+      const { $name, $id, $password, $confirm, $signUp, $failSignUp } =
+        await init();
 
-    await waitFor(() => {
-      // 새로운 페이지로의 리다이렉션 확인
-      expect($failSignUp).toHaveTextContent("not match password");
+      expect($failSignUp).toHaveTextContent("");
+
+      await userEvent.type($name, "name");
+      await userEvent.type($id, "duplicate");
+      await userEvent.type($password, "1234");
+      await userEvent.type($confirm, "123");
+      await userEvent.click($signUp);
+
+      await waitFor(() => {
+        // 새로운 페이지로의 리다이렉션 확인
+        expect($failSignUp).toHaveTextContent("duplicate name");
+      });
+
+      await userEvent.type($id, "notDuplicate");
+      await userEvent.click($signUp);
+
+      await waitFor(() => {
+        // 새로운 페이지로의 리다이렉션 확인
+        expect($failSignUp).toHaveTextContent("not match password");
+      });
     });
   });
 });

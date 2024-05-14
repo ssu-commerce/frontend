@@ -6,7 +6,7 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "test": "jest",
+    "test": "jest --verbose --coverage --ci --maxWorkers=2",
     "test:watch": "jest --watch",
     "lint": "next lint --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"

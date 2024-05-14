@@ -8,6 +8,8 @@ import Page from "./page";
 
 const push = jest.fn();
 
+const context = describe;
+
 beforeAll(() => {
   server.listen();
 });
@@ -49,39 +51,43 @@ const init = async () => {
 };
 
 describe("로그인 페이지", () => {
-  it("1. 잘 그려졌는지 테스트합니다.", async () => {
-    const { $id, $password, $findAccount, $signIn, $signUp } = await init();
+  context("렌더링", () => {
+    it("1. 컴포넌트 확인", async () => {
+      const { $id, $password, $findAccount, $signIn, $signUp } = await init();
 
-    expect($id).toBeInTheDocument();
-    expect($password).toBeInTheDocument();
-    expect($findAccount).toBeInTheDocument();
-    expect($signUp).toBeInTheDocument();
-    expect($signIn).toBeDisabled();
-  });
-
-  it("2. 로그인의 정상 동작을 테스트합니다.", async () => {
-    const { $id, $password, $signIn } = await init();
-
-    await userEvent.type($id, "test");
-    await userEvent.type($password, "1234");
-    await userEvent.click($signIn);
-
-    await waitFor(() => {
-      // 새로운 페이지로의 리다이렉션 확인
-      expect(push).toHaveBeenCalledTimes(1);
+      expect($id).toBeInTheDocument();
+      expect($password).toBeInTheDocument();
+      expect($findAccount).toBeInTheDocument();
+      expect($signUp).toBeInTheDocument();
+      expect($signIn).toBeDisabled();
     });
   });
 
-  it("3. 로그인의 실패 동작을 테스트합니다.", async () => {
-    const { $id, $password, $signIn, $failSignIn } = await init();
+  context("계정 입력", () => {
+    it("2. 정상 입력", async () => {
+      const { $id, $password, $signIn } = await init();
 
-    await userEvent.type($id, "test");
-    await userEvent.type($password, "123");
-    await userEvent.click($signIn);
+      await userEvent.type($id, "test");
+      await userEvent.type($password, "1234");
+      await userEvent.click($signIn);
 
-    await waitFor(() => {
-      // 새로운 페이지로의 리다이렉션 확인
-      expect($failSignIn).toHaveTextContent("id or password error");
+      await waitFor(() => {
+        // 새로운 페이지로의 리다이렉션 확인
+        expect(push).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    it("3. 비밀번호 오류", async () => {
+      const { $id, $password, $signIn, $failSignIn } = await init();
+
+      await userEvent.type($id, "test");
+      await userEvent.type($password, "123");
+      await userEvent.click($signIn);
+
+      await waitFor(() => {
+        // 새로운 페이지로의 리다이렉션 확인
+        expect($failSignIn).toHaveTextContent("id or password error");
+      });
     });
   });
 });
