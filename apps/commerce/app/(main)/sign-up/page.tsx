@@ -4,9 +4,17 @@ import { Button, SizeKey, TextField } from "@sc/ui";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { SignUpRq } from "api/sign/signUp";
-import { useSignUpMutation } from "api/sign/signUp";
+import { useMutation } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import axios from "axios";
 import * as S from "./signUp.styles";
+
+export interface SignUpRq {
+  name: string;
+  id: string;
+  password: string;
+  confirmPassword: string;
+}
 
 type SignInAccount = SignUpRq;
 
@@ -19,7 +27,13 @@ const SignUpPage = () => {
     password: "",
     confirmPassword: "",
   });
-  const { mutate: postSignUp } = useSignUpMutation({
+  const { mutate: postSignUp } = useMutation<
+    boolean,
+    AxiosError<string>,
+    SignUpRq
+  >({
+    mutationFn: (rq) =>
+      axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-up`, rq),
     onSuccess: () => {
       router.push("/sign-in");
     },
