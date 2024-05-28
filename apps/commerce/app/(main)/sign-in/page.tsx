@@ -6,27 +6,49 @@ import { css } from "@emotion/react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import Link from "next/link";
-import { useSignInMutation } from "api/sign/signIn";
+import { useMutation } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import axios from "axios";
 import * as S from "./signIn.styles";
 
+export interface SignInRq {
+  id: string;
+  password: string;
+}
+
+export interface SignInRs {
+  accessToken: string;
+}
+
 const SignInPage = () => {
+  const router = useRouter();
   const [account, setAccount] = useState({
     id: "",
     password: "",
   });
   const [alert, setAlert] = useState("");
-  const router = useRouter();
-
-  const { mutate: postSignIn } = useSignInMutation({
+  const { mutate: postSignIn } = useMutation<
+    SignInRs,
+    AxiosError<string>,
+    SignInRq
+  >({
+    mutationFn: (rq) =>
+      axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-in`, rq),
     onError: (error) => {
       const status = error.response?.status;
+      const message = error.response?.data;
+
       switch (status) {
         case 401: {
           setAlert("id or password error");
           break;
         }
         default: {
-          setAlert("");
+          if (message) {
+            setAlert(message);
+            break;
+          }
+          setAlert("login error");
           break;
         }
       }

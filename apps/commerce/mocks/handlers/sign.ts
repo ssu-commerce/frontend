@@ -1,5 +1,5 @@
-import type { SignInRq } from "api/sign/signIn";
-import type { SignUpRq } from "api/sign/signUp";
+import type { SignInRq } from "app/(main)/sign-in/page";
+import type { SignUpRq } from "app/(main)/sign-up/page";
 import { http, HttpResponse, PathParams } from "msw";
 
 const signIn = [
