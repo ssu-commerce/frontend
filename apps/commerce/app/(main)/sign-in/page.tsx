@@ -1,20 +1,41 @@
 "use client";
 
-import { Button, Checkbox, SizeKey, TextField, VariantKey } from "@sc/ui";
+import { useRouter } from "next/navigation";
+import { Button, SizeKey, TextField, VariantKey } from "@sc/ui";
 import { css } from "@emotion/react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
+import Link from "next/link";
 import { useSignInMutation } from "api/sign/signIn";
 import * as S from "./signIn.styles";
 
 const SignInPage = () => {
-  const [remember, setRemember] = useState(false);
   const [account, setAccount] = useState({
     id: "",
     password: "",
   });
+  const [alert, setAlert] = useState("");
+  const router = useRouter();
 
-  const { mutate: postSignIn } = useSignInMutation();
+  const { mutate: postSignIn } = useSignInMutation({
+    onError: (error) => {
+      const status = error.response?.status;
+      switch (status) {
+        case 401: {
+          setAlert("id or password error");
+          break;
+        }
+        default: {
+          setAlert("");
+          break;
+        }
+      }
+    },
+    onSuccess: (data) => {
+      sessionStorage.setItem("accessToken", data.accessToken);
+      router.push("/");
+    },
+  });
 
   const handleSubmitSignIn = (e: FormEvent) => {
     e.preventDefault();
@@ -24,11 +45,6 @@ const SignInPage = () => {
         password: account.password,
       });
     }
-  };
-
-  const handleClickRemember = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setRemember(!remember);
   };
 
   const handleChangeAccount = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,17 +85,9 @@ const SignInPage = () => {
               type="password"
             />
           </S.TextBox>
+          <S.AlertText data-testid="failSignIn">{alert}</S.AlertText>
           <S.AddonBox>
-            <Checkbox checked={remember} onChange={handleClickRemember}>
-              remember
-            </Checkbox>
-            <Button
-              css={css`
-                width: fit-content;
-              `}
-              href="/sign-find"
-              variant={VariantKey.Text}
-            >
+            <Button href="/sign-find" variant={VariantKey.Text}>
               find ID/Password
             </Button>
           </S.AddonBox>
@@ -88,22 +96,21 @@ const SignInPage = () => {
               width: 300px;
               margin-top: 16px;
             `}
+            disabled={account.id === "" && account.password === ""}
             onClick={handleSubmitSignIn}
             size={SizeKey.LG}
+            testId="signIn"
             type="submit"
           >
             Sign In
           </Button>
         </S.SignInForm>
         <S.SubmitBox>
-          <Button
-            fullWidth
-            href="/sign-up"
-            onClick={handleSubmitSignIn}
-            variant={VariantKey.Text}
-          >
-            Sign Up
-          </Button>
+          <Link href="/sign-up">
+            <Button fullWidth testId="signUp" variant={VariantKey.Text}>
+              Sign Up
+            </Button>
+          </Link>
         </S.SubmitBox>
       </S.SignInBox>
     </S.Container>

@@ -6,7 +6,7 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "test": "jest",
+    "test": "jest --verbose --coverage --ci --maxWorkers=2",
     "test:watch": "jest --watch",
     "lint": "next lint --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"
@@ -38,6 +38,7 @@
     "@tanstack/eslint-plugin-query": "^5.17.7",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/node": "^18.17.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
@@ -46,7 +47,8 @@
     "jest-environment-jsdom": "^29.6.4",
     "msw": "^2.2.12",
     "tsconfig-sc": "workspace:*",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "undici": "^5.28.3"
   },
   "msw": {
     "workerDirectory": [

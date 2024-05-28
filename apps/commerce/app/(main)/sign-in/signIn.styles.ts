@@ -33,6 +33,13 @@ export const TextBox = styled.div`
   gap: 16px;
 `;
 
+export const AlertText = styled.p`
+  color: #dc2626;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+`;
+
 export const AddonBox = styled.div`
   display: flex;
   justify-content: space-between;

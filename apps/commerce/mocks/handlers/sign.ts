@@ -1,14 +1,39 @@
-import { http, HttpResponse } from "msw";
+import type { SignInRq } from "api/sign/signIn";
+import type { SignUpRq } from "api/sign/signUp";
+import { http, HttpResponse, PathParams } from "msw";
 
 const signIn = [
-  http.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-in`, () => {
-    return HttpResponse.json({
-      accessToken: "123",
-    });
-  }),
-  http.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-up`, () => {
-    return HttpResponse.json();
-  }),
+  http.post<PathParams, SignInRq>(
+    `${process.env.NEXT_PUBLIC_API_KEY}/sign-in`,
+    async ({ request }) => {
+      const { id, password } = await request.json();
+
+      if (id === "test" && password === "1234") {
+        return HttpResponse.json(
+          {
+            accessToken: "accessToken 123",
+          },
+          { status: 200 },
+        );
+      }
+
+      return HttpResponse.json("login fail", { status: 401 });
+    },
+  ),
+  http.post<PathParams, SignUpRq>(
+    `${process.env.NEXT_PUBLIC_API_KEY}/sign-up`,
+    async ({ request }) => {
+      const { id, password, confirmPassword } = await request.json();
+
+      if (id === "duplicate") {
+        return HttpResponse.json("duplicate name", { status: 500 });
+      } else if (password !== confirmPassword) {
+        return HttpResponse.json("not match password", { status: 500 });
+      }
+
+      return HttpResponse.json({}, { status: 200 });
+    },
+  ),
 ];
 
 export default signIn;
