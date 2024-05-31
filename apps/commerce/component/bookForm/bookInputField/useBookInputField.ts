@@ -1,8 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import type { ChangeEvent } from "react";
-import { numerizeInput } from "../../../utils/common/input.util";
+import { numerizeInput } from "utils/common/input.util";
 
-const useBookEnrollInputField = () => {
+const useBookInputField = () => {
   const { register, setValue } = useFormContext();
 
   const titleRegister = register("title", { required: true });
@@ -36,4 +36,4 @@ const useBookEnrollInputField = () => {
   };
 };
 
-export default useBookEnrollInputField;
+export default useBookInputField;

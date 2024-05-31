@@ -1,4 +1,4 @@
-import { BookEnrollForm } from "component/bookEnrollForm/bookEnrollForm";
+import { BookEnrollForm } from "component/bookForm/bookEnrollForm";
 
 const EnrollBookPage = () => {
   return <BookEnrollForm />;

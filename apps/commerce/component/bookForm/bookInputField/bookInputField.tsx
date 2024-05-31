@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import useBookEnrollInputField from "component/bookEnrollForm/bookEnrollInputField/useBookEnrollInputField";
+import useBookInputField from "component/bookForm/bookInputField/useBookInputField";
 
-const BookEnrollInputField = () => {
+const BookInputField = () => {
   const {
     titleRegister,
     contentRegister,
@@ -11,7 +11,7 @@ const BookEnrollInputField = () => {
     isbnRegister,
     categoryIdRegister,
     maxBorrowDayRegister,
-  } = useBookEnrollInputField();
+  } = useBookInputField();
   return (
     <Fragment>
       <input {...titleRegister} />
@@ -26,4 +26,4 @@ const BookEnrollInputField = () => {
   );
 };
 
-export default BookEnrollInputField;
+export default BookInputField;

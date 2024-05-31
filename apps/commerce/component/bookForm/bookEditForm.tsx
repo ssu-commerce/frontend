@@ -1,9 +1,10 @@
 "use client";
-import { FormProvider, useForm } from "react-hook-form";
-import type RegisterBookRequestDto from "../../interfaces/dtos/RegisterBookRequestDto";
-import BookEnrollInputField from "component/bookEnrollForm/bookEnrollInputField/bookEnrollInputField";
 
-export const BookEnrollForm = () => {
+import { FormProvider, useForm } from "react-hook-form";
+import BookInputField from "./bookInputField/bookInputField";
+import type RegisterBookRequestDto from "interfaces/dtos/RegisterBookRequestDto";
+
+export const BookEditForm = () => {
   const methods = useForm<RegisterBookRequestDto>();
 
   const onSubmit = (data: RegisterBookRequestDto) => {
@@ -13,7 +14,7 @@ export const BookEnrollForm = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <BookEnrollInputField />
+        <BookInputField />
         <button type="submit">Submit</button>
       </form>
     </FormProvider>
