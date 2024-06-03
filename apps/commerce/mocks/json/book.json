@@ -1,0 +1,32 @@
+{
+  "1": {
+    "title": "Book 1",
+    "content": null,
+    "writer": "Author 1",
+    "price": 0,
+    "publishDate": null,
+    "isbn": "1",
+    "maxBorrowDay": 0,
+    "categoryId": ""
+  },
+  "2": {
+    "title": "Book 2",
+    "content": null,
+    "writer": "Author 2",
+    "price": 0,
+    "publishDate": null,
+    "isbn": "2",
+    "maxBorrowDay": 0,
+    "categoryId": ""
+  },
+  "3": {
+    "title": "Book 3",
+    "content": null,
+    "writer": "Author 3",
+    "price": 0,
+    "publishDate": null,
+    "isbn": "3",
+    "maxBorrowDay": 0,
+    "categoryId": ""
+  }
+}
