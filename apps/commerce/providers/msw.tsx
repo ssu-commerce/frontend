@@ -12,17 +12,14 @@ export function MockProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    (async () => {
-      if (
-        typeof window !== "undefined" &&
-        process.env.NEXT_PUBLIC_MOCK_SERVER
-      ) {
-        const { worker } = await import("../mocks/browser");
-        await worker.start();
-      }
-    })();
-  }, []);
-
+  (async () => {
+    if (typeof window === "undefined") {
+      const { server } = await import("../mocks/server");
+      server.listen();
+    } else {
+      const { worker } = await import("../mocks/browser");
+      await worker.start();
+    }
+  })();
   return <>{children}</>;
 }

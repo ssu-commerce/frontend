@@ -32,8 +32,8 @@ const SignInPage = () => {
     AxiosError<string>,
     SignInRq
   >({
-    mutationFn: async (rq) =>
-      await axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-in`, rq),
+    mutationFn: (rq) =>
+      axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/sign-in`, rq),
     onError: (error) => {
       const status = error.response?.status;
       const message = error.response?.data;
