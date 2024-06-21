@@ -3,6 +3,13 @@ import type { SignUpRq } from "app/(main)/sign-up/page";
 import { http, HttpResponse, PathParams } from "msw";
 
 const signIn = [
+  http.get("*", async ({ request }) => {
+    console.log("all request", request);
+    if (!request.headers.get("x-msw-intention")) {
+      // return fetch(request);
+      // return HttpResponse.json("mocking", { status: 200 });
+    }
+  }),
   http.post<PathParams, SignInRq>(
     `${process.env.NEXT_PUBLIC_API_KEY}/sign-in`,
     async ({ request }) => {

@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 
 /**
  * 참조 링크
@@ -7,19 +6,17 @@ import { useEffect } from "react";
  * draft pr : https://github.com/mswjs/examples/pull/101
  */
 
-export function MockProvider({
+export async function MockProvider({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  (async () => {
-    if (typeof window === "undefined") {
-      const { server } = await import("../mocks/server");
-      server.listen();
-    } else {
-      const { worker } = await import("../mocks/browser");
-      await worker.start();
-    }
-  })();
+  if (typeof window === "undefined") {
+    const { server } = await import("../mocks/server");
+    server.listen();
+  } else {
+    const { worker } = await import("../mocks/browser");
+    await worker.start();
+  }
   return <>{children}</>;
 }

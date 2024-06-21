@@ -8,12 +8,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import type { AxiosError } from "axios";
 
+axios.defaults.headers["x-msw-intention"] = "true";
+
 export const BookEditForm = ({ bookId }) => {
   const methods = useForm<RegisterBookRequestDto>();
 
   const { data, isSuccess } = useQuery<RegisterBookRequestDto>({
     queryKey: ["book", "edit", bookId],
-    queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_API_KEY}/book-comm`),
+    queryFn: () => {
+      console.log(
+        "-------------------------------- fetch /book?id=1 --------------------------------",
+      );
+      return axios.get(`${process.env.NEXT_PUBLIC_API_KEY}/book?id=${bookId}`);
+    },
   });
   const [alert, setAlert] = useState("");
 
@@ -25,7 +32,6 @@ export const BookEditForm = ({ bookId }) => {
     mutationFn: async (rq) =>
       await axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/book/edit`, rq),
     onError: (error) => {
-      console.log("error", error.response?.data);
       const status = error.response?.status;
       const message = error.response?.data;
 
@@ -54,7 +60,6 @@ export const BookEditForm = ({ bookId }) => {
   }, [isSuccess]);
 
   const onSubmit = (data: RegisterBookRequestDto) => {
-    console.log(data);
     editBook(data);
   };
 

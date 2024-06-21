@@ -1,14 +1,14 @@
 export const MOCK = {
   bookList: [
     {
-      href: "/book",
+      href: "/book/edit/1",
       previewSrc: "/assets/mock-image/image1.png",
       title: "title 1",
       subtitle: "subtitle 1",
       price: 100000,
     },
     {
-      href: "/book",
+      href: "/book/edit/2",
       previewSrc: "/assets/mock-image/image2.png",
       title: "title 2",
       subtitle: "subtitle 2",
