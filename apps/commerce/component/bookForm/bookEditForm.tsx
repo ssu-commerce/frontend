@@ -51,6 +51,7 @@ export const BookEditForm = ({ bookId }) => {
 
   useEffect(() => {
     if (isSuccess) {
+      console.log(data);
       methods.reset(data);
     }
   }, [isSuccess]);

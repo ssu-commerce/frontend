@@ -2,24 +2,17 @@ import Link from "next/link";
 import * as S from "./styles";
 import Image from "next/image";
 import { addComma } from "@sc/utils";
-
-interface BiViewItem {
-  href: string;
-  previewSrc: string;
-  title: string;
-  subtitle: string;
-  price: number;
-}
+import { BookDto } from "interfaces/dtos/BookRequestDto";
 
 interface BiViewProps {
-  item: BiViewItem;
+  item: BookDto;
 }
 
 export const BiView = ({ item }: BiViewProps) => {
-  const { href, previewSrc, title, subtitle, price } = item;
+  const { previewSrc, title, subtitle, price, isbn } = item;
   return (
     <S.Wrapper>
-      <Link href={href}>
+      <Link href={`/book/edit/${isbn}`}>
         <Image
           src={previewSrc}
           alt="book-card"

@@ -28,7 +28,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
     // Handle the response data here
-    return response;
+    return response.data;
   },
   (error) => {
     return Promise.reject(error);

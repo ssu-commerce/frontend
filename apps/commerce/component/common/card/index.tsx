@@ -2,20 +2,17 @@ import Link from "next/link";
 import * as S from "./styles";
 import Image from "next/image";
 import { addComma } from "@sc/utils";
+import { BookDto } from "interfaces/dtos/BookRequestDto";
 
-export interface CardItem {
-  href: string;
-  previewSrc: string;
-  title: string;
-  subtitle: string;
-  price: number;
+interface CardViewProps {
+  item: BookDto;
 }
 
-export const Card = ({ item }: { item: CardItem }) => {
-  const { href, previewSrc, title, subtitle, price } = item;
+export const Card = ({ item }: CardViewProps) => {
+  const { previewSrc, title, subtitle, price, isbn } = item;
   return (
     <S.Wrapper>
-      <Link href={href}>
+      <Link href={`/book/edit/${isbn}`}>
         <Image
           src={previewSrc}
           alt="book-card"

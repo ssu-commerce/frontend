@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, ColorKey, SizeKey, TextField, VariantKey } from "@sc/ui";
-import type { MouseEvent } from "react";
+import type { ChangeEvent, MouseEvent } from "react";
 import { useState } from "react";
 import FilterIcon from "assets/svg/filter_icon.svg";
 import BigRoundIcon from "assets/svg/grid_big_round_icon.svg";
@@ -9,15 +9,42 @@ import BiViewListIcon from "assets/svg/bi_view_list_icon.svg";
 import { Card } from "component/common/card";
 import { Pagination } from "component/common/pagination";
 import { BiView } from "component/common/biView";
-import { MOCK } from "../../../mocks/json/constants";
 import * as S from "./book.styles";
 import { ViewMode } from "./book.constants";
+import axios from "utils/common/axios";
+import { useQuery } from "@tanstack/react-query";
+import BookListRequestDto from "interfaces/dtos/BookRequestDto";
 
 const BookList = (): JSX.Element => {
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Around);
   const [currentPage, setCurrentPage] = useState(1);
+  const [size, setSize] = useState("6");
+
+  const {
+    data: bookList = {
+      list: [],
+      pageUtil: {
+        size: 6,
+        total: 0,
+      },
+    },
+    isSuccess,
+  } = useQuery<BookListRequestDto>({
+    queryKey: ["book", "list", currentPage],
+    queryFn: () => {
+      return axios.get(
+        `${process.env.NEXT_PUBLIC_API_KEY}/book/list?page=${currentPage}&size=6`,
+      );
+    },
+  });
+
   const handleMovePage = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const handleChangeSize = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSize(e.target.value);
   };
 
   const changeViewMode = (e: MouseEvent) => {
@@ -25,6 +52,8 @@ const BookList = (): JSX.Element => {
     const { value } = e.currentTarget as HTMLButtonElement;
     setViewMode(value as ViewMode);
   };
+
+  if (!isSuccess) return <div>Loading...</div>;
 
   return (
     <S.BookSection>
@@ -53,7 +82,10 @@ const BookList = (): JSX.Element => {
           value={ViewMode.Bi}
           variant={VariantKey.Text}
         />
-        <S.Status>Showing 1–16 of 32 results</S.Status>
+        <S.Status>
+          Showing {currentPage} {currentPage + size} of{" "}
+          {bookList.pageUtil.total} results
+        </S.Status>
         <S.Sort>
           <S.SortItem>
             <S.SortLabel>Show</S.SortLabel>
@@ -62,6 +94,8 @@ const BookList = (): JSX.Element => {
               css={{ width: "56px" }}
               placeholder="16"
               size={SizeKey.MD}
+              value={size}
+              onChange={handleChangeSize}
             />
           </S.SortItem>
           <S.SortItem>
@@ -77,9 +111,9 @@ const BookList = (): JSX.Element => {
       </S.Filter>
       {viewMode === ViewMode.Around && (
         <S.CardView>
-          {MOCK.bookList.map((item) => {
+          {bookList.list.map((item) => {
             return (
-              <S.Item key={item.previewSrc}>
+              <S.Item key={item.isbn}>
                 <Card item={item} />
               </S.Item>
             );
@@ -88,9 +122,9 @@ const BookList = (): JSX.Element => {
       )}
       {viewMode === ViewMode.Bi && (
         <S.BiView>
-          {MOCK.bookList.map((item) => {
+          {bookList.list.map((item) => {
             return (
-              <S.Item key={item.previewSrc}>
+              <S.Item key={item.isbn}>
                 <BiView item={item} />
               </S.Item>
             );
@@ -100,7 +134,7 @@ const BookList = (): JSX.Element => {
       <S.Page>
         <Pagination
           currentPage={currentPage}
-          lastPage={10}
+          lastPage={bookList.pageUtil.total / bookList.pageUtil.size}
           onClick={handleMovePage}
         />
       </S.Page>

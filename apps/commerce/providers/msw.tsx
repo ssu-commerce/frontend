@@ -1,13 +1,11 @@
 "use client";
-import { useEffect } from "react";
-
 /**
  * 참조 링크
  * https://github.com/mswjs/msw/issues/1644
  * draft pr : https://github.com/mswjs/examples/pull/101
  */
 
-export function MockProvider({
+export async function MockProvider({
   children,
 }: Readonly<{
   children: React.ReactNode;
