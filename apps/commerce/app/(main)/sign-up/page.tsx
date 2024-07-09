@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import axios from "axios";
+import axios from "utils/common/axios";
 import * as S from "./signUp.styles";
 
 export interface SignUpRq {

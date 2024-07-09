@@ -8,7 +8,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import axios from "axios";
+import axios from "utils/common/axios";
 import * as S from "./signIn.styles";
 
 export interface SignInRq {

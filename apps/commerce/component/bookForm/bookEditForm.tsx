@@ -4,16 +4,18 @@ import { FormProvider, useForm } from "react-hook-form";
 import BookInputField from "./bookInputField/bookInputField";
 import type RegisterBookRequestDto from "interfaces/dtos/RegisterBookRequestDto";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import type { AxiosError } from "axios";
+import axios from "utils/common/axios";
 
 export const BookEditForm = ({ bookId }) => {
   const methods = useForm<RegisterBookRequestDto>();
 
   const { data, isSuccess } = useQuery<RegisterBookRequestDto>({
     queryKey: ["book", "edit", bookId],
-    queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_API_KEY}/book-comm`),
+    queryFn: () => {
+      return axios.get(`${process.env.NEXT_PUBLIC_API_KEY}/book?id=${bookId}`);
+    },
   });
   const [alert, setAlert] = useState("");
 

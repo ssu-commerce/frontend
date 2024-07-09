@@ -1,6 +1,6 @@
 import type { SignInRq } from "app/(main)/sign-in/page";
 import type { SignUpRq } from "app/(main)/sign-up/page";
-import { http, HttpResponse, PathParams } from "msw";
+import { http, HttpResponse, passthrough, PathParams } from "msw";
 
 const signIn = [
   http.post<PathParams, SignInRq>(

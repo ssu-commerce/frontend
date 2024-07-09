@@ -1,4 +1,5 @@
 import book from "./book";
 import sign from "./sign";
+import common from "./common";
 
-export const handlers = [...sign, ...book];
+export const handlers = [...common, ...sign, ...book];

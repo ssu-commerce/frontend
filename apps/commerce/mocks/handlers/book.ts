@@ -6,7 +6,7 @@ const bookMap = new Map<string, any>(Object.entries(bookData));
 
 const book = [
   http.get<PathParams>(
-    `${process.env.NEXT_PUBLIC_API_KEY}/book-comm`,
+    `${process.env.NEXT_PUBLIC_API_KEY}/book/:id`,
     async ({ request }) => {
       try {
         console.log("get all");
@@ -16,6 +16,8 @@ const book = [
         console.log(productId);
         if (productId)
           return HttpResponse.json(bookMap.get(productId), { status: 200 });
+
+        throw new Error("productId is missing");
       } catch (e) {
         return HttpResponse.json("get fail", { status: 401 });
       }
