@@ -56,12 +56,13 @@ const book = [
     async ({ request }) => {
       try {
         const data = await request.json();
-
-        bookMap.set(data.isbn, data);
-
-        return HttpResponse.json({ status: 200 });
+        if (data.bookId) {
+          bookMap.set(data.bookId, data);
+          return HttpResponse.json({ status: 200 });
+        }
+        return HttpResponse.json("none id", { status: 401 });
       } catch (e) {
-        return HttpResponse.json("enroll fail", { status: 401 });
+        return HttpResponse.json(e);
       }
     },
   ),

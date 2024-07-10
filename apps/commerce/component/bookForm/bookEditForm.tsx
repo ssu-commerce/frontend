@@ -7,11 +7,15 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import type { AxiosError } from "axios";
 import axios from "utils/common/axios";
+import { Button } from "@sc/ui";
+import * as S from "./book.styles";
+import { useRouter } from "next/navigation";
+import useBookInputField from "./bookInputField/useBookInputField";
 
 export const BookEditForm = ({ bookId }) => {
   const methods = useForm<RegisterBookRequestDto>();
-
-  const { data, isSuccess } = useQuery<RegisterBookRequestDto>({
+  const router = useRouter();
+  const { data, isSuccess, isLoading } = useQuery<RegisterBookRequestDto>({
     queryKey: ["book", "edit", bookId],
     queryFn: () => {
       return axios.get(`${process.env.NEXT_PUBLIC_API_KEY}/book?id=${bookId}`);
@@ -27,46 +31,47 @@ export const BookEditForm = ({ bookId }) => {
     mutationFn: async (rq) =>
       await axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/book/edit`, rq),
     onError: (error) => {
-      console.log("error", error.response?.data);
       const status = error.response?.status;
       const message = error.response?.data;
-
-      switch (status) {
-        case 401: {
-          setAlert("id or password error");
-          break;
-        }
-        default: {
-          if (message) {
-            setAlert(message);
-            break;
-          }
-          setAlert("login error");
-          break;
-        }
+      console.log(error);
+      if (message) {
+        setAlert(message);
       }
     },
-    onSuccess: (data) => {},
+    onSuccess: (data) => {
+      if (data) {
+        // TODO: book/info/:id로 이동해야함
+        router.push(`/book`, { scroll: false });
+      }
+    },
   });
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
       methods.reset(data);
     }
   }, [isSuccess]);
 
   const onSubmit = (data: RegisterBookRequestDto) => {
-    console.log(data);
-    editBook(data);
+    editBook({
+      ...data,
+      bookId,
+    });
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <BookInputField />
-        <button type="submit">Submit</button>
-      </form>
-    </FormProvider>
+    <S.Container>
+      <S.Title>Eidt Book Info</S.Title>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <S.Content>
+            <BookInputField loading={isLoading} />
+          </S.Content>
+          <S.Submit>
+            <Button type="submit">Edit</Button>
+          </S.Submit>
+        </form>
+      </FormProvider>
+    </S.Container>
   );
 };

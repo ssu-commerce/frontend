@@ -9,4 +9,5 @@ export default interface RegisterBookRequestDto {
   isbn: string; // not '';
   maxBorrowDay: number; // not null;
   categoryId: UUID; // not null;
+  bookId?: UUID;
 }
