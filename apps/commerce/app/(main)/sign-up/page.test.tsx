@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { AppRouterContextProviderMock } from "providers/mockRouter";
-import Providers from "providers/provider";
+import Providers from "providers/testProvider";
 import { server } from "mocks/server";
 import Page from "./page";
 
@@ -76,7 +76,6 @@ describe("회원가입 페이지", () => {
       await userEvent.click($signUp);
 
       await waitFor(() => {
-        // 새로운 페이지로의 리다이렉션 확인
         expect(push).toHaveBeenCalledTimes(1);
       });
     });
@@ -94,7 +93,6 @@ describe("회원가입 페이지", () => {
       await userEvent.click($signUp);
 
       await waitFor(() => {
-        // 새로운 페이지로의 리다이렉션 확인
         expect($failSignUp).toHaveTextContent("duplicate name");
       });
 
@@ -102,7 +100,6 @@ describe("회원가입 페이지", () => {
       await userEvent.click($signUp);
 
       await waitFor(() => {
-        // 새로운 페이지로의 리다이렉션 확인
         expect($failSignUp).toHaveTextContent("not match password");
       });
     });

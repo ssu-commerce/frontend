@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { AppRouterContextProviderMock } from "providers/mockRouter";
-import Providers from "providers/provider";
+import Providers from "providers/testProvider";
 import { server } from "mocks/server";
 import Page from "./page";
 
@@ -71,8 +71,8 @@ describe("로그인 페이지", () => {
       await userEvent.type($password, "1234");
       await userEvent.click($signIn);
 
+      // 새로운 페이지로의 리다이렉션 확인
       await waitFor(() => {
-        // 새로운 페이지로의 리다이렉션 확인
         expect(push).toHaveBeenCalledTimes(1);
       });
     });
@@ -85,7 +85,6 @@ describe("로그인 페이지", () => {
       await userEvent.click($signIn);
 
       await waitFor(() => {
-        // 새로운 페이지로의 리다이렉션 확인
         expect($failSignIn).toHaveTextContent("id or password error");
       });
     });
