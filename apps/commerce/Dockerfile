@@ -10,10 +10,10 @@ RUN apk update
 
 # set working dir
 WORKDIR /app
-RUN npm install -g turbo
+RUN npm install -g turbo@1.12.4
 COPY . .
 # package-lock이 프로젝트간에 간섭을 일으키는 경우를 위한 해결책
-RUN turbo prune --scope=commerce --docker
+RUN turbo prune --scope=@sc/commerce --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -31,7 +31,7 @@ RUN pnpm install ---frozen-lockfile
 
 # build project
 COPY --from=builder /app/out/full/ .
-RUN turbo run build --filter=commerce...
+RUN turbo run build --filter=@sc/commerce...
 
 FROM base as runner
 WORKDIR /app
