@@ -9,7 +9,8 @@
         "!.next/cache/**",
         "storybook-static/**",
         "dist/**"
-      ]
+      ],
+      "env": ["NEXT_PUBLIC_API_KEY"]
     },
     "lint": {
       "dependsOn": ["build"]

@@ -21,6 +21,7 @@ services:
       - 3000:3000
     networks:
       - app_network
+    image: ghcr.io/${{ secrets.USERNAME }}/${{ secrets.REPO }}:latest
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname

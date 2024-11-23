@@ -1,4 +1,4 @@
-name: Test
+name: lint playwright test on Pull Request
 
 on:
   pull_request:
