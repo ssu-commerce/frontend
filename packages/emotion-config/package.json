@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.ts",
   "types": "index.ts",
-  "peerDependencies": {
+  "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "emotion-reset": "^3.0.1",

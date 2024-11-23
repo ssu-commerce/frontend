@@ -3,7 +3,7 @@ services:
   #   container_name: docs
   #   build:
   #     context: .
-  #     dockerfile: ./apps/backoffice/Dockerfile
+  #     dockerfile: ./apps/docs/Dockerfile
   #   restart: always
   #   ports:
   #     - 3001:3001
@@ -14,8 +14,6 @@ services:
     build:
       context: .
       dockerfile: ./apps/commerce/Dockerfile
-    environment:
-      NEXT_PUBLIC_API_KEY: ${{ variables.NEXT_PUBLIC_API_KEY }}
     restart: always
     ports:
       - 3000:3000

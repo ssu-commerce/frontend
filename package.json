@@ -51,7 +51,7 @@
       "turbo run test --"
     ]
   },
-  "packageManager": "pnpm@8.14.0",
+  "packageManager": "pnpm@8.15.3",
   "engines": {
     "node": ">=20",
     "pnpm": ">=8"
