@@ -1,21 +1,19 @@
-version: "1"
-
 services:
-  docs:
-    container_name: docs
+  # docs:
+  #   container_name: docs
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/docs/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 3001:3001
+  #   networks:
+  #     - app_network
+  commerce:
+    container_name: commerce
     build:
       context: .
-      dockerfile: ./apps/docs/Dockerfile
-    restart: always
-    ports:
-      - 3001:3001
-    networks:
-      - app_network
-  web:
-    container_name: web
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
+      dockerfile: ./apps/commerce/Dockerfile
     restart: always
     ports:
       - 3000:3000

@@ -3,7 +3,7 @@ module.exports = {
   transpilePackages: ["@sc/ui"],
   output: "standalone",
   compiler: {
-    styledComponents: true,
+    styledComponents: false,
   },
   experimental: {
     instrumentationHook: true,
