@@ -10,7 +10,7 @@ RUN apk update
 
 # set working dir
 WORKDIR /app
-RUN npm install -g turbo
+RUN npm install -g turbo@1.12.4
 COPY . .
 # package-lock이 프로젝트간에 간섭을 일으키는 경우를 위한 해결책
 RUN turbo prune --scope=backoffice --docker
