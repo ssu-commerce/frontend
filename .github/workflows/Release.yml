@@ -24,9 +24,9 @@ jobs:
 
       - name: Docker Run
         run: |
-          sudo docker-compose down --rmi all
+          sudo docker compose down --rmi all
           sudo docker pull ghcr.io/${{ secrets.USERNAME }}/${{ secrets.REPO }}:latest
-          sudo docker-compose up -d
+          sudo docker compose up -d
 
       - name: Docker Push
         run: docker push ${{ secrets.DOCKER_USERNAME }}/bumday_site:latest
