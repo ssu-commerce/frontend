@@ -1,28 +1,31 @@
 name: Release
 
-on:
-  push:
-    branches:
-      - main
+on: 
+    push:
+        branches:
+            - main
 
 jobs:
     release:
         name: Release
         runs-on: ubuntu-latest
-        steps:
+        stㄴeps:
         - name: Checkout
             uses: actions/checkout@v4
     
         - name: Install Node.js
             uses: actions/setup-node@v4
             with:
-            node-version-file: "package.json"
+                node-version-file: "package.json"
 
         - name: Docker Login
             run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
 
         - name: Docker Run
-            script: |
+            run: |
                 sudo docker-compose down --rmi all
                 sudo docker pull ghcr.io/${{ secrets.USERNAME }}/${{ secrets.REPO }}:latest
-                sudo docker-compose up -d            
+                sudo docker-compose up -d 
+                
+        - name: Docker Push
+            run: docker push ${{ secrets.DOCKER_USERNAME }}/bumday_site:latest
