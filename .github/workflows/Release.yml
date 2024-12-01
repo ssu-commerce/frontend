@@ -6,8 +6,9 @@ on:
       - feature/docker-publish
 
 jobs:
-  release:
+  build:
     name: Release
+    environment: docker-env
     runs-on: ubuntu-latest
     steps:
       - run: ls -al
@@ -18,6 +19,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: "package.json"
+
+      - name: env test
+        run: echo ${{ secrets.USERNAME }}
+        run: echo ${{ secrets.TOKEN }}
+        run: echo ${{ secrets.REPO }}
 
       - name: Docker Login
         run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
