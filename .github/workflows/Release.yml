@@ -21,9 +21,7 @@ jobs:
           node-version-file: "package.json"
 
       - name: env test
-        run: echo ${{ secrets.USERNAME }}
-        run: echo ${{ secrets.TOKEN }}
-        run: echo ${{ secrets.REPO }}
+        run: echo ${{ secrets.USERNAME }} | ${{ secrets.TOKEN }} | ${{ secrets.REPO }}
 
       - name: Docker Login
         run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
