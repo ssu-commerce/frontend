@@ -25,14 +25,19 @@ jobs:
       - name: env test
         run: echo "${{ secrets.USERNAME }}:${{ secrets.TOKEN }}:ssu-commerce/frontend"
 
+      - name: Create .env file
+        run: |
+          echo "USERNAME=${{ secrets.USERNAME }}" >> .env
+          echo "IMAGE_NAME=${{ secrets.IMAGE_NAME }}" >> .env
+
       - name: Docker Login
         run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
 
       - name: Docker Run
         run: |
-          sudo docker compose down --rmi all
+          sudo docker compose --env-file .env down --rmi all
           sudo docker pull ghcr.io/${{ secrets.USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
-          sudo docker compose up -d
+          sudo docker compose --env-file .env up -d
 
       - name: Docker Push
         run: docker push ${{ secrets.USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
