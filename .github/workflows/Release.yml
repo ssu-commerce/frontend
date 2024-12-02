@@ -26,12 +26,10 @@ jobs:
       - name: Docker Login
         run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
 
-      - name: Set environment variables
-        run: |
-          echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
-          echo "REPO=${{ secrets.IMAGE_NAME }}" >> $GITHUB_ENV
-
       - name: Docker Run
+        env: 
+          USERNAME: ${{ secrets.USERNAME }}
+          IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
         run: |
           sudo docker compose down --rmi all
           sudo docker pull ghcr.io/${{ secrets.USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
