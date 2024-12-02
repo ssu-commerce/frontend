@@ -23,4 +23,4 @@ jobs:
           sudo docker compose up -d
 
       - name: Docker Push
-        run: docker push ghcr.io/${{ env.REPO }}/commerce:latest
+        run: docker push ghcr.io/${{ vars.REPO }}/${{ vars.IMAGE_NAME }}:latest
