@@ -28,4 +28,4 @@ jobs:
           sudo docker compose up -d
 
       - name: Docker Push
-        run: docker push ghcr.io/frontend/commerce:latest
+        run: docker push ghcr.io/ssu-commerce/frontend/commerce:latest
