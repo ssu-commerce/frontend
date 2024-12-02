@@ -9,9 +9,6 @@ jobs:
   build:
     name: Release
     runs-on: ubuntu-latest
-    env:
-      USERNAME: ${{ secrets.USERNAME }}
-      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
     steps:
       - run: ls -al
       - name: Checkout
