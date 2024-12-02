@@ -29,8 +29,8 @@ jobs:
       - name: Docker Run
         run: |
           sudo docker compose down --rmi all
-          sudo docker pull ghcr.io/${{ secrets.USERNAME }}/ssu-commerce/frontend:latest
+          sudo docker pull ghcr.io/${{ secrets.USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
           sudo docker compose up -d
 
       - name: Docker Push
-        run: docker push ${{ secrets.USERNAME }}/ssu-commerce/frontend:latest
+        run: docker push ${{ secrets.USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
