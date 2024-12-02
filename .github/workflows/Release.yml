@@ -20,6 +20,7 @@ jobs:
       - name: Docker Run
         run: |
           sudo docker compose down --rmi all
+          sudo docker pull ghcr.io/ssu-commerce/frontend/commerce:latest
           sudo docker compose up -d
 
       - name: Docker Push
