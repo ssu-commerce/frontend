@@ -21,10 +21,10 @@ jobs:
           node-version-file: "package.json"
 
       - name: env test
-        run: echo "${{ secrets.DOCKER_USERNAME }}:${{ secrets.DOCKER_TOKEN }}:ssu-commerce/frontend"
+        run: echo "${{ secrets.USERNAME }}:${{ secrets.TOKEN }}:ssu-commerce/frontend"
 
       - name: Docker Login
-        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login ghcr.io -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
 
       - name: Docker Run
         run: |
