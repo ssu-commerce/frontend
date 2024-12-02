@@ -14,14 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Docker Login
-        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
-
       - name: Docker Run
         run: |
-          sudo docker compose down --rmi all
-          sudo docker pull ghcr.io/ssu-commerce/frontend/commerce:latest
+          echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdins
           sudo docker compose up -d
 
       - name: Docker Push
-        run: docker push ghcr.io/ssu-commerce/frontend/commerce:latest
+        run: docker push ghcr.io/${{ env.REPO }}/commerce:latest
