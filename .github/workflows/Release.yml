@@ -10,9 +10,6 @@ jobs:
     name: Release
     environment: docker-env
     runs-on: ubuntu-latest
-    env: 
-      USERNAME: ${{ secrets.USERNAME }}
-      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
     steps:
       - run: ls -al
       - name: Checkout
@@ -32,7 +29,7 @@ jobs:
       - name: Docker Run
         run: |
           sudo docker compose down --rmi all
-          sudo docker pull ghcr.io/${{ secrets.USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
+          sudo USERNAME=${{ secrets.USERNAME }} IMAGE_NAME=${{ secrets.IMAGE_NAME }} docker pull ghcr.io/${{ secrets.USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
           sudo docker compose up -d
 
       - name: Docker Push
