@@ -21,16 +21,16 @@ jobs:
           node-version-file: "package.json"
 
       - name: env test
-        run: echo "${{ secrets.USERNAME }}:${{ secrets.TOKEN }}:${{ secrets.REPO }}"
+        run: echo "${{ secrets.DOCKER_USERNAME }}:${{ secrets.DOCKER_TOKEN }}:ssu-commerce/frontend"
 
       - name: Docker Login
-        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: Docker Run
         run: |
           sudo docker compose down --rmi all
-          sudo docker pull ghcr.io/${{ secrets.USERNAME }}/${{ secrets.REPO }}:latest
+          sudo docker pull ghcr.io/${{ secrets.DOCKER_USERNAME }}/ssu-commerce/frontend:latest
           sudo docker compose up -d
 
       - name: Docker Push
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/bumday_site:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ssu-commerce/frontend:latest
